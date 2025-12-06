@@ -44,33 +44,33 @@ in
 
     home.packages = [ cfg.package ];
 
-    home.file = {
-      ".config/ghostty/config" = {
-        text = ''
-          app-notifications = no-clipboard-copy
-          clipboard-paste-protection = false
-          clipboard-trim-trailing-spaces = true
-          copy-on-select = clipboard
-          cursor-style = bar
-          background-opacity = 0.96
-          font-family = Iosevka Term SS03 Light
-          font-family-bold = Iosevka Term SS03 Medium
-          font-feature = calt
-          link-url = true
-          resize-overlay = never
-          selection-invert-fg-bg = true
-          theme = Gruvbox Dark Hard
-          window-decoration = false
-          window-padding-x = 3
-        '';
-      };
-    };
-
     xdg =
       let
         desktopEntryName = "ghostty-editor";
       in
       {
+        configFile = {
+          "ghostty/config" = {
+            text = ''
+              app-notifications = no-clipboard-copy
+              clipboard-paste-protection = false
+              clipboard-trim-trailing-spaces = true
+              copy-on-select = clipboard
+              cursor-style = bar
+              background-opacity = 0.96
+              font-family = Iosevka Term SS03 Light
+              font-family-bold = Iosevka Term SS03 Medium
+              font-feature = calt
+              link-url = true
+              resize-overlay = never
+              selection-invert-fg-bg = true
+              theme = Gruvbox Dark Hard
+              window-decoration = false
+              window-padding-x = 3
+            '';
+          };
+        };
+
         desktopEntries.${desktopEntryName} = {
           name = "Ghostty editor";
           comment = ''Open text files in ''$EDITOR in a new Ghostty terminal'';
@@ -93,6 +93,5 @@ in
           );
         };
       };
-
   };
 }

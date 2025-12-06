@@ -37,8 +37,8 @@ in
       ];
     };
 
-    home.file = {
-      ".config/nvim" = {
+    xdg.configFile = {
+      "nvim" = {
         source = ../../../../dotfiles/nvim;
         recursive = true;
       };
