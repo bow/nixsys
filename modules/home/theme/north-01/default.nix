@@ -13,16 +13,16 @@ in
   options.nixsys.home.theme.north-01 = {
     enable = lib.mkEnableOption "nixsys.home.theme.north-01";
     wallpaper = lib.mkOption {
-      type = types.attrs;
+      type = types.package;
       default = pkgs.local.wallpapers.francesco-ungaro-lcQzCo-X1vM-unsplash;
     };
   };
 
   config = lib.mkIf cfg.enable {
     nixsys.home.theme.active = lib.mkForce {
-      desktop.bg = "${cfg.wallpaper.desktop-bg}";
+      desktop.bg = "${cfg.wallpaper}/original";
       lock-screen = {
-        bg = "${cfg.wallpaper.lock-screen-bg}";
+        bg = "${cfg.wallpaper}/blurred";
         font = {
           name = "Titillium";
           package = pkgs.local.titillium-font;
