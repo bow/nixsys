@@ -23,7 +23,6 @@ let
     pkgs.distrobox
     pkgs.dmidecode
     pkgs.dnsmasq
-    pkgs.dnsutils
     pkgs.dos2unix
     pkgs.dua
     pkgs.duf
