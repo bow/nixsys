@@ -91,7 +91,6 @@ let
     pkgs.wrk
     pkgs.xan
     pkgs.xz
-    pkgs.yazi
     pkgs.zip
     pkgs.zstd
   ];
