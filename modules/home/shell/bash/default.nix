@@ -267,9 +267,10 @@ in
         EOF
         }
 
-        # Load private settings if it exists.
+        # Load private and local settings if it exists.
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
+        [[ -f ~/.bash_local ]] && . "''${HOME}/.bash_local"
       ''
       + lib.optionalString neovimEnabled ''
 
