@@ -266,12 +266,6 @@ in
         EOF
         }
 
-        # Load completions.
-        # complete -C "${pkgs.terraform}/bin/terraform" terraform
-        # complete -C "${pkgs.terraform}/bin/terraform" tf
-        # eval "''$(${pkgs.just}/bin/just --completions bash)"
-        # . "${pkgs.git}/share/bash-completion/completions/git"
-
         # Load private settings if it exists.
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
