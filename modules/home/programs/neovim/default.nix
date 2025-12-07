@@ -19,10 +19,12 @@ in
       type = types.bool;
       default = true;
     };
+    package = lib.mkPackageOption pkgs.unstable "neovim-unwrapped" { };
   };
 
   config = lib.mkIf cfg.enable {
     programs.neovim = {
+      inherit (cfg) package;
       enable = true;
       viAlias = false;
       vimAlias = false;

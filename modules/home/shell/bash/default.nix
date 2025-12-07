@@ -13,6 +13,7 @@ let
   fzfEnabled = libcfg.isFzfEnabled config;
   fzfPackage = libcfg.getFzfPackage config;
   neovimEnabled = libcfg.isNeovimEnabled config;
+  neovimPackage = libcfg.getNeovimPackage config;
   ripgrepEnabled = libcfg.isRipgrepEnabled config;
   ripgrepPackage = libcfg.getRipgrepPackage config;
   shellBash = libcfg.isShellBash user;
@@ -269,6 +270,11 @@ in
         # Load private settings if it exists.
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
+      ''
+      + lib.optionalString neovimEnabled ''
+
+        # Open a file, creating all the necessary parents.
+        function nvimk() { command mkdir -p "''$(dirname "''${1}")" && ${neovimPackage}/bin/nvim "''$1"; }
       ''
       + lib.optionalString xorgEnabled ''
 

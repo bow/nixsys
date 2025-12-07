@@ -10,6 +10,11 @@ _: rec {
   getFzfPackage = config: getModulePackage config "fzf";
 
   /**
+    Return the package used by the neovim module.
+  */
+  getNeovimPackage = config: getModulePackage config "neovim";
+
+  /**
     Return the package used by the ripgrep module.
   */
   getRipgrepPackage = config: getModulePackage config "ripgrep";
