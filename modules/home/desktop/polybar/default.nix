@@ -370,14 +370,13 @@ in
           format = {
             volume = "<ramp-volume> <label-volume>";
             muted = {
-              prefix = " ";
               foreground = ''''${colors.foreground-alt}'';
             };
           };
 
           label = {
             volume = "%percentage%%";
-            muted = " -";
+            muted = "";
           };
 
           ramp.volume = {
