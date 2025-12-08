@@ -10,6 +10,9 @@ in
     desktop.i3 = enabled;
     devel = enabled;
     theme.current = enabled;
+    services = {
+      redshift = enabled;
+    };
     system = {
       docker = enabled;
       pulseaudio = enabled;

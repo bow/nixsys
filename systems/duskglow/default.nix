@@ -42,6 +42,9 @@ in
       home-manager = enabledWith {
         desktop.i3 = enabled;
         devel = enabled;
+        services = {
+          redshift = enabled;
+        };
         theme.current = enabled;
       };
     };
