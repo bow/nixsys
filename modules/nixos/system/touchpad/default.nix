@@ -8,11 +8,11 @@ let
 
   xorgEnabled = libcfg.isXorgEnabled config;
 
-  cfg = config.nixsys.system.hardware.touchpad;
+  cfg = config.nixsys.system.touchpad;
 in
 {
-  options.nixsys.system.hardware.touchpad = {
-    enable = lib.mkEnableOption "nixsys.system.hardware.touchpad";
+  options.nixsys.system.touchpad = {
+    enable = lib.mkEnableOption "nixsys.system.touchpad";
   };
 
   config = lib.mkIf (cfg.enable && xorgEnabled) {

@@ -19,7 +19,7 @@ in
     system = {
       inherit hostname;
       profile = "workstation";
-      hardware.touchpad = enabled;
+      touchpad = enabled;
 
       boot.systemd = enabled;
       networking.networkmanager = enabled;
