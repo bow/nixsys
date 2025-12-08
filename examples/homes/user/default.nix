@@ -10,6 +10,9 @@ in
     desktop.i3 = enabled;
     devel = enabled;
     theme.north-01 = enabled;
-    system.docker = enabled;
+    system = {
+      docker = enabled;
+      pulseaudio = enabled;
+    };
   };
 }

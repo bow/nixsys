@@ -63,6 +63,7 @@ in
           # Façade for system-level config.
           system = {
             docker.enable = config.nixsys.system.virtualization.docker.enable;
+            pulseaudio.enable = config.nixsys.system.hardware.pulseaudio.enable;
           };
         };
       };

@@ -165,6 +165,7 @@ in
     type = types.submodule {
       options = {
         docker.enable = lib.mkEnableOption "nixsys.home.system.docker";
+        pulseaudio.enable = lib.mkEnableOption "nixsys.home.system.pulseaudio";
       };
     };
   };
