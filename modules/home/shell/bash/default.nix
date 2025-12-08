@@ -245,9 +245,6 @@ in
         # Calculator.
         function calc() { ${pkgs.coreutils}/bin/echo "''$*" | ${pkgs.bc}/bin/bc; }
 
-        # Check weather from wttr.
-        function wttr() { ${pkgs.curl}/bin/curl http://wttr.in/"''${1:-${user.location.city}}"; }
-
         # Show the absolute path of a command executable.
         # shellcheck disable=SC2164
         function wx() { ${pkgs.coreutils}/bin/readlink -f "''$(${pkgs.which}/bin/which "''${1}")"; }
@@ -271,6 +268,11 @@ in
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
         [[ -f ~/.bash_local ]] && . "''${HOME}/.bash_local"
+      ''
+      + lib.optionalString (user.location.city != "") ''
+
+        # Check weather from wttr.
+        function wttr() { ${pkgs.curl}/bin/curl http://wttr.in/"''${1:-${user.location.city}}"; }
       ''
       + lib.optionalString neovimEnabled ''
 
