@@ -10,11 +10,11 @@ let
   mainUser = libcfg.getMainUser config;
   mainUserDefined = libcfg.isMainUserDefined config;
 
-  cfg = config.nixsys.system.hardware.pulseaudio;
+  cfg = config.nixsys.system.audio.pulseaudio;
 in
 {
-  options.nixsys.system.hardware.pulseaudio = {
-    enable = lib.mkEnableOption "nixsys.system.hardware.pulseaudio";
+  options.nixsys.system.audio.pulseaudio = {
+    enable = lib.mkEnableOption "nixsys.system.audio.pulseaudio";
     package = lib.mkPackageOption pkgs "pulseaudioFull" { };
   };
 
