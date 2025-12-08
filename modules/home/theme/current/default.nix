@@ -33,11 +33,11 @@ let
     sha256 = "a36d6e0231bc57900e9725675664d9fa075996f4fee1bd96580f183eac5b4685";
   };
 
-  cfg = config.nixsys.home.theme.north-01;
+  cfg = config.nixsys.home.theme.current;
 in
 {
-  options.nixsys.home.theme.north-01 = {
-    enable = lib.mkEnableOption "nixsys.home.theme.north-01";
+  options.nixsys.home.theme.current = {
+    enable = lib.mkEnableOption "nixsys.home.theme.current";
   };
 
   config = lib.mkIf cfg.enable {
