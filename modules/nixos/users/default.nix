@@ -26,7 +26,11 @@ in
       name = mkOpt types.str null "User name of the main user";
       full-name = mkOpt' types.str "Full name of the main user";
       email = mkOpt' types.str "Email of the main user";
-      city = mkOpt' types.str "City where the user lives";
+      location = {
+        city = mkOpt' types.str "City where the user is located";
+        latitude = mkOpt' (types.either types.str types.float) "Location latitude";
+        longitude = mkOpt' (types.either types.str types.float) "Location longitude";
+      };
       timezone = mkOpt types.str "UTC" "Timezone";
 
       home-directory = mkOpt types.str "/home/${cfg.main.name}" "Path to the user's home directory";

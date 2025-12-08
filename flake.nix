@@ -62,7 +62,11 @@
         name = "user";
         full-name = "User Example";
         email = "example@email.com";
-        city = "Reykjavik";
+        location = {
+          city = "Reykjavik";
+          latitude = 64.13;
+          longitude = -21.56;
+        };
         timezone = "UTC";
       };
     in

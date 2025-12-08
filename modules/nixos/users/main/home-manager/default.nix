@@ -43,7 +43,7 @@ in
             name
             email
             full-name
-            city
+            location
             timezone
             home-directory
             shell

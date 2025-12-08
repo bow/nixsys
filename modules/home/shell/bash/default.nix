@@ -246,7 +246,7 @@ in
         function calc() { ${pkgs.coreutils}/bin/echo "''$*" | ${pkgs.bc}/bin/bc; }
 
         # Check weather from wttr.
-        function wttr() { ${pkgs.curl}/bin/curl http://wttr.in/"''${1:-${user.city}}"; }
+        function wttr() { ${pkgs.curl}/bin/curl http://wttr.in/"''${1:-${user.location.city}}"; }
 
         # Show the absolute path of a command executable.
         # shellcheck disable=SC2164

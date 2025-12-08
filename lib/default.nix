@@ -48,7 +48,11 @@ rec {
         name = "default";
         full-name = "Default User";
         email = "default@email.com";
-        city = "Reykjavik";
+        location = {
+          city = "Reykjavik";
+          latitude = 64.13;
+          longitude = -21.89;
+        };
         timezone = "UTC";
       };
       systemModuleName = "duskglow";

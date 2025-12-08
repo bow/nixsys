@@ -32,7 +32,7 @@ in
         name
         full-name
         email
-        city
+        location
         timezone
         ;
       trusted = true;
