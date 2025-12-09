@@ -19,8 +19,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
     nixpkgs.config.pulseaudio = true;
-    hardware.pulseaudio.enable = true;
+
+    hardware.pulseaudio = {
+      enable = true;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
+    };
+
     security.rtkit.enable = true;
 
     users.users = lib.mkIf mainUserDefined {
