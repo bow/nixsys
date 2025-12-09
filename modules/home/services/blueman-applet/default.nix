@@ -25,5 +25,10 @@ in
       inherit (cfg) package;
       enable = true;
     };
+
+    systemd.user.services.blueman-applet = {
+      # FIXME: This should be systemctl --user import-environment DISPLAY XAUTHORITY somewhere.
+      Service.Environment = [ "DISPLAY=:0" ];
+    };
   };
 }
