@@ -148,7 +148,7 @@ rec {
         // user;
         asStandalone = true;
         lib = pkgs.lib.extend (
-          final: _prev: {
+          _final: _prev: {
             inherit (inputs.home-manager.lib) hm;
             nixsys = { inherit home enabled enabledWith; };
           }

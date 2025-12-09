@@ -37,7 +37,6 @@
       self,
       nixpkgs,
       nixos-generators,
-      home-manager,
       ...
     }@inputs:
     let
