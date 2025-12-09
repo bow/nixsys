@@ -98,6 +98,7 @@ rec {
       modules = [
         inputs.disko.nixosModules.disko
         inputs.sops-nix.nixosModules.sops
+        outputs.nixosModules.nixsys
         ../systems/${systemModuleName}
       ]
       ++ modules;

@@ -1,5 +1,4 @@
 {
-  outputs,
   lib,
   user,
   hostname,
@@ -9,12 +8,6 @@ let
   inherit (lib.nixsys) enabled enabledWith;
 in
 {
-  system.stateVersion = "25.05";
-
-  imports = [
-    outputs.nixosModules.nixsys
-  ];
-
   nixsys = enabledWith {
     system = {
       inherit hostname;
@@ -51,4 +44,6 @@ in
       };
     };
   };
+
+  system.stateVersion = "25.05";
 }
