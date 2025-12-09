@@ -44,6 +44,7 @@ in
         desktop.i3 = enabled;
         devel = enabled;
         services = {
+          mpris-proxy = enabled;
           redshift = enabled;
         };
         theme.current = enabled;
