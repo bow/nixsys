@@ -157,6 +157,7 @@ rec {
         );
       };
       modules = [
+        inputs.sops-nix.homeManagerModules.sops
         outputs.homeManagerModules.nixsys
         ../modules/nixos/users/main/home-manager/home.nix
       ]
