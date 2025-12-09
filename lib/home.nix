@@ -55,6 +55,16 @@ _: rec {
     sys != { } && sys.pulseaudio.enable;
 
   /**
+    Return whether the current config enables bluetooth.
+  */
+  isBluetoothEnabled =
+    config:
+    let
+      sys = config.nixsys.home.system;
+    in
+    sys != { } && sys.bluetooth.enable;
+
+  /**
     Return whether the current config enables the given program.
   */
   isProgramEnabled = config: name: config.nixsys.home.programs.${name}.enable;

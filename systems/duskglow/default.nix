@@ -22,6 +22,7 @@ in
       touchpad = enabled;
 
       boot.systemd = enabled;
+      bluetooth = enabled;
       networking.networkmanager = enabled;
       nix.nixos-cli = enabled;
       servers.ssh = enabled; # FIXME: Remove when ready.

@@ -16,6 +16,7 @@ in
     system = {
       docker = enabled;
       pulseaudio = enabled;
+      bluetooth = enabled;
     };
   };
 }

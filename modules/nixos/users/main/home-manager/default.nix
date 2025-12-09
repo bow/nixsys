@@ -62,6 +62,7 @@ in
         nixsys.home = removeAttrs cfg [ "enable" ] // {
           # Façade for system-level config.
           system = {
+            bluetooth.enable = config.nixsys.system.bluetooth.enable;
             docker.enable = config.nixsys.system.virtualization.docker.enable;
             pulseaudio.enable = config.nixsys.system.audio.pulseaudio.enable;
           };

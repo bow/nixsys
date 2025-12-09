@@ -50,6 +50,11 @@ _: rec {
   isXorgEnabled = config: config.nixsys.users.main.session.i3.enable;
 
   /**
+    Return whether the current config enables a desktop.
+  */
+  isDesktopEnabled = isXorgEnabled;
+
+  /**
     Return the nixsys home-manager config if it is enabled and a main user is defined,
     otherwise return null.
   */
