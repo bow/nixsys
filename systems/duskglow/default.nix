@@ -11,13 +11,15 @@ in
   nixsys = enabledWith {
     system = {
       inherit hostname;
-      profile = "workstation";
-      touchpad = enabled;
-
-      boot.systemd = enabled;
       bluetooth = enabled;
+      boot.systemd = enabled;
       networking.networkmanager = enabled;
       nix.nixos-cli = enabled;
+      touchpad = enabled;
+      udev.rulesets = {
+        qmk = enabled;
+        wake-on-device = enabled;
+      };
       virtualization = {
         docker = enabled;
         libvirtd = enabled;

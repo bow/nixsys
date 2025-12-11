@@ -4,11 +4,6 @@
   pkgs,
   ...
 }:
-let
-  libcfg = lib.nixsys.nixos;
-
-  profileWorkstation = libcfg.isProfileWorkstation config;
-in
 {
   config = lib.mkIf config.nixsys.enable {
     environment = {
@@ -30,8 +25,7 @@ in
         pkgs.wget
 
         pkgs.unstable.ripgrep
-      ]
-      ++ (lib.optionals profileWorkstation [ pkgs.home-manager ]);
+      ];
       variables = {
         EDITOR = "nvim";
       };
