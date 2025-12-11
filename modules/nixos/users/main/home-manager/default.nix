@@ -63,8 +63,8 @@ in
           # Façade for system-level config.
           system = {
             bluetooth.enable = config.nixsys.system.bluetooth.enable;
-            docker.enable = config.nixsys.system.virtualization.docker.enable;
-            libvirtd.enable = config.nixsys.system.virtualization.libvirtd.enable;
+            docker.enable = config.nixsys.system.virtualization.host.docker.enable;
+            libvirtd.enable = config.nixsys.system.virtualization.host.libvirtd.enable;
             pulseaudio.enable = config.nixsys.system.audio.pulseaudio.enable;
           };
         };

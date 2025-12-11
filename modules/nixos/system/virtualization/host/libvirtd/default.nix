@@ -11,11 +11,11 @@ let
   mainUser = libcfg.getMainUser config;
   mainUserDefined = libcfg.isMainUserDefined config;
 
-  cfg = config.nixsys.system.virtualization.libvirtd;
+  cfg = config.nixsys.system.virtualization.host.libvirtd;
 in
 {
-  options.nixsys.system.virtualization.libvirtd = {
-    enable = lib.mkEnableOption "nixsys.system.virtualization.libvirtd";
+  options.nixsys.system.virtualization.host.libvirtd = {
+    enable = lib.mkEnableOption "nixsys.system.virtualization.host.libvirtd";
     package = lib.mkPackageOption pkgs "libvirt" { };
 
     qemu-package = lib.mkPackageOption pkgs "qemu" { };

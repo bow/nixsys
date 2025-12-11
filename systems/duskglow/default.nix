@@ -20,7 +20,7 @@ in
         qmk = enabled;
         wake-on-device = enabled;
       };
-      virtualization = {
+      virtualization.host = {
         docker = enabled;
         libvirtd = enabled;
       };

@@ -3,9 +3,9 @@ _:
   nixsys = {
     system = {
       servers.ssh.enable = true;
-      virtualized = {
+      virtualization.guest = {
         enable = true;
-        guest-type = "qemu";
+        type = "qemu";
       };
     };
     users.main = {

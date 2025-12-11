@@ -10,11 +10,11 @@ let
   mainUser = libcfg.getMainUser config;
   mainUserDefined = libcfg.isMainUserDefined config;
 
-  cfg = config.nixsys.system.virtualization.docker;
+  cfg = config.nixsys.system.virtualization.host.docker;
 in
 {
-  options.nixsys.system.virtualization.docker = {
-    enable = lib.mkEnableOption "nixsys.system.virtualization.docker";
+  options.nixsys.system.virtualization.host.docker = {
+    enable = lib.mkEnableOption "nixsys.system.virtualization.host.docker";
     package = lib.mkPackageOption pkgs.unstable "docker" { };
   };
 

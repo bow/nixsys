@@ -9,19 +9,19 @@ let
 
   xorgEnabled = libcfg.isXorgEnabled config;
 
-  cfg = config.nixsys.system.virtualized;
+  cfg = config.nixsys.system.virtualization.guest;
 in
 {
-  options.nixsys.system.virtualized = {
-    enable = lib.mkEnableOption "nixsys.system.virtualized";
-    guest-type = lib.mkOption {
+  options.nixsys.system.virtualization.guest = {
+    enable = lib.mkEnableOption "nixsys.system.virtualization.guest";
+    type = lib.mkOption {
       type = types.enum [ "qemu" ];
       description = "The type of the guest agent to run";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.qemuGuest.enable = cfg.guest-type == "qemu";
+    services.qemuGuest.enable = cfg.type == "qemu";
     services.spice-vdagentd.enable = xorgEnabled;
   };
 }
