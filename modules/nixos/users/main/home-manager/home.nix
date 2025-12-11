@@ -183,7 +183,10 @@ in
       # FIXME: Find out where to best put this.
       file.".config/libvirt/qemu.conf" = lib.mkIf config.nixsys.home.system.libvirtd.enable {
         text = ''
-          nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+          nvram = [
+            "/run/libvirt/nix-ovmf/edk2-aarch64-code.fd:/run/libvirt/nix-ovmf/edk2-arm-vars.fd",
+            "/run/libvirt/nix-ovmf/edk2-x86_64-code.fd:/run/libvirt/nix-ovmf/edk2-i386-vars.fd"
+          ]
         '';
       };
     };
