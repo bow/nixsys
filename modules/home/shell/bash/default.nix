@@ -66,7 +66,7 @@ in
         # du, with human-readable output.
         du = "${pkgs.coreutils}/bin/du -sh";
         # grep, colorized.
-        grep = "${pkgs.gnugrep}/bin/grep --color auto";
+        grep = "grep --color=auto";
         # less, without wrapping, with line numbers.
         less = "${pkgs.less}/bin/less -SN";
         # ls, colorized.
