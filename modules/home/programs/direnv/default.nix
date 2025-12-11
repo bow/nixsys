@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   user,
   ...
 }:
@@ -14,11 +15,15 @@ in
 {
   options.nixsys.home.programs.direnv = {
     enable = lib.mkEnableOption "nixsys.home.programs.direnv";
+    package = lib.mkPackageOption pkgs "direnv" { };
+    nix-direnv-package = lib.mkPackageOption pkgs "nix-direnv" { };
   };
 
   config = lib.mkIf cfg.enable {
     programs.direnv = {
       enable = true;
+
+      inherit (cfg) package;
       enableBashIntegration = shellBash;
       config = {
         global = {
@@ -26,7 +31,10 @@ in
           hide_env_diff = false;
         };
       };
-      nix-direnv.enable = true;
+      nix-direnv = {
+        enable = true;
+        package = cfg.nix-direnv-package;
+      };
     };
   };
 }
