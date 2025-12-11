@@ -166,6 +166,7 @@ in
       options = {
         bluetooth.enable = lib.mkEnableOption "nixsys.home.system.bluetooth";
         docker.enable = lib.mkEnableOption "nixsys.home.system.docker";
+        libvirtd.enable = lib.mkEnableOption "nixsys.home.system.libvirtd";
         pulseaudio.enable = lib.mkEnableOption "nixsys.home.system.pulseaudio";
       };
     };
@@ -178,6 +179,13 @@ in
       homeDirectory = user.home-directory;
       packages = cliPackages ++ (lib.optionals desktopEnabled desktopPackages);
       preferXdgDirectories = true;
+
+      # FIXME: Find out where to best put this.
+      file.".config/libvirt/qemu.conf" = lib.mkIf config.nixsys.home.system.libvirtd.enable {
+        text = ''
+          nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+        '';
+      };
     };
 
     nixpkgs = lib.mkIf asStandalone {

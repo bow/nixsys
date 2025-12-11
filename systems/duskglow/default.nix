@@ -18,7 +18,10 @@ in
       bluetooth = enabled;
       networking.networkmanager = enabled;
       nix.nixos-cli = enabled;
-      virtualization.docker = enabled;
+      virtualization = {
+        docker = enabled;
+        libvirtd = enabled;
+      };
     };
     users.main = {
       inherit (user)
