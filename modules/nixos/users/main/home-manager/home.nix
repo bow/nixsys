@@ -36,6 +36,7 @@ let
     pkgs.gh
     pkgs.glow
     pkgs.gnugrep
+    pkgs.gnumake
     pkgs.gnupatch
     pkgs.gnupg
     pkgs.gnused
