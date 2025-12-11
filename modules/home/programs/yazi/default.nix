@@ -14,9 +14,7 @@ let
 in
 {
   options.nixsys.home.programs.yazi = {
-    enable = lib.mkEnableOption "nixsys.home.programs.yazi" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.yazi";
     package = lib.mkPackageOption pkgs "yazi" { };
   };
 

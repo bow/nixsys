@@ -11,9 +11,7 @@ let
 in
 {
   options.nixsys.home.programs.git = {
-    enable = lib.mkEnableOption "nixsys.home.programs.git" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.git";
     inherit (options.programs.git) package;
   };
 

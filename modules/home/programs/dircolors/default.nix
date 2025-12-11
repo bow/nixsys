@@ -13,9 +13,7 @@ let
 in
 {
   options.nixsys.home.programs.dircolors = {
-    enable = lib.mkEnableOption "nixsys.home.programs.dircolors" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.dircolors";
   };
 
   config = lib.mkIf cfg.enable {

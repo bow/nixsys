@@ -9,9 +9,7 @@ let
 in
 {
   options.nixsys.home.programs.bat = {
-    enable = lib.mkEnableOption "nixsys.home.programs.bat" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.bat";
     package = lib.mkPackageOption pkgs.unstable "bat" { };
   };
 

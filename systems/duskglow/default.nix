@@ -36,10 +36,30 @@ in
         settings.auto-login = true;
       };
       home-manager = enabledWith {
-        desktop.i3 = enabled;
+        desktop = {
+          i3 = enabled;
+          xdg = enabled;
+        };
         devel = enabled;
+        fonts = enabled;
         programs = {
+          bat = enabled;
+          dircolors = enabled;
+          direnv = enabled;
+          dnsutils = enabled;
+          fzf = enabled;
+          git = enabled;
+          gpg = enabled;
           ncmpcpp = enabled;
+          neovim = enabledWith {
+            as-default-editor = true;
+          };
+          readline = enabled;
+          ripgrep = enabled;
+          starship = enabled;
+          tmux = enabled;
+          yazi = enabled;
+          zoxide = enabled;
         };
         services = {
           mpd = enabled;

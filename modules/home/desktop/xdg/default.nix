@@ -10,9 +10,7 @@ let
 in
 {
   options.nixsys.home.desktop.xdg = {
-    enable = lib.mkEnableOption "nixsys.home.desktop.xdg" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.desktop.xdg";
     create-directories = lib.mkOption {
       default = true;
       type = types.bool;

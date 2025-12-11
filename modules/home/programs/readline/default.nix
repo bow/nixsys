@@ -8,9 +8,7 @@ let
 in
 {
   options.nixsys.home.programs.readline = {
-    enable = lib.mkEnableOption "nixsys.home.programs.readline" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.readline";
   };
 
   config = lib.mkIf cfg.enable {

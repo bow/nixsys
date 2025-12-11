@@ -11,13 +11,10 @@ let
 in
 {
   options.nixsys.home.programs.neovim = {
-    enable = lib.mkEnableOption "nixsys.home.programs.neovim" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.neovim";
     as-default-editor = lib.mkOption {
       description = "Whether to set the EDITOR environment variable to neovim or not";
       type = types.bool;
-      default = true;
     };
     package = lib.mkPackageOption pkgs.unstable "neovim-unwrapped" { };
   };

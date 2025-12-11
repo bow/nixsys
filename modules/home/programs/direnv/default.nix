@@ -13,9 +13,7 @@ let
 in
 {
   options.nixsys.home.programs.direnv = {
-    enable = lib.mkEnableOption "nixsys.home.programs.direnv" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.direnv";
   };
 
   config = lib.mkIf cfg.enable {

@@ -13,9 +13,7 @@ let
 in
 {
   options.nixsys.home.programs.ripgrep = {
-    enable = lib.mkEnableOption "nixsys.home.programs.ripgrep" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.ripgrep";
     package = lib.mkPackageOption pkgs.unstable "ripgrep" { };
   };
 

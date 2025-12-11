@@ -13,9 +13,7 @@ let
 in
 {
   options.nixsys.home.programs.zoxide = {
-    enable = lib.mkEnableOption "nixsys.home.programs.zoxide" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.zoxide";
   };
 
   config = lib.mkIf cfg.enable {

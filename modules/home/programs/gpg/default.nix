@@ -14,9 +14,7 @@ let
 in
 {
   options.nixsys.home.programs.gpg = {
-    enable = lib.mkEnableOption "nixsys.home.programs.gpg" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.gpg";
 
     default-cache-ttl = lib.mkOption {
       description = "Sets services.gpg-agent.defaultCacheTtl";

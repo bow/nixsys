@@ -9,9 +9,7 @@ let
 in
 {
   options.nixsys.home.fonts = {
-    enable = lib.mkEnableOption "nixsys.home.fonts" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.fonts";
   };
 
   config = lib.mkIf cfg.enable {

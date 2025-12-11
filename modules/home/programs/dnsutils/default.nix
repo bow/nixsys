@@ -9,9 +9,7 @@ let
 in
 {
   options.nixsys.home.programs.dnsutils = {
-    enable = lib.mkEnableOption "nixsys.home.programs.dnsutils" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.dnsutils";
     package = lib.mkPackageOption pkgs "dnsutils" { };
   };
 

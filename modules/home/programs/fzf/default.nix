@@ -15,9 +15,7 @@ let
 in
 {
   options.nixsys.home.programs.fzf = {
-    enable = lib.mkEnableOption "nixsys.home.programs.fzf" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.fzf";
     package = lib.mkPackageOption pkgs.unstable "fzf" { };
   };
 

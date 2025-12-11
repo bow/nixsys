@@ -13,9 +13,7 @@ let
 in
 {
   options.nixsys.home.programs.starship = {
-    enable = lib.mkEnableOption "nixsys.home.programs.starship" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.starship";
   };
 
   config = lib.mkIf cfg.enable rec {

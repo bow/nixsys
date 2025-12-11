@@ -9,9 +9,7 @@ let
 in
 {
   options.nixsys.home.programs.tmux = {
-    enable = lib.mkEnableOption "nixsys.home.programs.tmux" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "nixsys.home.programs.tmux";
     package = lib.mkPackageOption pkgs "tmux" { };
   };
 
