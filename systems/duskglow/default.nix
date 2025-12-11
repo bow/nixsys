@@ -18,7 +18,6 @@ in
       bluetooth = enabled;
       networking.networkmanager = enabled;
       nix.nixos-cli = enabled;
-      servers.ssh = enabled; # FIXME: Remove when ready.
       virtualization.docker = enabled;
     };
     users.main = {
