@@ -9,12 +9,12 @@
     environment = {
       pathsToLink = [ "/share/bash-completion" ];
       systemPackages = [
+        pkgs.coreutils
         pkgs.curl
         pkgs.findutils
         pkgs.file
         pkgs.git
         pkgs.gnugrep
-        pkgs.gnupg
         pkgs.gnused
         pkgs.iputils
         pkgs.jq

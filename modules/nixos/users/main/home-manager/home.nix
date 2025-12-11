@@ -17,7 +17,7 @@ let
     pkgs.age
     pkgs.aria2
     pkgs.btop
-    pkgs.coreutils-full
+    pkgs.coreutils
     pkgs.curl
     pkgs.curlie
     pkgs.distrobox
@@ -53,7 +53,6 @@ let
     pkgs.iproute2
     pkgs.jq
     pkgs.ldns
-    pkgs.libvirt
     pkgs.lld
     pkgs.lldb
     pkgs.lshw
@@ -71,19 +70,16 @@ let
     pkgs.pciutils
     pkgs.pdftk
     pkgs.pv
-    pkgs.qemu
     pkgs.restic
     pkgs.sequoia-sq
     pkgs.socat
     pkgs.strace
     pkgs.sysstat
-    pkgs.tmux
     pkgs.tree
     pkgs.unrar
     pkgs.unzip
     pkgs.usbutils
     pkgs.vim
-    pkgs.virt-manager
     pkgs.virt-viewer
     pkgs.weechat
     pkgs.wget
@@ -123,6 +119,9 @@ let
 
     # Markdown-based knowledge base.
     pkgs.obsidian
+
+    # VPN client.
+    pkgs.openconnect
 
     # Mail client.
     pkgs.protonmail-bridge
