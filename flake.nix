@@ -101,6 +101,9 @@
               hostname = "duskglow-qemu";
             };
             modules = [
+              inputs.sops-nix.homeManagerModules.sops
+              inputs.nix-index-database.homeModules.nix-index
+              outputs.homeManagerModules.nixsys
               {
                 nix.registry.nixpkgs.flake = nixpkgs;
                 virtualisation.vmVariant.virtualisation = {
