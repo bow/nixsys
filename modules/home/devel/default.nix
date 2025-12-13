@@ -88,6 +88,8 @@ in
         pkgs.unstable.cmake
         pkgs.unstable.gdb
         pkgs.unstable.gnumake
+        pkgs.unstable.lld
+        pkgs.unstable.lldb
         pkgs.unstable.valgrind
       ];
       treesitters = [

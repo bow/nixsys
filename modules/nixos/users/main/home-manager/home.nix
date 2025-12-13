@@ -13,84 +13,117 @@ let
 
   desktopEnabled = libcfg.isDesktopEnabled config;
 
-  cliPackages = [
-    pkgs.age
-    pkgs.aria2
-    pkgs.btop
-    pkgs.coreutils
-    pkgs.curl
-    pkgs.curlie
-    pkgs.distrobox
-    pkgs.dmidecode
-    pkgs.dnsmasq
-    pkgs.dos2unix
-    pkgs.dua
-    pkgs.duf
-    pkgs.elinks
-    pkgs.entr
-    pkgs.ethtool
-    pkgs.eza
-    pkgs.fd
-    pkgs.file
-    pkgs.findutils
-    pkgs.gh
-    pkgs.glow
-    pkgs.gnugrep
-    pkgs.gnumake
-    pkgs.gnupatch
-    pkgs.gnupg
-    pkgs.gnused
-    pkgs.grpcurl
-    pkgs.gzip
-    pkgs.hexyl
-    pkgs.htop
-    pkgs.iftop
-    pkgs.imagemagick
-    pkgs.inetutils
-    pkgs.iotop
-    pkgs.ipcalc
-    pkgs.iperf3
-    pkgs.iproute2
-    pkgs.jq
-    pkgs.ldns
-    pkgs.lld
-    pkgs.lldb
-    pkgs.lshw
-    pkgs.ltrace
-    pkgs.lzip
-    pkgs.minify
-    pkgs.mtr
-    pkgs.nerdctl
-    pkgs.nh
-    pkgs.nmap
-    pkgs.ntfs3g
-    pkgs.p7zip
-    pkgs.packer
-    pkgs.pass
-    pkgs.pciutils
-    pkgs.pdftk
-    pkgs.pv
-    pkgs.restic
-    pkgs.sequoia-sq
-    pkgs.socat
-    pkgs.strace
-    pkgs.sysstat
-    pkgs.tree
-    pkgs.unrar
-    pkgs.unzip
-    pkgs.usbutils
-    pkgs.vim
-    pkgs.virt-viewer
-    pkgs.weechat
-    pkgs.wget
-    pkgs.which
-    pkgs.whois
-    pkgs.wrk
-    pkgs.xan
-    pkgs.xz
-    pkgs.zip
-    pkgs.zstd
-  ];
+  tools = {
+    backup = [
+      pkgs.restic
+    ];
+    base = [
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.file
+      pkgs.gawk
+      pkgs.gnugrep
+      pkgs.gnused
+      pkgs.jq
+      pkgs.vim
+      pkgs.which
+    ];
+    chat = [
+      pkgs.weechat
+    ];
+    dev = [
+      pkgs.curlie
+      pkgs.dos2unix
+      pkgs.entr
+      pkgs.glow
+      pkgs.gnumake
+      pkgs.gnupatch
+      pkgs.grpcurl
+      pkgs.minify
+      pkgs.wrk
+      pkgs.xan
+    ];
+    format-editors = [
+      pkgs.pdftk
+      pkgs.imagemagick
+    ];
+    network-clients = [
+      pkgs.aria2
+      pkgs.elinks
+      pkgs.wget
+    ];
+    nix = [
+      pkgs.nh
+    ];
+    ops = [
+      pkgs.btop
+      pkgs.dmidecode
+      pkgs.dnsmasq
+      pkgs.dua
+      pkgs.duf
+      pkgs.ethtool
+      pkgs.eza
+      pkgs.fd
+      pkgs.findutils
+      pkgs.hexyl
+      pkgs.htop
+      pkgs.iftop
+      pkgs.inetutils
+      pkgs.iotop
+      pkgs.ipcalc
+      pkgs.iperf3
+      pkgs.iproute2
+      pkgs.ldns
+      pkgs.lshw
+      pkgs.ltrace
+      pkgs.mtr
+      pkgs.nmap
+      pkgs.ntfs3g
+      pkgs.pciutils
+      pkgs.pv
+      pkgs.socat
+      pkgs.strace
+      pkgs.sysstat
+      pkgs.tree
+      pkgs.usbutils
+      pkgs.whois
+
+      # Compression tools.
+      pkgs.gzip
+      pkgs.lzip
+      pkgs.p7zip
+      pkgs.unrar
+      pkgs.unzip
+      pkgs.xz
+      pkgs.zip
+      pkgs.zstd
+    ];
+    security = [
+      pkgs.age
+      pkgs.gnupg
+      pkgs.openssl
+      pkgs.pass
+      pkgs.sequoia-sq
+    ];
+    virtualization = [
+      pkgs.distrobox
+      pkgs.nerdctl
+      pkgs.packer
+      pkgs.virt-viewer
+    ];
+  };
+
+  cliPackages =
+    tools.backup
+    ++ tools.base
+    ++ tools.chat
+    ++ tools.dev
+    ++ tools.format-editors
+    ++ tools.network-clients
+    ++ tools.nix
+    ++ tools.ops
+    ++ tools.security
+    ++ tools.virtualization;
 
   desktopPackages = [
     # File storage.
