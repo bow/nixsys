@@ -26,7 +26,7 @@ let
       cfg = config.nixsys.home.devel.${name};
     in
     {
-      options.nixsys.home.devel.${name} = {
+      options.nixsys.home.devel.${name} = lib.recursiveUpdate {
         enable = lib.mkEnableOption "nixsys.home.devel.${name}" // {
           default = config.nixsys.home.devel.enable;
         };
@@ -46,17 +46,15 @@ let
           type = types.listOf types.package;
           default = treesitters;
         };
-      }
-      // extraOptions;
+      } extraOptions;
 
       config = lib.mkIf cfg.enable (
-        {
+        lib.recursiveUpdate {
           home.packages = cfg.tools;
           programs.neovim.extraPackages = lib.mkIf cfg.enable-neovim-integration (
             cfg.langservers ++ cfg.tools ++ cfg.treesitters
           );
-        }
-        // extraConfig
+        } extraConfig
       );
     };
 in
