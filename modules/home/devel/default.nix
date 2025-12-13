@@ -23,7 +23,7 @@ let
     }:
     let
       inherit (lib) types;
-      cfg = config.nixsys.home.devel.${name};
+      dcfg = config.nixsys.home.devel.${name};
     in
     {
       options.nixsys.home.devel.${name} = lib.recursiveUpdate {
@@ -48,15 +48,17 @@ let
         };
       } extraOptions;
 
-      config = lib.mkIf cfg.enable (
+      config = lib.mkIf dcfg.enable (
         lib.recursiveUpdate {
-          home.packages = cfg.tools;
-          programs.neovim.extraPackages = lib.mkIf cfg.enable-neovim-integration (
-            cfg.langservers ++ cfg.tools ++ cfg.treesitters
+          home.packages = dcfg.tools;
+          programs.neovim.extraPackages = lib.mkIf dcfg.enable-neovim-integration (
+            dcfg.langservers ++ dcfg.tools ++ dcfg.treesitters
           );
         } extraConfig
       );
     };
+
+  cfg = config.nixsys.home.devel;
 in
 {
   options.nixsys.home.devel = {
@@ -87,7 +89,6 @@ in
         pkgs.unstable.clang-tools
         pkgs.unstable.cmake
         pkgs.unstable.gdb
-        pkgs.unstable.gnumake
         pkgs.unstable.lld
         pkgs.unstable.lldb
         pkgs.unstable.valgrind
@@ -595,7 +596,19 @@ in
     };
   };
 
-  config = {
-    home.packages = [ pkgs.cloc ];
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      pkgs.unstable.cloc
+      pkgs.unstable.curlie
+      pkgs.unstable.dos2unix
+      pkgs.unstable.entr
+      pkgs.unstable.glow
+      pkgs.unstable.gnumake
+      pkgs.unstable.gnupatch
+      pkgs.unstable.grpcurl
+      pkgs.unstable.minify
+      pkgs.unstable.wrk
+      pkgs.unstable.xan
+    ];
   };
 }
