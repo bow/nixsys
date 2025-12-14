@@ -9,7 +9,7 @@ let
   inherit (lib) types;
   libcfg = lib.nixsys.home;
 
-  theme = config.nixsys.home.theme.active;
+  theme = config.nixsys.home.theme.active.i3;
 
   lock-sh =
     with theme.lock-screen;
@@ -101,244 +101,233 @@ in
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3;
-      config =
-        let
-          pallete = {
-            focusedFG = "#ffffff";
-            focusedBG = "#184a53";
-            focusedInactiveFG = "#a89984";
-            focusedInactiveBG = "#3c3836";
-            unfocusedFG = "#665c54";
-            unfocusedBG = "#282828";
-            urgentFG = "#151515";
-            urgentBG = "#e3ac2d";
-            barBG = "#151515";
-            barFG = "#bdbeab";
-          };
-        in
-        rec {
-          bars = [ ];
-          modifier = cfg.mod-key;
-          colors = {
+      config = rec {
+        bars = [ ];
+        modifier = cfg.mod-key;
+        colors =
+          let
+            inherit (theme.desktop) colors;
+          in
+          {
             focused = {
-              border = pallete.focusedBG;
-              background = pallete.focusedBG;
-              text = pallete.focusedFG;
-              indicator = pallete.focusedInactiveBG;
-              childBorder = "";
+              border = colors.focused-bg;
+              background = colors.focused-bg;
+              text = colors.focused-fg;
+              indicator = colors.focused-inactive-bg;
+              childBorder = colors.focused-child-border;
             };
             focusedInactive = {
-              border = pallete.focusedInactiveBG;
-              background = pallete.focusedInactiveBG;
-              text = pallete.focusedInactiveFG;
-              indicator = pallete.focusedBG;
-              childBorder = pallete.focusedInactiveBG;
+              border = colors.focused-inactive-bg;
+              background = colors.focused-inactive-bg;
+              text = colors.focused-inactive-fg;
+              indicator = colors.focused-bg;
+              childBorder = colors.focused-inactive-bg;
             };
             unfocused = {
-              border = "#222222";
-              background = pallete.unfocusedBG;
-              text = pallete.unfocusedFG;
-              indicator = pallete.unfocusedBG;
-              childBorder = pallete.unfocusedBG;
+              border = colors.unfocused-border;
+              background = colors.unfocused-bg;
+              text = colors.unfocused-fg;
+              indicator = colors.unfocused-bg;
+              childBorder = colors.unfocused-bg;
             };
             urgent = {
-              border = pallete.urgentBG;
-              background = pallete.urgentBG;
-              text = pallete.urgentFG;
-              indicator = pallete.urgentBG;
-              childBorder = pallete.urgentBG;
+              border = colors.urgent-bg;
+              background = colors.urgent-bg;
+              text = colors.urgent-fg;
+              indicator = colors.urgent-bg;
+              childBorder = colors.urgent-bg;
             };
             placeholder = {
-              border = "#000000";
-              background = pallete.focusedInactiveBG;
-              text = pallete.focusedInactiveFG;
-              indicator = "#000000";
-              childBorder = pallete.focusedInactiveBG;
+              border = colors.placeholder-border;
+              background = colors.focused-inactive-bg;
+              text = colors.focused-inactive-fg;
+              indicator = colors.placeholder-indicator;
+              childBorder = colors.focused-inactive-bg;
             };
           };
-          fonts = {
-            names = [ "DroidSansMono Nerd Font" ];
-            size = "8";
-          };
-          floating = { inherit modifier; };
-          gaps = {
-            inner = 2;
-            outer = 23;
-            bottom = 22;
-            top = 0;
-          };
-          modes = {
-            resize = {
-              "h" = "resize shrink width 10 px or 10 ppt";
-              "j" = "resize grow height 10 px or 10 ppt";
-              "k" = "resize shrink height 10 px or 10 ppt";
-              "l" = "resize grow width 10 px or 10 ppt";
-
-              "Right" = "resize shrink width 10 px or 10 ppt";
-              "Up" = "resize grow height 10 px or 10 ppt";
-              "Down" = "resize shrink height 10 px or 10 ppt";
-              "Left" = "resize grow width 10 px or 10 ppt";
-
-              "Return" = ''mode "default"'';
-              "Escape" = ''mode "default"'';
-            };
-          };
-          window = {
-            hideEdgeBorders = "smart";
-            commands =
-              builtins.map
-                (class: {
-                  criteria = { inherit class; };
-                  command = "border pixel 0";
-                })
-                [
-                  "ghostty"
-                  "Zathura"
-                  "firefox"
-                  "google-chrome"
-                ];
-          };
-          defaultWorkspace = keybindings."${modifier}+2";
-          keybindings = {
-            # Navigation.
-            "${modifier}+j" = "focus left";
-            "${modifier}+k" = "focus down";
-            "${modifier}+l" = "focus up";
-            "${modifier}+semicolon" = "focus right";
-            "${modifier}+Left" = "focus left";
-            "${modifier}+Down" = "focus down";
-            "${modifier}+Up" = "focus up";
-            "${modifier}+Right" = "focus right";
-
-            # Move windows.
-            "${modifier}+Shift+h" = "move left";
-            "${modifier}+Shift+j" = "move down";
-            "${modifier}+Shift+k" = "move up";
-            "${modifier}+Shift+l" = "move right";
-            "${modifier}+Shift+Left" = "move left";
-            "${modifier}+Shift+Down" = "move down";
-            "${modifier}+Shift+Up" = "move up";
-            "${modifier}+Shift+Right" = "move right";
-
-            # Split windows.
-            "${modifier}+h" = "split h";
-            "${modifier}+v" = "split v";
-
-            # Enter fullscreen mode for the focused container.
-            "${modifier}+f" = "fullscreen toggle";
-
-            # Change container layout (stacked, tabbed, toggle split).
-            "${modifier}+s" = "layout stacking";
-            "${modifier}+w" = "layout tabbed";
-            "${modifier}+e" = "layout toggle split";
-
-            # Toggle tiling / floating.
-            "${modifier}+Shift+space" = "floating toggle";
-
-            # Change focus between tiling / floating windows.
-            "${modifier}+space" = "focus mode_toggle";
-
-            # Focus the parent container.
-            "${modifier}+a" = "focus parent";
-
-            # Switch to workspace.
-            # FIXME: How to sync with polybar workspaces?
-            "${modifier}+1" = "workspace 1:";
-            "${modifier}+2" = "workspace 2:";
-            "${modifier}+3" = "workspace 3:";
-            "${modifier}+4" = "workspace 4:";
-            "${modifier}+5" = "workspace 5:";
-            "${modifier}+6" = "workspace 6:•";
-            "${modifier}+7" = "workspace 7:•";
-            "${modifier}+8" = "workspace 8:•";
-            "${modifier}+9" = "workspace 9:•";
-            "${modifier}+0" = "workspace 10:•";
-            "${modifier}+p" = "workspace 11:";
-            "${modifier}+c" = "workspace 12:";
-            "${modifier}+b" = "workspace 13:";
-
-            # Move focused container to workspace.
-            "${modifier}+Shift+1" = "move container to workspace 1:";
-            "${modifier}+Shift+2" = "move container to workspace 2:";
-            "${modifier}+Shift+3" = "move container to workspace 3:";
-            "${modifier}+Shift+4" = "move container to workspace 4:";
-            "${modifier}+Shift+5" = "move container to workspace 5:";
-            "${modifier}+Shift+6" = "move container to workspace 6:•";
-            "${modifier}+Shift+7" = "move container to workspace 7:•";
-            "${modifier}+Shift+8" = "move container to workspace 8:•";
-            "${modifier}+Shift+9" = "move container to workspace 9:•";
-            "${modifier}+Shift+0" = "move container to workspace 10:•";
-            "${modifier}+Shift+p" = "move container to workspace 11:";
-            "${modifier}+Shift+c" = "move container to workspace 12:";
-            "${modifier}+Shift+b" = "move container to workspace 13:";
-
-            # Move between workspaces.
-            "${modifier}+Prior" = "workspace prev";
-            "${modifier}+Next" = "workspace next";
-            "${modifier}+Shift+n" = "move workspace to output next";
-            "${modifier}+n" = "focus output next";
-
-            # Reload the configuration file.
-            "${modifier}+Shift+o" = "reload";
-
-            # Restart i3 inplace (preserves layout/session, can be used to upgrade i3)
-            "${modifier}+Shift+r" = "restart";
-
-            # Exit i3 (logs out of an X session).
-            "${modifier}+Shift+e" = ''
-              exec "${pkgs.i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${pkgs.i3}/bin/i3-msg exit'"
-            '';
-
-            # Shortcuts.
-            "${modifier}+Shift+q" = "kill";
-            "${modifier}+r" = ''mode "resize"'';
-
-            # Interact with applications.
-            # FIXME: Move this into ghostty module and set a default terminal here.
-            "${modifier}+Return" = "exec ${pkgs.unstable.ghostty}/bin/ghostty";
-            "${modifier}+backslash" = "exec ${pkgs.xfce.thunar}/bin/thunar";
-
-            # Audio + video controls.
-            "XF86AudioRaiseVolume" =
-              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
-            "XF86AudioLowerVolume" =
-              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
-            "XF86AudioMute" =
-              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer set Capture toggle";
-            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
-            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
-
-            # System controls.
-            "${modifier}+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
-            "${modifier}+Shift+x" = "exec ${lock-sh}";
-          }
-          // lib.optionalAttrs rofiEnabled {
-            "${modifier}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-          };
-          startup = [
-            {
-              command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
-              notification = false;
-              always = true;
-            }
-            {
-              command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-              notification = false;
-              always = true;
-            }
-            {
-              command = "${pkgs.feh}/bin/feh --bg-scale ${theme.desktop.bg}";
-              notification = false;
-              always = true;
-            }
-            {
-              command = "${pkgs.systemd}/bin/systemctl --user start picom";
-              notification = false;
-              always = true;
-            }
-          ];
+        fonts = {
+          names = [ "DroidSansMono Nerd Font" ];
+          size = "8";
         };
+        floating = { inherit modifier; };
+        gaps = {
+          inner = 2;
+          outer = 23;
+          bottom = 22;
+          top = 0;
+        };
+        modes = {
+          resize = {
+            "h" = "resize shrink width 10 px or 10 ppt";
+            "j" = "resize grow height 10 px or 10 ppt";
+            "k" = "resize shrink height 10 px or 10 ppt";
+            "l" = "resize grow width 10 px or 10 ppt";
+
+            "Right" = "resize shrink width 10 px or 10 ppt";
+            "Up" = "resize grow height 10 px or 10 ppt";
+            "Down" = "resize shrink height 10 px or 10 ppt";
+            "Left" = "resize grow width 10 px or 10 ppt";
+
+            "Return" = ''mode "default"'';
+            "Escape" = ''mode "default"'';
+          };
+        };
+        window = {
+          hideEdgeBorders = "smart";
+          commands =
+            builtins.map
+              (class: {
+                criteria = { inherit class; };
+                command = "border pixel 0";
+              })
+              [
+                "ghostty"
+                "Zathura"
+                "firefox"
+                "google-chrome"
+              ];
+        };
+        defaultWorkspace = keybindings."${modifier}+2";
+        keybindings = {
+          # Navigation.
+          "${modifier}+j" = "focus left";
+          "${modifier}+k" = "focus down";
+          "${modifier}+l" = "focus up";
+          "${modifier}+semicolon" = "focus right";
+          "${modifier}+Left" = "focus left";
+          "${modifier}+Down" = "focus down";
+          "${modifier}+Up" = "focus up";
+          "${modifier}+Right" = "focus right";
+
+          # Move windows.
+          "${modifier}+Shift+h" = "move left";
+          "${modifier}+Shift+j" = "move down";
+          "${modifier}+Shift+k" = "move up";
+          "${modifier}+Shift+l" = "move right";
+          "${modifier}+Shift+Left" = "move left";
+          "${modifier}+Shift+Down" = "move down";
+          "${modifier}+Shift+Up" = "move up";
+          "${modifier}+Shift+Right" = "move right";
+
+          # Split windows.
+          "${modifier}+h" = "split h";
+          "${modifier}+v" = "split v";
+
+          # Enter fullscreen mode for the focused container.
+          "${modifier}+f" = "fullscreen toggle";
+
+          # Change container layout (stacked, tabbed, toggle split).
+          "${modifier}+s" = "layout stacking";
+          "${modifier}+w" = "layout tabbed";
+          "${modifier}+e" = "layout toggle split";
+
+          # Toggle tiling / floating.
+          "${modifier}+Shift+space" = "floating toggle";
+
+          # Change focus between tiling / floating windows.
+          "${modifier}+space" = "focus mode_toggle";
+
+          # Focus the parent container.
+          "${modifier}+a" = "focus parent";
+
+          # Switch to workspace.
+          # FIXME: How to sync with polybar workspaces?
+          "${modifier}+1" = "workspace 1:";
+          "${modifier}+2" = "workspace 2:";
+          "${modifier}+3" = "workspace 3:";
+          "${modifier}+4" = "workspace 4:";
+          "${modifier}+5" = "workspace 5:";
+          "${modifier}+6" = "workspace 6:•";
+          "${modifier}+7" = "workspace 7:•";
+          "${modifier}+8" = "workspace 8:•";
+          "${modifier}+9" = "workspace 9:•";
+          "${modifier}+0" = "workspace 10:•";
+          "${modifier}+p" = "workspace 11:";
+          "${modifier}+c" = "workspace 12:";
+          "${modifier}+b" = "workspace 13:";
+
+          # Move focused container to workspace.
+          "${modifier}+Shift+1" = "move container to workspace 1:";
+          "${modifier}+Shift+2" = "move container to workspace 2:";
+          "${modifier}+Shift+3" = "move container to workspace 3:";
+          "${modifier}+Shift+4" = "move container to workspace 4:";
+          "${modifier}+Shift+5" = "move container to workspace 5:";
+          "${modifier}+Shift+6" = "move container to workspace 6:•";
+          "${modifier}+Shift+7" = "move container to workspace 7:•";
+          "${modifier}+Shift+8" = "move container to workspace 8:•";
+          "${modifier}+Shift+9" = "move container to workspace 9:•";
+          "${modifier}+Shift+0" = "move container to workspace 10:•";
+          "${modifier}+Shift+p" = "move container to workspace 11:";
+          "${modifier}+Shift+c" = "move container to workspace 12:";
+          "${modifier}+Shift+b" = "move container to workspace 13:";
+
+          # Move between workspaces.
+          "${modifier}+Prior" = "workspace prev";
+          "${modifier}+Next" = "workspace next";
+          "${modifier}+Shift+n" = "move workspace to output next";
+          "${modifier}+n" = "focus output next";
+
+          # Reload the configuration file.
+          "${modifier}+Shift+o" = "reload";
+
+          # Restart i3 inplace (preserves layout/session, can be used to upgrade i3)
+          "${modifier}+Shift+r" = "restart";
+
+          # Exit i3 (logs out of an X session).
+          "${modifier}+Shift+e" = ''
+            exec "${pkgs.i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${pkgs.i3}/bin/i3-msg exit'"
+          '';
+
+          # Shortcuts.
+          "${modifier}+Shift+q" = "kill";
+          "${modifier}+r" = ''mode "resize"'';
+
+          # Interact with applications.
+          # FIXME: Move this into ghostty module and set a default terminal here.
+          "${modifier}+Return" = "exec ${pkgs.unstable.ghostty}/bin/ghostty";
+          "${modifier}+backslash" = "exec ${pkgs.xfce.thunar}/bin/thunar";
+
+          # Audio + video controls.
+          "XF86AudioRaiseVolume" =
+            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
+          "XF86AudioLowerVolume" =
+            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+          "XF86AudioMute" =
+            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer set Capture toggle";
+          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
+          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
+
+          # System controls.
+          "${modifier}+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
+          "${modifier}+Shift+x" = "exec ${lock-sh}";
+        }
+        // lib.optionalAttrs rofiEnabled {
+          "${modifier}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+        };
+        startup = [
+          {
+            command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
+            notification = false;
+            always = true;
+          }
+          {
+            command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+            notification = false;
+            always = true;
+          }
+          {
+            command = "${pkgs.feh}/bin/feh --bg-scale ${theme.desktop.bg}";
+            notification = false;
+            always = true;
+          }
+          {
+            command = "${pkgs.systemd}/bin/systemctl --user start picom";
+            notification = false;
+            always = true;
+          }
+        ];
+      };
     };
 
     home.file = {

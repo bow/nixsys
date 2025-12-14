@@ -42,23 +42,43 @@ in
 
   config = lib.mkIf cfg.enable {
     nixsys.home.theme.active = lib.mkForce {
-      desktop.bg = "${wallpaper}/original";
-      lock-screen = {
-        bg = "${wallpaper}/blurred";
-        font = {
-          name = "Titillium";
-          package = pkgs.local.titillium-font;
+      i3 = {
+        desktop = {
+          bg = "${wallpaper}/original";
+          colors = {
+            bar-bg = "#151515";
+            bar-fg = "#bdbeab";
+            focused-bg = "#184a53";
+            focused-child-border = "";
+            focused-fg = "#ffffff";
+            focused-inactive-bg = "#3c3836";
+            focused-inactive-fg = "#a89984";
+            placeholder-border = "#000000";
+            placeholder-indicator = "#000000";
+            unfocused-bg = "#282828";
+            unfocused-border = "#222222";
+            unfocused-fg = "#665c54";
+            urgent-bg = "#e3ac2d";
+            urgent-fg = "#151515";
+          };
         };
-        colors = rec {
-          time = light;
-          greeter = dark;
+        lock-screen = {
+          bg = "${wallpaper}/blurred";
+          font = {
+            name = "Titillium";
+            package = pkgs.local.titillium-font;
+          };
+          colors = rec {
+            time = light;
+            greeter = dark;
 
-          light = "#ffffffff";
-          dark = "#1d2021ee";
-          ring = "#007c5bff";
-          ring-hl = "#e3ac2dff";
-          ring-bs = "#d1472fff";
-          ring-sep = "#00000000";
+            light = "#ffffffff";
+            dark = "#1d2021ee";
+            ring = "#007c5bff";
+            ring-hl = "#e3ac2dff";
+            ring-bs = "#d1472fff";
+            ring-sep = "#00000000";
+          };
         };
       };
     };
