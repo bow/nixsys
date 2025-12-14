@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.nixsys.home.fonts;
+  cfg = config.nixsys.home.desktop.fonts;
 in
 {
-  options.nixsys.home.fonts = {
-    enable = lib.mkEnableOption "nixsys.home.fonts";
+  options.nixsys.home.desktop.fonts = {
+    enable = lib.mkEnableOption "nixsys.home.desktop.fonts";
   };
 
   config = lib.mkIf cfg.enable {

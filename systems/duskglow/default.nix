@@ -39,11 +39,11 @@ in
       };
       home-manager = enabledWith {
         desktop = {
+          fonts = enabled;
           i3 = enabled;
           xdg = enabled;
         };
         devel = enabled;
-        fonts = enabled;
         pkgset.home = enabled;
         programs = {
           bat = enabled;
