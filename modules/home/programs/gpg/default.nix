@@ -57,11 +57,15 @@ in
       type = types.bool;
       default = true;
     };
+
+    package = lib.mkPackageOption pkgs "gnupg" { };
   };
 
   config = lib.mkIf cfg.enable {
     programs.gpg = {
       enable = true;
+
+      inherit (cfg) package;
       mutableKeys = cfg.mutable-keys;
       mutableTrust = cfg.mutable-trust;
     };

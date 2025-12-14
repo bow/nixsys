@@ -38,7 +38,7 @@ in
         wget = enabled;
 
         # Security.
-        gnupg = enabled;
+        gpg = enabled;
         pass = enabled;
         sequoia-sq = enabled;
 

@@ -51,7 +51,6 @@ in
           dnsutils = enabled;
           fzf = enabled;
           git = enabled;
-          gpg = enabled;
           ncmpcpp = enabled;
           neovim = enabled;
           readline = enabled;
