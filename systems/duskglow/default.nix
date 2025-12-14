@@ -44,26 +44,6 @@ in
           xdg = enabled;
         };
         pkgset.home = enabled;
-        programs = {
-          bat = enabled;
-          dircolors = enabled;
-          direnv = enabled;
-          dnsutils = enabled;
-          fzf = enabled;
-          git = enabled;
-          ncmpcpp = enabled;
-          readline = enabled;
-          ripgrep = enabled;
-          starship = enabled;
-          tmux = enabled;
-          yazi = enabled;
-          zoxide = enabled;
-        };
-        services = {
-          mpd = enabled;
-          mpris-proxy = enabled;
-          redshift = enabled;
-        };
         theme.current = enabled;
       };
     };

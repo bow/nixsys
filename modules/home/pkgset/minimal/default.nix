@@ -20,18 +20,23 @@ in
         # Base.
         coreutils = enabled;
         curl = enabled;
+        dircolors = enabled;
         file = enabled;
+        fzf = enabled;
         gawk = enabled;
         gnugrep = enabled;
         gnused = enabled;
         jq = enabled;
         neovim = enabledWith { extended = lib.mkDefault false; };
+        readline = enabled;
+        ripgrep = enabled;
         which = enabled;
 
         # Ops.
         btop = enabled;
         dmidecode = enabled;
         dnsmasq = enabled;
+        dnsutils = enabled;
         dua = enabled;
         duf = enabled;
         ethtool = enabled;

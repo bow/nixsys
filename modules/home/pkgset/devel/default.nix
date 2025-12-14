@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib.nixsys) enabledWith;
+  inherit (lib.nixsys) enabled enabledWith;
   libcfg = lib.nixsys.home;
 
   shellBash = libcfg.isShellBash user;
@@ -607,7 +607,22 @@ in
     ];
 
     nixsys.home.programs = {
+      bat = enabled;
+      direnv = enabled;
+      git = enabled;
       neovim = enabledWith { extended = true; };
+      starship = enabled;
+      tmux = enabled;
+
+      # Navigation.
+      yazi = enabled;
+      zoxide = enabled;
+
+      # Virtualization.
+      distrobox = enabled;
+      nerdctl = enabled;
+      packer = enabled;
+      virt-viewer = enabled;
     };
   };
 }

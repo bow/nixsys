@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   outputs,
   user,
   asStandalone ? true,
@@ -9,76 +8,6 @@
 }:
 let
   inherit (lib) types;
-  libcfg = lib.nixsys.home;
-
-  desktopEnabled = libcfg.isDesktopEnabled config;
-
-  cliPackages = [ pkgs.unstable.nh ];
-
-  desktopPackages = [
-    # File storage.
-    pkgs.dropbox
-
-    # PDF reader.
-    pkgs.evince
-
-    # Web browser.
-    pkgs.firefox
-
-    # Web browser.
-    pkgs.google-chrome
-
-    # Text editor.
-    pkgs.geany
-
-    # Disk partition editor.
-    pkgs.gparted
-
-    # Screnshot tool.
-    pkgs.maim
-
-    # Image viewer.
-    pkgs.nomacs
-
-    # Markdown-based knowledge base.
-    pkgs.obsidian
-
-    # VPN client.
-    pkgs.openconnect
-
-    # Mail client.
-    pkgs.protonmail-bridge
-
-    # Music player.
-    pkgs.spotify
-
-    # Image viewer.
-    pkgs.sxiv
-
-    # Logitech peripherals.
-    pkgs.solaar
-
-    # Synology.
-    pkgs.synology-drive-client
-
-    # Email client.
-    pkgs.thunderbird-latest
-
-    # Official Todoist app.
-    pkgs.todoist-electron
-
-    # Encryption tooling.
-    pkgs.veracrypt
-
-    # Video player.
-    pkgs.vlc
-
-    # File explorer + plugins.
-    pkgs.xfce.thunar
-    pkgs.xfce.thunar-archive-plugin
-    pkgs.xfce.thunar-dropbox-plugin
-    pkgs.xfce.thunar-volman
-  ];
 in
 {
   options.nixsys.home.system = lib.mkOption {
@@ -100,7 +29,6 @@ in
       stateVersion = "25.05";
       username = user.name;
       homeDirectory = user.home-directory;
-      packages = cliPackages ++ (lib.optionals desktopEnabled desktopPackages);
       preferXdgDirectories = true;
 
       # FIXME: Find out where to best put this.

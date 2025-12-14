@@ -1,10 +1,14 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
   inherit (lib.nixsys) enabled;
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
 
   cfg = config.nixsys.home.pkgset.home;
 in
@@ -14,6 +18,74 @@ in
   };
   config = lib.mkIf cfg.enable {
 
+    home.packges = [
+      pkgs.unstable.nh
+    ]
+    ++ lib.optionals desktopEnabled [
+      # File storage.
+      pkgs.dropbox
+
+      # PDF reader.
+      pkgs.evince
+
+      # Web browser.
+      pkgs.firefox
+
+      # Web browser.
+      pkgs.google-chrome
+
+      # Text editor.
+      pkgs.geany
+
+      # Disk partition editor.
+      pkgs.gparted
+
+      # Screnshot tool.
+      pkgs.maim
+
+      # Image viewer.
+      pkgs.nomacs
+
+      # Markdown-based knowledge base.
+      pkgs.obsidian
+
+      # VPN client.
+      pkgs.openconnect
+
+      # Mail client.
+      pkgs.protonmail-bridge
+
+      # Music player.
+      pkgs.spotify
+
+      # Image viewer.
+      pkgs.sxiv
+
+      # Logitech peripherals.
+      pkgs.solaar
+
+      # Synology.
+      pkgs.synology-drive-client
+
+      # Email client.
+      pkgs.thunderbird-latest
+
+      # Official Todoist app.
+      pkgs.todoist-electron
+
+      # Encryption tooling.
+      pkgs.veracrypt
+
+      # Video player.
+      pkgs.vlc
+
+      # File explorer + plugins.
+      pkgs.xfce.thunar
+      pkgs.xfce.thunar-archive-plugin
+      pkgs.xfce.thunar-dropbox-plugin
+      pkgs.xfce.thunar-volman
+    ];
+
     nixsys.home = {
 
       pkgset = {
@@ -22,6 +94,9 @@ in
       };
 
       programs = {
+        # Audio.
+        ncmpcpp = enabled;
+
         # Backup.
         restic = enabled;
 
@@ -41,12 +116,12 @@ in
         gpg = enabled;
         pass = enabled;
         sequoia-sq = enabled;
+      };
 
-        # Virtualization.
-        distrobox = enabled;
-        nerdctl = enabled;
-        packer = enabled;
-        virt-viewer = enabled;
+      services = {
+        mpd = enabled;
+        mpris-proxy = enabled;
+        redshift = enabled;
       };
     };
   };
