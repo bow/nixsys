@@ -53,9 +53,7 @@ in
           git = enabled;
           gpg = enabled;
           ncmpcpp = enabled;
-          neovim = enabledWith {
-            as-default-editor = true;
-          };
+          neovim = enabled;
           readline = enabled;
           ripgrep = enabled;
           starship = enabled;
