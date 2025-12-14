@@ -68,6 +68,16 @@ in
           mpris-proxy = enabled;
           redshift = enabled;
         };
+        suites = {
+          backup = enabled;
+          base = enabled;
+          chat = enabled;
+          media-editors = enabled;
+          network-clients = enabled;
+          ops = enabled;
+          security = enabled;
+          virtualization = enabled;
+        };
         theme.current = enabled;
       };
     };
