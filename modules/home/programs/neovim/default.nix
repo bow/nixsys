@@ -18,6 +18,7 @@ in
       default = true;
     };
     package = lib.mkPackageOption pkgs.unstable "neovim-unwrapped" { };
+    extended = lib.mkOption { type = types.bool; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,13 +32,13 @@ in
         pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars
         pkgs.unstable.vimPlugins.nvim-treesitter
       ];
-      extraPackages = [
+      extraPackages = lib.mkIf cfg.extended [
         pkgs.unstable.tree-sitter
         pkgs.unstable.lua54Packages.jsregexp
       ];
     };
 
-    xdg.configFile = {
+    xdg.configFile = lib.mkIf cfg.extended {
       "nvim" = {
         source = ../../../../dotfiles/nvim;
         recursive = true;

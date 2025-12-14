@@ -6,6 +6,7 @@
   ...
 }:
 let
+  inherit (lib.nixsys) enabledWith;
   libcfg = lib.nixsys.home;
 
   shellBash = libcfg.isShellBash user;
@@ -30,10 +31,6 @@ let
         enable = lib.mkEnableOption "nixsys.home.pkgset.devel.${name}" // {
           default = config.nixsys.home.pkgset.devel.enable;
         };
-        enable-neovim-integration = lib.mkOption {
-          default = true;
-          type = types.bool;
-        };
         langservers = lib.mkOption {
           type = types.listOf types.package;
           default = langservers;
@@ -51,9 +48,7 @@ let
       config = lib.mkIf dcfg.enable (
         lib.recursiveUpdate {
           home.packages = dcfg.tools;
-          programs.neovim.extraPackages = lib.mkIf dcfg.enable-neovim-integration (
-            dcfg.langservers ++ dcfg.tools ++ dcfg.treesitters
-          );
+          programs.neovim.extraPackages = dcfg.langservers ++ dcfg.tools ++ dcfg.treesitters;
         } extraConfig
       );
     };
@@ -610,5 +605,9 @@ in
       pkgs.unstable.wrk
       pkgs.unstable.xan
     ];
+
+    nixsys.home.programs = {
+      neovim = enabledWith { extended = true; };
+    };
   };
 }

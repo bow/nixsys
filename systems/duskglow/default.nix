@@ -52,7 +52,6 @@ in
           fzf = enabled;
           git = enabled;
           ncmpcpp = enabled;
-          neovim = enabled;
           readline = enabled;
           ripgrep = enabled;
           starship = enabled;

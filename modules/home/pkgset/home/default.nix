@@ -28,7 +28,7 @@ in
         # Chat.
         weechat = enabled;
 
-        # Media editors.
+        # Media tools.
         pdftk = enabled;
         imagemagick = enabled;
 

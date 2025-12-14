@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (lib.nixsys) enabled;
+  inherit (lib.nixsys) enabled enabledWith;
 
   cfg = config.nixsys.home.pkgset.minimal;
 in
@@ -25,7 +25,7 @@ in
         gnugrep = enabled;
         gnused = enabled;
         jq = enabled;
-        vim = enabled;
+        neovim = enabledWith { extended = lib.mkDefault false; };
         which = enabled;
 
         # Ops.
