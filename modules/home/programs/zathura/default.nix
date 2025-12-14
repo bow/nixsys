@@ -20,6 +20,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
     programs.zathura = {
       inherit (cfg) package;
       enable = true;
@@ -49,5 +50,34 @@ in
         highlight-active-color = "#b769c3";
       };
     };
+
+    xdg =
+      let
+        desktopEntryName = "zathura";
+        mimeTypes = [ "application/pdf" ];
+      in
+      {
+        desktopEntries.${desktopEntryName} = {
+          name = "Zathura";
+          comment = "Open PDF files in zathura";
+          exec = "${cfg.package}/bin/zathura %f";
+          terminal = false;
+          icon = "zathura";
+          categories = [
+            "Office"
+            "Viewer"
+          ];
+          mimeType = mimeTypes;
+        };
+        mimeApps = {
+          enable = true;
+          defaultApplications = builtins.listToAttrs (
+            builtins.map (name: {
+              inherit name;
+              value = [ "${desktopEntryName}.desktop" ];
+            }) mimeTypes
+          );
+        };
+      };
   };
 }
