@@ -120,6 +120,9 @@ in
       nerdctl
       packer
       virt-viewer
+
+      # Desktop.
+      pavucontrol
       ;
   };
 }

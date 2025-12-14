@@ -9,6 +9,7 @@ let
   libcfg = lib.nixsys.home;
 
   desktopEnabled = libcfg.isDesktopEnabled config;
+  pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
 
   cfg = config.nixsys.home.profile.home;
 in
@@ -116,6 +117,12 @@ in
         gpg = enabled;
         pass = enabled;
         sequoia-sq = enabled;
+      }
+      // lib.optionalAttrs desktopEnabled {
+        zathura = enabled;
+      }
+      // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
+        pavucontrol = enabled;
       };
 
       services = {
