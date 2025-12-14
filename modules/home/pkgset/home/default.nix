@@ -16,7 +16,10 @@ in
 
     nixsys.home = {
 
-      pkgset.minimal = enabled;
+      pkgset = {
+        minimal = enabled;
+        devel = enabled;
+      };
 
       programs = {
         # Backup.

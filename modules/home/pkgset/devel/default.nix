@@ -23,12 +23,12 @@ let
     }:
     let
       inherit (lib) types;
-      dcfg = config.nixsys.home.devel.${name};
+      dcfg = config.nixsys.home.pkgset.devel.${name};
     in
     {
-      options.nixsys.home.devel.${name} = lib.recursiveUpdate {
-        enable = lib.mkEnableOption "nixsys.home.devel.${name}" // {
-          default = config.nixsys.home.devel.enable;
+      options.nixsys.home.pkgset.devel.${name} = lib.recursiveUpdate {
+        enable = lib.mkEnableOption "nixsys.home.pkgset.devel.${name}" // {
+          default = config.nixsys.home.pkgset.devel.enable;
         };
         enable-neovim-integration = lib.mkOption {
           default = true;
@@ -58,11 +58,11 @@ let
       );
     };
 
-  cfg = config.nixsys.home.devel;
+  cfg = config.nixsys.home.pkgset.devel;
 in
 {
-  options.nixsys.home.devel = {
-    enable = lib.mkEnableOption "nixsys.home.devel";
+  options.nixsys.home.pkgset.devel = {
+    enable = lib.mkEnableOption "nixsys.home.pkgset.devel";
   };
 
   imports = mkDevelModuleImports {

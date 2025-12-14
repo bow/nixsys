@@ -43,7 +43,6 @@ in
           i3 = enabled;
           xdg = enabled;
         };
-        devel = enabled;
         pkgset.home = enabled;
         programs = {
           bat = enabled;
