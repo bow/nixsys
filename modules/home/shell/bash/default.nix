@@ -12,6 +12,8 @@ let
   dockerEnabled = libcfg.isDockerEnabled config;
   fzfEnabled = libcfg.isFzfEnabled config;
   fzfPackage = libcfg.getFzfPackage config;
+  gpgEnabled = libcfg.isGpgEnabled config;
+  gpgPackage = libcfg.getGpgPackage config;
   neovimEnabled = libcfg.isNeovimEnabled config;
   neovimPackage = libcfg.getNeovimPackage config;
   ripgrepEnabled = libcfg.isRipgrepEnabled config;
@@ -115,10 +117,10 @@ in
         drni = "${pkgs.docker}/bin/docker run --rm -itP";
       };
 
-      profileExtra = ''
+      profileExtra = lib.optionalString gpgEnabled ''
         # Reset GPG and SSH agents.
         function credsreset() {
-            ${pkgs.gnupg}/bin/gpgconf --kill gpg-agent && eval "''$(${pkgs.openssh}/bin/ssh-agent -s)" && . "''${HOME}/.profile"
+            ${gpgPackage}/bin/gpgconf --kill gpg-agent && eval "''$(${pkgs.openssh}/bin/ssh-agent -s)" && . "''${HOME}/.profile"
         }
       '';
 

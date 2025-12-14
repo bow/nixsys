@@ -10,6 +10,11 @@ _: rec {
   getFzfPackage = config: getModulePackage config "fzf";
 
   /**
+    Return the package used by the gpg module.
+  */
+  getGpgPackage = config: getModulePackage config "gpg";
+
+  /**
     Return the package used by the neovim module.
   */
   getNeovimPackage = config: getModulePackage config "neovim";
@@ -83,6 +88,11 @@ _: rec {
     Return whether the current config enables ghostty.
   */
   isGhosttyEnabled = config: isProgramEnabled config "ghostty";
+
+  /**
+    Return whether the current config enables gpg.
+  */
+  isGpgEnabled = config: isProgramEnabled config "ghostty";
 
   /**
     Return whether the current config enables neovim.
