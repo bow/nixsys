@@ -6,11 +6,11 @@
 let
   inherit (lib.nixsys) enabled enabledWith;
 
-  cfg = config.nixsys.home.pkgset.minimal;
+  cfg = config.nixsys.home.profile.base;
 in
 {
-  options.nixsys.home.pkgset.minimal = {
-    enable = lib.mkEnableOption "nixsys.home.pkgset.minimal";
+  options.nixsys.home.profile.base = {
+    enable = lib.mkEnableOption "nixsys.home.profile.base";
   };
   config = lib.mkIf cfg.enable {
 

@@ -24,12 +24,12 @@ let
     }:
     let
       inherit (lib) types;
-      dcfg = config.nixsys.home.pkgset.devel.${name};
+      dcfg = config.nixsys.home.profile.devel.${name};
     in
     {
-      options.nixsys.home.pkgset.devel.${name} = lib.recursiveUpdate {
-        enable = lib.mkEnableOption "nixsys.home.pkgset.devel.${name}" // {
-          default = config.nixsys.home.pkgset.devel.enable;
+      options.nixsys.home.profile.devel.${name} = lib.recursiveUpdate {
+        enable = lib.mkEnableOption "nixsys.home.profile.devel.${name}" // {
+          default = config.nixsys.home.profile.devel.enable;
         };
         langservers = lib.mkOption {
           type = types.listOf types.package;
@@ -53,11 +53,11 @@ let
       );
     };
 
-  cfg = config.nixsys.home.pkgset.devel;
+  cfg = config.nixsys.home.profile.devel;
 in
 {
-  options.nixsys.home.pkgset.devel = {
-    enable = lib.mkEnableOption "nixsys.home.pkgset.devel";
+  options.nixsys.home.profile.devel = {
+    enable = lib.mkEnableOption "nixsys.home.profile.devel";
   };
 
   imports = mkDevelModuleImports {

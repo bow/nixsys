@@ -43,7 +43,7 @@ in
           i3 = enabled;
           xdg = enabled;
         };
-        pkgset.home = enabled;
+        profile.home = enabled;
         theme.current = enabled;
       };
     };

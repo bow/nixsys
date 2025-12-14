@@ -10,15 +10,15 @@ let
 
   desktopEnabled = libcfg.isDesktopEnabled config;
 
-  cfg = config.nixsys.home.pkgset.home;
+  cfg = config.nixsys.home.profile.home;
 in
 {
-  options.nixsys.home.pkgset.home = {
-    enable = lib.mkEnableOption "nixsys.home.pkgset.home";
+  options.nixsys.home.profile.home = {
+    enable = lib.mkEnableOption "nixsys.home.profile.home";
   };
   config = lib.mkIf cfg.enable {
 
-    home.packges = [
+    home.packages = [
       pkgs.unstable.nh
     ]
     ++ lib.optionals desktopEnabled [
@@ -88,8 +88,8 @@ in
 
     nixsys.home = {
 
-      pkgset = {
-        minimal = enabled;
+      profile = {
+        base = enabled;
         devel = enabled;
       };
 
