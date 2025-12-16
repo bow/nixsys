@@ -10,6 +10,11 @@ _: rec {
   getFzfPackage = config: getModulePackage config "fzf";
 
   /**
+    Return the package used by the ghostty module.
+  */
+  getGhosttyPackage = config: getModulePackage config "ghostty";
+
+  /**
     Return the package used by the gpg module.
   */
   getGpgPackage = config: getModulePackage config "gpg";

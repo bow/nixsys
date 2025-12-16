@@ -9,6 +9,9 @@ let
   inherit (lib) types;
   libcfg = lib.nixsys.home;
 
+  ghosttyEnabled = libcfg.isGhosttyEnabled config;
+  ghosttyPackage = libcfg.getGhosttyPackage config;
+
   theme =
     let
       mkWallpaperDrv =
@@ -412,8 +415,6 @@ in
           "${modifier}+r" = ''mode "resize"'';
 
           # Interact with applications.
-          # FIXME: Move this into ghostty module and set a default terminal here.
-          "${modifier}+Return" = "exec ${pkgs.unstable.ghostty}/bin/ghostty";
           "${modifier}+backslash" = "exec ${pkgs.xfce.thunar}/bin/thunar";
 
           # Audio + video controls.
@@ -430,6 +431,9 @@ in
           # System controls.
           "${modifier}+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
           "${modifier}+Shift+x" = "exec ${lock-sh}";
+        }
+        // lib.optionalAttrs ghosttyEnabled {
+          "${modifier}+Return" = "exec ${ghosttyPackage}/bin/ghostty";
         }
         // lib.optionalAttrs rofiEnabled {
           "${modifier}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
