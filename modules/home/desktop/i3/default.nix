@@ -9,7 +9,80 @@ let
   inherit (lib) types;
   libcfg = lib.nixsys.home;
 
-  theme = config.nixsys.home.theme.active.i3;
+  theme =
+    let
+      mkWallpaperDrv =
+        wallpaper:
+        pkgs.stdenvNoCC.mkDerivation {
+          pname = "${wallpaper.name}";
+          version = "0.0.0";
+
+          src = pkgs.fetchurl {
+            inherit (wallpaper) sha256;
+            name = "${wallpaper.name}-source";
+            url = "${wallpaper.url}";
+          };
+
+          unpackPhase = "true";
+
+          buildPhase = ''
+            mkdir -p $out
+            cp $src $out/original
+            ${pkgs.imagemagick}/bin/magick $src -blur 0x8 $out/blurred
+          '';
+        };
+
+      wallpaper = mkWallpaperDrv {
+        inherit (cfg.wallpaper)
+          name
+          ext
+          url
+          sha256
+          ;
+      };
+    in
+    {
+      desktop = {
+        bg = "${wallpaper}/original";
+        colors = {
+          inherit (cfg.colors.desktop)
+            bar-bg
+            bar-fg
+            focused-bg
+            focused-child-border
+            focused-fg
+            focused-inactive-bg
+            focused-inactive-fg
+            placeholder-border
+            placeholder-indicator
+            unfocused-bg
+            unfocused-border
+            unfocused-fg
+            urgent-bg
+            urgent-fg
+            ;
+        };
+      };
+      lock-screen = {
+        bg = "${wallpaper}/blurred";
+        font = {
+          name = "Titillium";
+          package = pkgs.local.titillium-font;
+        };
+        colors = {
+          inherit (cfg.colors.lock-screen)
+            time
+            greeter
+            light
+            dark
+            ring
+            ring-hl
+            ring-bs
+            ring-sep
+            ;
+        };
+      };
+    };
 
   lock-sh =
     with theme.lock-screen;
@@ -95,6 +168,62 @@ in
       type = types.str;
       default = "Mod4";
     };
+
+    wallpaper = lib.mkOption {
+      default = {
+        name = "francesco-ungaro-lcQzCo-X1vM-unsplash";
+        ext = "jpg";
+        url = "https://images.unsplash.com/photo-1729839472414-4f28edcb5b80?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=francesco-ungaro-lcQzCo-X1vM-unsplash.jpg&w=2400";
+        sha256 = "a36d6e0231bc57900e9725675664d9fa075996f4fee1bd96580f183eac5b4685";
+      };
+      type = types.submodule {
+        options = {
+          name = lib.mkOption { type = types.str; };
+          ext = lib.mkOption { type = types.str; };
+          url = lib.mkOption { type = types.str; };
+          sha256 = lib.mkOption { type = types.str; };
+        };
+      };
+    };
+
+    colors =
+      let
+        mkColorOption =
+          default:
+          lib.mkOption {
+            inherit default;
+            type = types.str;
+          };
+      in
+      {
+        desktop = {
+          bar-bg = mkColorOption "#151515";
+          bar-fg = mkColorOption "#bdbeab";
+          focused-bg = mkColorOption "#184a53";
+          focused-child-border = mkColorOption "";
+          focused-fg = mkColorOption "#ffffff";
+          focused-inactive-bg = mkColorOption "#3c3836";
+          focused-inactive-fg = mkColorOption "#a89984";
+          placeholder-border = mkColorOption "#000000";
+          placeholder-indicator = mkColorOption "#000000";
+          unfocused-bg = mkColorOption "#282828";
+          unfocused-border = mkColorOption "#222222";
+          unfocused-fg = mkColorOption "#665c54";
+          urgent-bg = mkColorOption "#e3ac2d";
+          urgent-fg = mkColorOption "#151515";
+        };
+        lock-screen = rec {
+          time = mkColorOption light;
+          greeter = mkColorOption dark;
+
+          light = mkColorOption "#ffffffff";
+          dark = mkColorOption "#1d2021ee";
+          ring = mkColorOption "#007c5bff";
+          ring-hl = mkColorOption "#e3ac2dff";
+          ring-bs = mkColorOption "#d1472fff";
+          ring-sep = mkColorOption "#00000000";
+        };
+      };
   };
 
   config = lib.mkIf cfg.enable {
@@ -106,7 +235,7 @@ in
         modifier = cfg.mod-key;
         colors =
           let
-            inherit (theme.desktop) colors;
+            colors = cfg.colors.desktop;
           in
           {
             focused = {

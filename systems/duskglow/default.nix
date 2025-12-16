@@ -44,7 +44,6 @@ in
           xdg = enabled;
         };
         profile.personal = enabled;
-        theme.current = enabled;
       };
     };
   };
