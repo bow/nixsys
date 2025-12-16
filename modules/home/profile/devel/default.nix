@@ -339,6 +339,7 @@ in
         pkgs.unstable.nil
       ];
       tools = [
+        pkgs.unstable.deadnix
         pkgs.unstable.nixfmt-rfc-style
         pkgs.unstable.statix
       ];
