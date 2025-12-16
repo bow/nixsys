@@ -11,11 +11,11 @@ let
   desktopEnabled = libcfg.isDesktopEnabled config;
   pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
 
-  cfg = config.nixsys.home.profile.home;
+  cfg = config.nixsys.home.profile.personal;
 in
 {
-  options.nixsys.home.profile.home = {
-    enable = lib.mkEnableOption "nixsys.home.profile.home";
+  options.nixsys.home.profile.personal = {
+    enable = lib.mkEnableOption "nixsys.home.profile.personal";
   };
   config = lib.mkIf cfg.enable {
 

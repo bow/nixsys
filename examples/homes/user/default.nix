@@ -8,7 +8,7 @@ in
 {
   nixsys.home = {
     desktop.i3 = enabled;
-    profile.home = enabled;
+    profile.personal = enabled;
     theme.current = enabled;
     system = {
       docker = enabled;

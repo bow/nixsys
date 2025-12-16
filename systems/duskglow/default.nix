@@ -43,7 +43,7 @@ in
           i3 = enabled;
           xdg = enabled;
         };
-        profile.home = enabled;
+        profile.personal = enabled;
         theme.current = enabled;
       };
     };
