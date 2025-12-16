@@ -21,7 +21,6 @@ in
 
     nixsys.home.desktop = {
       fonts = enabled;
-      i3 = enabled;
       xdg = enabled;
     };
 
