@@ -18,7 +18,6 @@ let
       name,
       langservers ? [ ],
       tools ? [ ],
-      treesitters ? [ ],
       extraOptions ? { },
       extraConfig ? { },
     }:
@@ -39,16 +38,12 @@ let
           type = types.listOf types.package;
           default = tools;
         };
-        treesitters = lib.mkOption {
-          type = types.listOf types.package;
-          default = treesitters;
-        };
       } extraOptions;
 
       config = lib.mkIf dcfg.enable (
         lib.recursiveUpdate {
           home.packages = dcfg.tools;
-          programs.neovim.extraPackages = dcfg.langservers ++ dcfg.tools ++ dcfg.treesitters;
+          programs.neovim.extraPackages = dcfg.langservers ++ dcfg.tools;
         } extraConfig
       );
     };
@@ -88,11 +83,6 @@ in
         pkgs.unstable.lldb
         pkgs.unstable.valgrind
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-c
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-cmake
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-cpp
-      ];
       extraConfig = {
         home.file.".clang-format".text = ''
           BasedOnStyle: LLVM
@@ -128,15 +118,9 @@ in
       langservers = [
         pkgs.vscode-langservers-extracted
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-css
-      ];
     };
 
     elixir = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-elixir
-      ];
       extraConfig = {
         home.file.".iex.exs".text = ''
           IEx.configure(
@@ -175,12 +159,6 @@ in
       };
     };
 
-    erlang = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-erlang
-      ];
-    };
-
     go = {
       langservers = [
         pkgs.unstable.gopls
@@ -189,10 +167,6 @@ in
         pkgs.unstable.delve
         pkgs.unstable.go
         pkgs.unstable.gofumpt
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-go
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-gomod
       ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
@@ -216,17 +190,11 @@ in
       tools = [
         pkgs.graphviz
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-dot
-      ];
     };
 
     haskell = {
       langservers = [
         pkgs.unstable.haskell-language-server
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-haskell
       ];
     };
 
@@ -238,29 +206,11 @@ in
         pkgs.unstable.terraform-ls
         pkgs.unstable.terraform-lsp
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-hcl
-      ];
-    };
-
-    html = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-html
-      ];
-    };
-
-    http = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-http
-      ];
     };
 
     java = {
       langservers = [
         pkgs.unstable.jdt-language-server
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-java
       ];
     };
 
@@ -268,31 +218,11 @@ in
       tools = [
         pkgs.unstable.nodejs
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-javascript
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-jsdoc
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-typescript
-      ];
-    };
-
-    json = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-json
-      ];
     };
 
     just = {
       tools = [
         pkgs.unstable.just
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-just
-      ];
-    };
-
-    kotlin = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-kotlin
       ];
     };
 
@@ -303,22 +233,6 @@ in
       tools = [
         pkgs.unstable.stylua
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-lua
-      ];
-    };
-
-    make = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-make
-      ];
-    };
-
-    markdown = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-markdown
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-markdown-inline
-      ];
     };
 
     latex = {
@@ -327,10 +241,6 @@ in
       ];
       tools = [
         pkgs.unstable.texliveFull
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-bibtex
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-latex
       ];
     };
 
@@ -342,9 +252,6 @@ in
         pkgs.unstable.deadnix
         pkgs.unstable.nixfmt-rfc-style
         pkgs.unstable.statix
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-nix
       ];
     };
 
@@ -368,15 +275,6 @@ in
       langservers = [
         pkgs.unstable.perlnavigator
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-perl
-      ];
-    };
-
-    php = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-php
-      ];
     };
 
     postgresql = {
@@ -385,9 +283,6 @@ in
       ];
       tools = [
         pkgs.unstable.sqlfluff
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-sql
       ];
       extraConfig = {
         home.file.".psqlrc".text = ''
@@ -433,9 +328,6 @@ in
       tools = [
         pkgs.unstable.buf
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-proto
-      ];
     };
 
     python = {
@@ -450,9 +342,6 @@ in
         pkgs.unstable.pyrefly
         pkgs.unstable.python3
         pkgs.unstable.ruff
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-python
       ];
       extraConfig = {
         programs.uv = {
@@ -507,27 +396,15 @@ in
       };
     };
 
-    regex = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-regex
-      ];
-    };
-
     ruby = {
       langservers = [
         pkgs.unstable.ruby-lsp
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-ruby
       ];
     };
 
     rust = {
       tools = [
         pkgs.unstable.rustup
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-rust
       ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
@@ -543,12 +420,6 @@ in
       };
     };
 
-    scala = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-scala
-      ];
-    };
-
     sh = {
       langservers = [
         pkgs.unstable.bash-language-server
@@ -556,17 +427,11 @@ in
       tools = [
         pkgs.unstable.shfmt
       ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-bash
-      ];
     };
 
     sqlite = {
       tools = [
         pkgs.unstable.sqlfluff
-      ];
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-sql
       ];
       extraConfig = {
         home.file.".sqliterc".text = ''
@@ -577,18 +442,6 @@ in
           .prompt 'sqlite> ' '...   - '
         '';
       };
-    };
-
-    toml = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-toml
-      ];
-    };
-
-    yaml = {
-      treesitters = [
-        pkgs.unstable.tree-sitter-grammars.tree-sitter-yaml
-      ];
     };
   };
 

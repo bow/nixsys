@@ -30,7 +30,6 @@ in
       vimdiffAlias = true;
       plugins = [
         pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars
-        pkgs.unstable.vimPlugins.nvim-treesitter
       ];
       extraPackages = lib.mkIf cfg.extended [
         pkgs.unstable.tree-sitter
