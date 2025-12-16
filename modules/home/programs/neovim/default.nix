@@ -42,6 +42,19 @@ in
         source = ../../../../dotfiles/nvim;
         recursive = true;
       };
+      "nvim/lua/config/local.lua" = {
+        text =
+        let
+          grammars-path = pkgs.symlinkJoin {
+            name = "nvim-treesitter-grammars";
+            paths = pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+          };
+        in
+        ''
+          vim.opt.runtimepath:append("${pkgs.unstable.vimPlugins.nvim-treesitter}")
+          vim.opt.runtimepath:append("${grammars-path}")
+        '';
+      };
     };
 
     home.sessionVariables = lib.mkIf cfg.as-default-editor {
