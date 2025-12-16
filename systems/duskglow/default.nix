@@ -38,11 +38,6 @@ in
         settings.auto-login = true;
       };
       home-manager = enabledWith {
-        desktop = {
-          fonts = enabled;
-          i3 = enabled;
-          xdg = enabled;
-        };
         profile.personal = enabled;
       };
     };

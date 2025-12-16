@@ -7,7 +7,6 @@ let
 in
 {
   nixsys.home = {
-    desktop.i3 = enabled;
     profile.personal = enabled;
     system = {
       docker = enabled;
