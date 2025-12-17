@@ -30,9 +30,6 @@ in
       pkgs.evince
 
       # Web browser.
-      pkgs.firefox
-
-      # Web browser.
       pkgs.google-chrome
 
       # Text editor.
@@ -119,6 +116,7 @@ in
         sequoia-sq = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
+        firefox = enabled;
         zathura = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
