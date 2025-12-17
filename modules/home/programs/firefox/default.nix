@@ -24,6 +24,11 @@ in
       default = true;
     };
 
+    dev-pixels-per-px = lib.mkOption {
+      type = types.float;
+      default = 1.0;
+    };
+
     extra-search-engines = lib.mkOption {
       type = types.attrs;
       default = { };
@@ -116,7 +121,7 @@ in
           Enabled = false;
         };
         Homepage = {
-          StartPage = "none";
+          StartPage = "startpage";
         };
         NoDefaultBookmarks = true;
         OfferToSaveLogins = false;
@@ -128,56 +133,117 @@ in
           inherit (cfg) containers;
           id = 0;
           isDefault = true;
-          search.engines = {
-            "Nix Packages" = {
-              definedAliases = [ "@np" ];
-              urls = [
-                {
-                  template = "https://search.nixos.org/packages";
-                  params = [
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            };
+          search = {
+            force = true;
+            engines = {
+              "Nix Packages" = {
+                definedAliases = [ "@np" ];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              };
 
-            "Home-Manager Options" = {
-              definedAliases = [ "@hm" ];
-              urls = [
-                {
-                  template = "https://home-manager-options.extranix.com/?query=yubico";
-                  params = [
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            };
+              "Home-Manager Options" = {
+                definedAliases = [ "@hm" ];
+                urls = [
+                  {
+                    template = "https://home-manager-options.extranix.com/";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              };
 
-            "NixOS Options" = {
-              definedAliases = [ "@no" ];
-              urls = [
-                {
-                  template = "https://search.nixos.org/options";
-                  params = [
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
+              "NixOS Options" = {
+                definedAliases = [ "@no" ];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              };
+            }
+            // cfg.extra-search-engines;
+
+          };
+          settings = {
+            "browser.toolbars.bookmarks.visibility" = "never";
+            "browser.translations.neverTranslateLanguages" = "nl,da,de,id,fr,ja";
+            "browser.uiCustomization.state" = builtins.toJSON {
+              placements = {
+                widget-overflow-fixed-list = [
+                  "save-to-pocket-button"
+                ];
+                unified-extensions-area = [ ];
+                nav-bar = [
+                  "back-button"
+                  "forward-button"
+                  "stop-reload-button"
+                  "developer-button"
+                  "vertical-spacer"
+                  "urlbar-container"
+                  "downloads-button"
+                  "unified-extensions-button"
+                  "reset-pbm-toolbar-button"
+                  "fxa-toolbar-menu-button"
+                ];
+                toolbar-menubar = [
+                  "menubar-items"
+                ];
+                TabsToolbar = [
+                  "firefox-view-button"
+                  "tabbrowser-tabs"
+                  "new-tab-button"
+                  "alltabs-button"
+                ];
+                vertical-tabs = [ ];
+                PersonalToolbar = [
+                  "personal-bookmarks"
+                ];
+              };
+              seen = [
+                "developer-button"
+                "screenshot-button"
               ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              dirtyAreaCache = [
+                "widget-overflow-fixed-list"
+                "nav-bar"
+                "toolbar-menubar"
+                "TabsToolbar"
+                "vertical-tabs"
+                "PersonalToolbar"
+              ];
+              currentVersion = 23;
+              newElementCount = 3;
             };
-          }
-          // cfg.extra-search-engines;
+            "general.smoothScroll.msdPhysics.enabled" = true;
+            "general.smoothScroll.mouseWheel.duration.MinMS" = 200;
+            "general.smoothScroll.mouseWheel.duration.MaxMS" = 400;
+            "general.autoScroll" = true;
+            "layout.css.devPixelsPerPx" = cfg.dev-pixels-per-px;
+            "mousewheel.min_line_scroll_amount" = 50;
+          };
         };
       };
     };
