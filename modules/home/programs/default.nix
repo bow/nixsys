@@ -36,6 +36,12 @@ in
   # 'inherit' because that's the only reliable way to map package names we use here to the actual
   # packages we want ~ without interference from env-wrapping or aliases.
   imports = mkProgramModuleImports {
+
+    inherit (pkgs.unstable)
+      # Nix.
+      nh
+      ;
+
     inherit (pkgs)
       # Backup tools.
       restic
@@ -62,9 +68,6 @@ in
       aria2
       elinks
       wget
-
-      # Nix.
-      nh
 
       # Ops.
       btop

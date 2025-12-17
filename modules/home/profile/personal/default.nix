@@ -19,10 +19,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.packages = [
-      pkgs.unstable.nh
-    ]
-    ++ lib.optionals desktopEnabled [
+    home.packages = lib.optionals desktopEnabled [
       # File storage.
       pkgs.dropbox
 
@@ -109,6 +106,9 @@ in
         aria2 = enabled;
         elinks = enabled;
         wget = enabled;
+
+        # Nix tools.
+        nh = enabled;
 
         # Security.
         gpg = enabled;
