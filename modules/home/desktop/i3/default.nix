@@ -177,7 +177,7 @@ in
         name = "francesco-ungaro-lcQzCo-X1vM-unsplash";
         ext = "jpg";
         url = "https://images.unsplash.com/photo-1729839472414-4f28edcb5b80?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=francesco-ungaro-lcQzCo-X1vM-unsplash.jpg&w=2400";
-        sha256 = "a36d6e0231bc57900e9725675664d9fa075996f4fee1bd96580f183eac5b4685";
+        sha256 = "sha256-t8W0N3yW/5n2GPsE6ngHCFHblOFNYs9kZKGyf92tJag=";
       };
       type = types.submodule {
         options = {
