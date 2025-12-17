@@ -19,7 +19,7 @@ in
       default = { };
     };
 
-    additional-search-engines = lib.mkOption {
+    extra-search-engines = lib.mkOption {
       type = types.attrs;
       default = { };
     };
@@ -101,6 +101,7 @@ in
           isDefault = true;
           search.engines = {
             "Nix Packages" = {
+              definedAliases = [ "@np" ];
               urls = [
                 {
                   template = "https://search.nixos.org/packages";
@@ -113,9 +114,25 @@ in
                 }
               ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
             };
-            "Nix Options" = {
+
+            "Home-Manager Options" = {
+              definedAliases = [ "@hm" ];
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com/?query=yubico";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            };
+
+            "NixOS Options" = {
               definedAliases = [ "@no" ];
               urls = [
                 {
@@ -128,9 +145,10 @@ in
                   ];
                 }
               ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             };
           }
-          // cfg.additional-search-engines;
+          // cfg.extra-search-engines;
         };
       };
     };
