@@ -19,6 +19,11 @@ in
       default = { };
     };
 
+    default-browser = lib.mkOption {
+      type = types.bool;
+      default = true;
+    };
+
     extra-search-engines = lib.mkOption {
       type = types.attrs;
       default = { };
@@ -29,7 +34,30 @@ in
 
     home.sessionVariables = {
       MOZ_USE_XINPUT2 = "1";
+    }
+    // lib.optionalAttrs cfg.default-browser {
+      BROWSER = "firefox";
     };
+
+    xdg.mimeApps =
+      let
+        mimeTypes = [
+          "text/html"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+          "x-scheme-handler/about"
+          "x-scheme-handler/unknown"
+        ];
+      in
+      lib.mkIf cfg.default-browser {
+        enable = true;
+        defaultApplications = builtins.listToAttrs (
+          builtins.map (name: {
+            inherit name;
+            value = [ "firefox.desktop" ];
+          }) mimeTypes
+        );
+      };
 
     programs.firefox = {
       enable = true;
@@ -64,6 +92,7 @@ in
         DisableSetDesktopBackground = true;
         DisableTelemetry = true;
         DisplayMenuBar = "default-off";
+        DontCheckDefaultBrowser = true;
         # FIXME: Update XDG to allow for per-directory configuration and use here.
         DownloadDirectory = "${config.home.homeDirectory}/dl";
         EnableTrackingProtection = {
