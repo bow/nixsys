@@ -5,11 +5,17 @@
   ...
 }:
 let
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
+
   cfg = config.nixsys.home.desktop.fonts;
 in
 {
   options.nixsys.home.desktop.fonts = {
-    enable = lib.mkEnableOption "nixsys.home.desktop.fonts";
+    enable = lib.mkEnableOption "nixsys.home.desktop.fonts" // {
+      default = desktopEnabled;
+    };
   };
 
   config = lib.mkIf cfg.enable {

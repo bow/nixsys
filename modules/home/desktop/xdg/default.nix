@@ -5,12 +5,17 @@
 }:
 let
   inherit (lib) types;
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
 
   cfg = config.nixsys.home.desktop.xdg;
 in
 {
   options.nixsys.home.desktop.xdg = {
-    enable = lib.mkEnableOption "nixsys.home.desktop.xdg";
+    enable = lib.mkEnableOption "nixsys.home.desktop.xdg" // {
+      default = desktopEnabled;
+    };
     create-directories = lib.mkOption {
       default = true;
       type = types.bool;

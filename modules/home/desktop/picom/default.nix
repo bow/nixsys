@@ -4,12 +4,16 @@
   ...
 }:
 let
+  libcfg = lib.nixsys.home;
+
+  i3Enabled = libcfg.isI3Enabled config;
+
   cfg = config.nixsys.home.desktop.picom;
 in
 {
   options.nixsys.home.desktop.picom = {
     enable = lib.mkEnableOption "nixsys.home.desktop.picom" // {
-      default = config.nixsys.home.desktop.i3.enable;
+      default = i3Enabled;
     };
   };
 

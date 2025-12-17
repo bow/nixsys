@@ -19,11 +19,6 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    nixsys.home.desktop = {
-      fonts = enabled;
-      xdg = enabled;
-    };
-
     home.packages = [
       pkgs.unstable.nh
     ]
