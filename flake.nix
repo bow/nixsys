@@ -21,11 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,7 +97,6 @@
             };
             modules = [
               inputs.sops-nix.nixosModules.sops
-              inputs.nix-index-database.nixosModules.nix-index
               outputs.nixosModules.nixsys
               {
                 nix.registry.nixpkgs.flake = nixpkgs;

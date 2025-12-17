@@ -98,7 +98,6 @@ rec {
       modules = [
         inputs.disko.nixosModules.disko
         inputs.sops-nix.nixosModules.sops
-        inputs.nix-index-database.nixosModules.nix-index
         outputs.nixosModules.nixsys
         ../systems/${systemModuleName}
       ]
@@ -159,7 +158,6 @@ rec {
       };
       modules = [
         inputs.sops-nix.homeManagerModules.sops
-        inputs.nix-index-database.homeModules.nix-index
         outputs.homeManagerModules.nixsys
         ../modules/nixos/users/main/home-manager/home.nix
       ]
