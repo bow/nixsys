@@ -5,10 +5,6 @@
   ...
 }:
 let
-  libcfg = lib.nixsys.home;
-
-  desktopEnabled = libcfg.isDesktopEnabled config;
-
   cfg = config.nixsys.home.programs.zathura;
 in
 {
