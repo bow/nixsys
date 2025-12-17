@@ -55,7 +55,7 @@ rec {
         };
         timezone = "UTC";
       };
-      systemModuleName = "duskglow";
+      systemModuleName = "workstation";
       modules = [
         ./hardware-configuration.nix;
         ./config.nix

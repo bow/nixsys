@@ -87,7 +87,7 @@
         { pkgs }:
         import ./packages { inherit pkgs; }
         // {
-          duskglow-qcow = nixos-generators.nixosGenerate {
+          workstation-qcow = nixos-generators.nixosGenerate {
             inherit lib;
             inherit (pkgs.stdenv.hostPlatform) system;
             format = "qcow-efi";
@@ -98,7 +98,7 @@
                 lib
                 user
                 ;
-              hostname = "duskglow-qemu";
+              hostname = "workstation-qemu";
             };
             modules = [
               inputs.sops-nix.nixosModules.sops
@@ -112,10 +112,10 @@
                   writableStoreUseTmpfs = false;
                 };
               }
-              ./systems/duskglow
-              ./examples/machines/duskglow-qemu/hardware.nix
-              ./examples/machines/duskglow-qemu/config.nix
-              ./examples/machines/duskglow-qemu/secrets.nix
+              ./systems/workstation
+              ./examples/machines/workstation-qemu/hardware.nix
+              ./examples/machines/workstation-qemu/config.nix
+              ./examples/machines/workstation-qemu/secrets.nix
             ];
           };
         }
@@ -126,14 +126,14 @@
       #   - nix build .#nixosConfigurations.{name}.config.system.build.toplevel
       #   - nix run .#build-machine -- {name}
       nixosConfigurations = {
-        duskglow-qemu = lib.nixsys.mkMachine {
+        workstation-qemu = lib.nixsys.mkMachine {
           inherit user;
-          systemModuleName = "duskglow";
+          systemModuleName = "workstation";
           modules = [
-            ./examples/machines/duskglow-qemu/disk.nix
-            ./examples/machines/duskglow-qemu/hardware.nix
-            ./examples/machines/duskglow-qemu/config.nix
-            ./examples/machines/duskglow-qemu/secrets.nix
+            ./examples/machines/workstation-qemu/disk.nix
+            ./examples/machines/workstation-qemu/hardware.nix
+            ./examples/machines/workstation-qemu/config.nix
+            ./examples/machines/workstation-qemu/secrets.nix
           ];
         };
       };
