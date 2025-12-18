@@ -172,6 +172,8 @@ in
       default = "Mod4";
     };
 
+    package = lib.mkPackageOption pkgs "i3" { };
+
     wallpaper = lib.mkOption {
       default = {
         name = "francesco-ungaro-lcQzCo-X1vM-unsplash";
@@ -232,7 +234,8 @@ in
   config = lib.mkIf cfg.enable {
     xsession.windowManager.i3 = {
       enable = true;
-      package = pkgs.i3;
+
+      inherit (cfg) package;
       config = rec {
         bars = [ ];
         modifier = cfg.mod-key;
@@ -407,7 +410,7 @@ in
 
           # Exit i3 (logs out of an X session).
           "${modifier}+Shift+e" = ''
-            exec "${pkgs.i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${pkgs.i3}/bin/i3-msg exit'"
+            exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
           '';
 
           # Shortcuts.
