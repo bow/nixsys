@@ -210,7 +210,10 @@ in
                 widget-overflow-fixed-list = [
                   "save-to-pocket-button"
                 ];
-                unified-extensions-area = [ ];
+                unified-extensions-area = [
+                  "ublock0_raymondhill_net-browser-action"
+                  "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+                ];
                 nav-bar = [
                   "back-button"
                   "forward-button"
@@ -240,6 +243,8 @@ in
               seen = [
                 "developer-button"
                 "screenshot-button"
+                "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
+                "ublock0_raymondhill_net-browser-action"
               ];
               dirtyAreaCache = [
                 "widget-overflow-fixed-list"
@@ -248,6 +253,7 @@ in
                 "TabsToolbar"
                 "vertical-tabs"
                 "PersonalToolbar"
+                "unified-extensions-area"
               ];
               currentVersion = 23;
               newElementCount = 3;
