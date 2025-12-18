@@ -24,6 +24,11 @@ in
       default = 1;
     };
 
+    num-entries-max = lib.mkOption {
+      type = types.ints.positive;
+      default = 30;
+    };
+
     quiet = lib.mkOption {
       type = types.bool;
       default = true;
@@ -39,6 +44,7 @@ in
         timeout = lib.mkForce cfg.loader-timeout;
         systemd-boot = {
           enable = true;
+          configurationLimit = cfg.num-entries-max;
           consoleMode = cfg.console-mode;
         };
         efi.canTouchEfiVariables = true;
