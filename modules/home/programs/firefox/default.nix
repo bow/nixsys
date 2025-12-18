@@ -29,6 +29,11 @@ in
       default = 1.0;
     };
 
+    extra-extensions = lib.mkOption {
+      type = types.attrs;
+      default = { };
+    };
+
     extra-search-engines = lib.mkOption {
       type = types.attrs;
       default = { };
@@ -106,6 +111,16 @@ in
           Cryptomining = true;
           Fingerprinting = true;
         };
+        ExtensionSettings = lib.recursiveUpdate {
+          "uBlock0@raymondhill.net" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+            installation_mode = "normal_installed";
+          };
+          "jid1-MnnxcxisBPnSXQ@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
+            installation_mode = "normal_installed";
+          };
+        } cfg.extra-extensions;
         FirefoxHome = {
           Search = true;
           TopSites = false;
