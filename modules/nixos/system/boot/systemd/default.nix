@@ -23,10 +23,18 @@ in
       type = types.nullOr types.ints.positive;
       default = 1;
     };
+
+    quiet = lib.mkOption {
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     boot = {
+      consoleLogLevel = if cfg.quiet then 0 else 4;
+      initrd.verbose = !cfg.quiet;
+      kernelParams = lib.optionals cfg.quiet [ "quiet" ];
       loader = {
         timeout = lib.mkForce cfg.loader-timeout;
         systemd-boot = {
