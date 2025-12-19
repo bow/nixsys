@@ -125,7 +125,30 @@ in
       virt-viewer
 
       # Desktop.
+      arandr
+      btrfs-assistant
+      dbeaver-bin
+      dropbox
+      evince
+      geany
+      google-chrome
+      gparted
+      maim
+      nomacs
+      obsidian
+      openconnect
       pavucontrol
+      protonmail-bridge
+      solaar
+      spotify
+      sxiv
+      synology-drive-client
+      thunderbird-latest
+      todoist-electron
+      veracrypt
+      vlc
+      yubikey-personalization
+      yubioath-flutter
       ;
   };
 }

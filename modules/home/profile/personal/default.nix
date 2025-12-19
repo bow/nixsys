@@ -20,60 +20,6 @@ in
   config = lib.mkIf cfg.enable {
 
     home.packages = lib.optionals desktopEnabled [
-      # File storage.
-      pkgs.dropbox
-
-      # PDF reader.
-      pkgs.evince
-
-      # Web browser.
-      pkgs.google-chrome
-
-      # Text editor.
-      pkgs.geany
-
-      # Disk partition editor.
-      pkgs.gparted
-
-      # Screnshot tool.
-      pkgs.maim
-
-      # Image viewer.
-      pkgs.nomacs
-
-      # Markdown-based knowledge base.
-      pkgs.obsidian
-
-      # VPN client.
-      pkgs.openconnect
-
-      # Mail client.
-      pkgs.protonmail-bridge
-
-      # Music player.
-      pkgs.spotify
-
-      # Image viewer.
-      pkgs.sxiv
-
-      # Logitech peripherals.
-      pkgs.solaar
-
-      # Synology.
-      pkgs.synology-drive-client
-
-      # Email client.
-      pkgs.thunderbird-latest
-
-      # Official Todoist app.
-      pkgs.todoist-electron
-
-      # Encryption tooling.
-      pkgs.veracrypt
-
-      # Video player.
-      pkgs.vlc
-
       # File explorer + plugins.
       pkgs.xfce.thunar
       pkgs.xfce.thunar-archive-plugin
@@ -116,7 +62,26 @@ in
         sequoia-sq = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
+        arandr = enabled;
+        dropbox = enabled;
+        evince = enabled;
         firefox = enabled;
+        geany = enabled;
+        google-chrome = enabled;
+        gparted = enabled;
+        maim = enabled;
+        nomacs = enabled;
+        obsidian = enabled;
+        openconnect = enabled;
+        protonmail-bridge = enabled;
+        solaar = enabled;
+        spotify = enabled;
+        sxiv = enabled;
+        synology-drive-client = enabled;
+        thunderbird-latest = enabled;
+        todoist-electron = enabled;
+        veracrypt = enabled;
+        vlc = enabled;
         zathura = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
