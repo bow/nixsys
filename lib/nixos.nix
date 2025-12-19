@@ -40,11 +40,6 @@ _: rec {
   isMainUserDefined = config: config.nixsys.users.main.name != null;
 
   /**
-    Return whether the current config is for a workstation.
-  */
-  isProfileWorkstation = config: config.nixsys.system.profile == "workstation";
-
-  /**
     Return whether the current config enables Xorg.
   */
   isXorgEnabled = config: config.nixsys.users.main.session.i3.enable;
