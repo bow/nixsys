@@ -86,6 +86,7 @@ in
       };
 
       services = {
+        gpg-agent = enabled;
         mpd = enabled;
         mpris-proxy = enabled;
         redshift = enabled;
