@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -87,9 +86,14 @@ in
 
       services = {
         gpg-agent = enabled;
+      }
+      // lib.optionalAttrs desktopEnabled {
+        redshift = enabled;
+      }
+      # FIXME: Generalize pulseaudio check to any audio system.
+      // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
         mpd = enabled;
         mpris-proxy = enabled;
-        redshift = enabled;
       };
     };
   };
