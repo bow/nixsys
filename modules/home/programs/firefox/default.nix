@@ -231,6 +231,7 @@ in
               placements = {
                 widget-overflow-fixed-list = [
                   "save-to-pocket-button"
+                  "fxa-toolbar-menu-button"
                 ];
                 unified-extensions-area = [
                   "ublock0_raymondhill_net-browser-action"
@@ -245,8 +246,6 @@ in
                   "urlbar-container"
                   "downloads-button"
                   "unified-extensions-button"
-                  "reset-pbm-toolbar-button"
-                  "fxa-toolbar-menu-button"
                 ];
                 toolbar-menubar = [
                   "menubar-items"
@@ -263,22 +262,23 @@ in
                 ];
               };
               seen = [
+                "save-to-pocket-button"
                 "developer-button"
                 "screenshot-button"
                 "jid1-mnnxcxisbpnsxq_jetpack-browser-action"
                 "ublock0_raymondhill_net-browser-action"
               ];
               dirtyAreaCache = [
-                "widget-overflow-fixed-list"
                 "nav-bar"
-                "toolbar-menubar"
-                "TabsToolbar"
                 "vertical-tabs"
                 "PersonalToolbar"
+                "toolbar-menubar"
+                "TabsToolbar"
+                "widget-overflow-fixed-list"
                 "unified-extensions-area"
               ];
               currentVersion = 23;
-              newElementCount = 3;
+              newElementCount = 4;
             };
             "general.smoothScroll.msdPhysics.enabled" = true;
             "general.smoothScroll.mouseWheel.duration.MinMS" = 200;
