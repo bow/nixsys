@@ -219,7 +219,14 @@ in
           };
           settings = {
             "browser.toolbars.bookmarks.visibility" = "never";
-            "browser.translations.neverTranslateLanguages" = "nl,da,de,id,fr,ja";
+            "browser.translations.neverTranslateLanguages" = lib.concatStringsSep "," [
+              "da"
+              "de"
+              "fr"
+              "id"
+              "ja"
+              "nl"
+            ];
             "browser.uiCustomization.state" = builtins.toJSON {
               placements = {
                 widget-overflow-fixed-list = [
