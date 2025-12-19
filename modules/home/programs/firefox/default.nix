@@ -14,6 +14,11 @@ in
     enable = lib.mkEnableOption "nixsys.home.programs.firefox";
     package = lib.mkPackageOption pkgs.unstable "firefox" { };
 
+    bookmarks = lib.mkOption {
+      type = types.listOf (types.either types.attrs types.str);
+      default = [ ];
+    };
+
     containers = lib.mkOption {
       type = types.attrs;
       default = { };
@@ -138,14 +143,20 @@ in
         Homepage = {
           StartPage = "startpage";
         };
-        NoDefaultBookmarks = true;
         OfferToSaveLogins = false;
         SearchBar = "unified";
         ShowHomeButton = false;
+      }
+      // lib.optionalAttrs (cfg.bookmarks == [ ]) {
+        NoDefaultBookmarks = true;
       };
       profiles = {
         user = {
           inherit (cfg) containers;
+          bookmarks = lib.mkIf (cfg.bookmarks != [ ]) {
+            force = true;
+            settings = cfg.bookmarks;
+          };
           id = 0;
           isDefault = true;
           search = {
