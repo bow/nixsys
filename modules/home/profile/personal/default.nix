@@ -20,14 +20,6 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    home.packages = lib.optionals desktopEnabled [
-      # File explorer + plugins.
-      pkgs.xfce.thunar
-      pkgs.xfce.thunar-archive-plugin
-      pkgs.xfce.thunar-dropbox-plugin
-      pkgs.xfce.thunar-volman
-    ];
-
     nixsys.home = {
 
       profile = {
@@ -79,6 +71,7 @@ in
         spotify = enabled;
         sxiv = enabled;
         synology-drive-client = enabled;
+        thunar = enabled;
         thunderbird-latest = enabled;
         todoist-electron = enabled;
         veracrypt = enabled;
