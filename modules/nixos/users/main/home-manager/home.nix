@@ -10,16 +10,24 @@ let
   inherit (lib) types;
 in
 {
-  options.nixsys.home.system = lib.mkOption {
-    default = { };
-    description = "Container for copied system-level settings";
-    # Make this a typed submodule to prevent this from becoming a random bag of stuff.
-    type = types.submodule {
-      options = {
-        bluetooth.enable = lib.mkEnableOption "nixsys.home.system.bluetooth";
-        docker.enable = lib.mkEnableOption "nixsys.home.system.docker";
-        libvirtd.enable = lib.mkEnableOption "nixsys.home.system.libvirtd";
-        pulseaudio.enable = lib.mkEnableOption "nixsys.home.system.pulseaudio";
+  options.nixsys.home = {
+
+    session-variables = lib.mkOption {
+      type = types.attrs;
+      default = { };
+    };
+
+    system = lib.mkOption {
+      default = { };
+      description = "Container for copied system-level settings";
+      # Make this a typed submodule to prevent this from becoming a random bag of stuff.
+      type = types.submodule {
+        options = {
+          bluetooth.enable = lib.mkEnableOption "nixsys.home.system.bluetooth";
+          docker.enable = lib.mkEnableOption "nixsys.home.system.docker";
+          libvirtd.enable = lib.mkEnableOption "nixsys.home.system.libvirtd";
+          pulseaudio.enable = lib.mkEnableOption "nixsys.home.system.pulseaudio";
+        };
       };
     };
   };
