@@ -50,6 +50,16 @@ _: rec {
   isDesktopEnabled = isXorgEnabled;
 
   /**
+    Return whether the current config enables btrfs.
+  */
+  isBTRFSEnabled =
+    config:
+    let
+      sys = config.nixsys.home.system;
+    in
+    sys != { } && sys.btrfs.enable;
+
+  /**
     Return whether the current config enables docker.
   */
   isDockerEnabled =

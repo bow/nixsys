@@ -8,6 +8,7 @@ let
   inherit (lib.nixsys) enabled;
   libcfg = lib.nixsys.home;
 
+  btrfsEnabled = libcfg.isBTRFSEnabled config;
   desktopEnabled = libcfg.isDesktopEnabled config;
   pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
 
@@ -86,6 +87,9 @@ in
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
         pavucontrol = enabled;
+      }
+      // lib.optionalAttrs (desktopEnabled && btrfsEnabled) {
+        btrfs-assistant = enabled;
       };
 
       services = {

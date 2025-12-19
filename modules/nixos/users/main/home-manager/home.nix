@@ -24,6 +24,7 @@ in
       type = types.submodule {
         options = {
           bluetooth.enable = lib.mkEnableOption "nixsys.home.system.bluetooth";
+          btrfs.enable = lib.mkEnableOption "nixsys.home.system.btrfs";
           docker.enable = lib.mkEnableOption "nixsys.home.system.docker";
           libvirtd.enable = lib.mkEnableOption "nixsys.home.system.libvirtd";
           pulseaudio.enable = lib.mkEnableOption "nixsys.home.system.pulseaudio";
