@@ -198,6 +198,21 @@ in
                 ];
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               };
+
+              "Noogle" = {
+                definedAliases = [ "@nf" ];
+                urls = [
+                  {
+                    template = "https://noogle.dev/q";
+                    params = [
+                      {
+                        name = "term";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+              };
             }
             // cfg.extra-search-engines;
 
