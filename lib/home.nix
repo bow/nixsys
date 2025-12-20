@@ -38,7 +38,6 @@ _: rec {
   */
   getI3Package = config: config.nixsys.home.desktop.i3.package;
 
-
   /**
     Return whether the current config enables Xorg.
   */
@@ -50,44 +49,35 @@ _: rec {
   isDesktopEnabled = isXorgEnabled;
 
   /**
+    Return whether a system-set attribute with the given name exists
+    and is set to enabled.
+  */
+  isSystemAttrEnabled =
+    attrName: config:
+    let
+      sysAttrs = config.nixsys.home.system;
+    in
+    builtins.hasAttr attrName sysAttrs && sysAttrs.${attrName}.enable;
+
+  /**
     Return whether the current config enables btrfs.
   */
-  isBTRFSEnabled =
-    config:
-    let
-      sys = config.nixsys.home.system;
-    in
-    sys != { } && sys.btrfs.enable;
+  isBTRFSEnabled = isSystemAttrEnabled "btrfs";
 
   /**
     Return whether the current config enables docker.
   */
-  isDockerEnabled =
-    config:
-    let
-      sys = config.nixsys.home.system;
-    in
-    sys != { } && sys.docker.enable;
+  isDockerEnabled = isSystemAttrEnabled "docker";
 
   /**
     Return whether the current config enables audio.
   */
-  isPulseaudioEnabled =
-    config:
-    let
-      sys = config.nixsys.home.system;
-    in
-    sys != { } && sys.pulseaudio.enable;
+  isPulseaudioEnabled = isSystemAttrEnabled "pulseaudio";
 
   /**
     Return whether the current config enables bluetooth.
   */
-  isBluetoothEnabled =
-    config:
-    let
-      sys = config.nixsys.home.system;
-    in
-    sys != { } && sys.bluetooth.enable;
+  isBluetoothEnabled = isSystemAttrEnabled "bluetooth";
 
   /**
     Return whether the current config enables the given program.
