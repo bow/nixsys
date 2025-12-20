@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   user,
   hostname,
@@ -6,11 +7,16 @@
 }:
 let
   inherit (lib.nixsys) enabled enabledWith;
+  libcfg = lib.nixsys.nixos;
+  btrfsEnabled = libcfg.isBTRFSEnabled config;
 in
 {
   nixsys = enabledWith {
     system = {
       inherit hostname;
+      backup.snapper = {
+        enable-home-snapshots = btrfsEnabled;
+      };
       bluetooth = enabled;
       boot.systemd = enabled;
       networking.networkmanager = enabled;
