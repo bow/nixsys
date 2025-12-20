@@ -61,6 +61,7 @@
         name = "user";
         full-name = "User Example";
         email = "example@email.com";
+        shell = "bash";
         location = {
           city = "Reykjavik";
           latitude = 64.13;

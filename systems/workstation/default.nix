@@ -31,6 +31,7 @@ in
         full-name
         email
         location
+        shell
         timezone
         ;
       trusted = true;
