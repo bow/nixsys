@@ -224,6 +224,21 @@ in
                   }
                 ];
               };
+
+              "Nixhub" = {
+                definedAliases = [ "@nh" ];
+                urls = [
+                  {
+                    template = "https://www.nixhub.io/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+              };
             }
             // cfg.extra-search-engines;
 
