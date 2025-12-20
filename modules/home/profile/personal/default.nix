@@ -7,6 +7,7 @@ let
   inherit (lib.nixsys) enabled;
   libcfg = lib.nixsys.home;
 
+  audioEnabled = libcfg.isAudioEnabled config;
   btrfsEnabled = libcfg.isBTRFSEnabled config;
   desktopEnabled = libcfg.isDesktopEnabled config;
   pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
@@ -91,8 +92,7 @@ in
       // lib.optionalAttrs desktopEnabled {
         redshift = enabled;
       }
-      # FIXME: Generalize pulseaudio check to any audio system.
-      // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
+      // lib.optionalAttrs (desktopEnabled && audioEnabled) {
         mpd = enabled;
         mpris-proxy = enabled;
       };

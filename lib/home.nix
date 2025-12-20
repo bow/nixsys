@@ -70,7 +70,7 @@ _: rec {
   isDockerEnabled = isSystemAttrEnabled "docker";
 
   /**
-    Return whether the current config enables audio.
+    Return whether the current config enables pulseaudio.
   */
   isPulseaudioEnabled = isSystemAttrEnabled "pulseaudio";
 
@@ -78,6 +78,11 @@ _: rec {
     Return whether the current config enables bluetooth.
   */
   isBluetoothEnabled = isSystemAttrEnabled "bluetooth";
+
+  /**
+    Return whether the current config enables audio.
+  */
+  isAudioEnabled = isPulseaudioEnabled;
 
   /**
     Return whether the current config enables the given program.
