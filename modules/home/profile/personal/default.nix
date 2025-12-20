@@ -86,6 +86,7 @@ in
 
       services = {
         gpg-agent = enabled;
+        ssh-agent = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
         redshift = enabled;
