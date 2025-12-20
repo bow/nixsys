@@ -2,32 +2,32 @@ _: rec {
   /**
     Return the package used by the given module.
   */
-  getModulePackage = config: name: config.nixsys.home.programs.${name}.package;
+  getModulePackage = modName: config: config.nixsys.home.programs.${modName}.package;
 
   /**
     Return the package used by the fzf module.
   */
-  getFzfPackage = config: getModulePackage config "fzf";
+  getFzfPackage = getModulePackage "fzf";
 
   /**
     Return the package used by the ghostty module.
   */
-  getGhosttyPackage = config: getModulePackage config "ghostty";
+  getGhosttyPackage = getModulePackage "ghostty";
 
   /**
     Return the package used by the gpg module.
   */
-  getGpgPackage = config: getModulePackage config "gpg";
+  getGpgPackage = getModulePackage "gpg";
 
   /**
     Return the package used by the neovim module.
   */
-  getNeovimPackage = config: getModulePackage config "neovim";
+  getNeovimPackage = getModulePackage "neovim";
 
   /**
     Return the package used by the ripgrep module.
   */
-  getRipgrepPackage = config: getModulePackage config "ripgrep";
+  getRipgrepPackage = getModulePackage "ripgrep";
 
   /**
     Return whether the current config enables i3.
@@ -82,47 +82,47 @@ _: rec {
   /**
     Return whether the current config enables the given program.
   */
-  isProgramEnabled = config: name: config.nixsys.home.programs.${name}.enable;
+  isProgramEnabled = progName: config: config.nixsys.home.programs.${progName}.enable;
 
   /**
     Return whether the current config enables bat.
   */
-  isBatEnabled = config: isProgramEnabled config "bat";
+  isBatEnabled = isProgramEnabled "bat";
 
   /**
     Return whether the current config enables fzf.
   */
-  isFzfEnabled = config: isProgramEnabled config "fzf";
+  isFzfEnabled = isProgramEnabled "fzf";
 
   /**
     Return whether the current config enables ghostty.
   */
-  isGhosttyEnabled = config: isProgramEnabled config "ghostty";
+  isGhosttyEnabled = isProgramEnabled "ghostty";
 
   /**
     Return whether the current config enables gpg.
   */
-  isGpgEnabled = config: isProgramEnabled config "ghostty";
+  isGpgEnabled = isProgramEnabled "ghostty";
 
   /**
     Return whether the current config enables neovim.
   */
-  isNeovimEnabled = config: isProgramEnabled config "neovim";
+  isNeovimEnabled = isProgramEnabled "neovim";
 
   /**
     Return whether the current config enables ripgrep.
   */
-  isRipgrepEnabled = config: isProgramEnabled config "ripgrep";
+  isRipgrepEnabled = isProgramEnabled "ripgrep";
 
   /**
     Return whether the current config enables rofi.
   */
-  isRofiEnabled = config: isProgramEnabled config "rofi";
+  isRofiEnabled = isProgramEnabled "rofi";
 
   /**
     Return whether the current config enables zoxide.
   */
-  isZoxideEnabled = config: isProgramEnabled config "zoxide";
+  isZoxideEnabled = isProgramEnabled "zoxide";
 
   /**
     Return whether the current user enables a bash shell.
