@@ -8,7 +8,7 @@
     security = {
       sudo = {
         enable = true;
-        wheelNeedsPassword = false;
+        wheelNeedsPassword = true;
         execWheelOnly = true;
         keepTerminfo = true;
       };
