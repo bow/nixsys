@@ -44,6 +44,7 @@
                       "noatime"
                     ];
                   };
+                  "/home/.snapshots" = { };
                   "/nix" = {
                     mountpoint = "/nix";
                     mountOptions = [
