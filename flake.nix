@@ -109,8 +109,8 @@
               }
               ./systems/workstation
               ./examples/machines/workstation-qemu/hardware.nix
-              ./examples/machines/workstation-qemu/config.nix
               ./examples/machines/workstation-qemu/secrets.nix
+              ./examples/machines/workstation-qemu/local.nix
             ];
           };
         }
@@ -127,8 +127,8 @@
           modules = [
             ./examples/machines/workstation-qemu/disk.nix
             ./examples/machines/workstation-qemu/hardware.nix
-            ./examples/machines/workstation-qemu/config.nix
             ./examples/machines/workstation-qemu/secrets.nix
+            ./examples/machines/workstation-qemu/local.nix
           ];
         };
       };
