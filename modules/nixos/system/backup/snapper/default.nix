@@ -26,8 +26,8 @@ in
         home = {
           SUBVOLUME = "/home";
           FSTYPE = "btrfs";
-          SPACE_LIMIT = 0.5;
-          FREE_LIMIT = 0.2;
+          SPACE_LIMIT = 0.3;
+          FREE_LIMIT = 0.25;
           ALLOW_USERS = lib.optionals (mainUser != null) [ mainUser.name ];
           SYNC_ACL = false;
           BACKGROUND_COMPARISON = true;
@@ -38,7 +38,7 @@ in
           TIMELINE_CREATE = true;
           TIMELINE_CLEANUP = true;
           TIMELINE_MIN_AGE = 3600;
-          TIMELINE_LIMIT_HOURLY = 10;
+          TIMELINE_LIMIT_HOURLY = 6;
           TIMELINE_LIMIT_DAILY = 7;
           TIMELINE_LIMIT_WEEKLY = 0;
           TIMELINE_LIMIT_MONTHLY = 0;
