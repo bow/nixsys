@@ -44,10 +44,7 @@ in
       session.greetd = enabledWith {
         settings.auto-login = true;
       };
-      home-manager = enabledWith {
-        desktop.i3 = enabled;
-        profile.personal = enabled;
-      };
+      home-manager = enabled;
     };
   };
 

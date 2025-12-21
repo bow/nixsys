@@ -15,6 +15,7 @@ _:
           enable = true;
           mod-key = "Mod1";
         };
+        profile.personal.enable = true;
       };
     };
   };
