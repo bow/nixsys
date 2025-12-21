@@ -39,6 +39,7 @@ in
         nh = enabled;
 
         # Security.
+        clamav = enabled;
         gpg = enabled;
         pass = enabled;
       }
