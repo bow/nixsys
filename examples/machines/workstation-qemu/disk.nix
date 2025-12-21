@@ -61,6 +61,7 @@
                       "noatime"
                     ];
                   };
+                  "/persist/.snapshots" = { };
                   "/log" = {
                     mountpoint = "/var/log";
                     mountOptions = [
