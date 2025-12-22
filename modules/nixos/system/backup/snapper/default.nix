@@ -71,11 +71,11 @@ in
             TIMELINE_CREATE = true;
             TIMELINE_CLEANUP = true;
             TIMELINE_MIN_AGE = 3600;
-            TIMELINE_LIMIT_HOURLY = 6;
+            TIMELINE_LIMIT_HOURLY = 3;
             TIMELINE_LIMIT_DAILY = 7;
-            TIMELINE_LIMIT_WEEKLY = 0;
-            TIMELINE_LIMIT_MONTHLY = 0;
-            TIMELINE_LIMIT_QUARTERLY = 0;
+            TIMELINE_LIMIT_WEEKLY = 1;
+            TIMELINE_LIMIT_MONTHLY = 1;
+            TIMELINE_LIMIT_QUARTERLY = 1;
             TIMELINE_LIMIT_YEARLY = 0;
             EMPTY_PRE_POST_CLEANUP = true;
             EMPTY_PRE_POST_MIN_AGE = 3600;
