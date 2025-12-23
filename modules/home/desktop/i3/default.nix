@@ -176,10 +176,10 @@ in
 
     wallpaper = lib.mkOption {
       default = {
-        name = "francesco-ungaro-lcQzCo-X1vM-unsplash";
+        name = "adrien-olichon-RCAhiGJsUUE-unsplash";
         ext = "jpg";
-        url = "https://images.unsplash.com/photo-1729839472414-4f28edcb5b80?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=francesco-ungaro-lcQzCo-X1vM-unsplash.jpg&w=2400";
-        sha256 = "sha256-t8W0N3yW/5n2GPsE6ngHCFHblOFNYs9kZKGyf92tJag=";
+        url = "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        sha256 = "sha256-BbAWNMOggHet7muY+pdsiXR2RKPUOOAX3o/v83sgh/k=";
       };
       type = types.submodule {
         options = {
@@ -219,7 +219,7 @@ in
         };
         lock-screen = rec {
           time = mkColorOption light;
-          greeter = mkColorOption dark;
+          greeter = mkColorOption light;
 
           light = mkColorOption "#ffffffff";
           dark = mkColorOption "#1d2021ee";
