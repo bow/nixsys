@@ -44,6 +44,7 @@ in
       }
       // lib.optionalAttrs desktopEnabled {
         arandr = enabled;
+        dbeaver-bin = enabled;
         evince = enabled;
         firefox = enabled;
         geany = enabled;
@@ -56,6 +57,8 @@ in
         sxiv = enabled;
         thunar = enabled;
         todoist-electron = enabled;
+        yubikey-personalization = enabled;
+        yubioath-flutter = enabled;
         zathura = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
