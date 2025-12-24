@@ -236,6 +236,9 @@ in
       enable = true;
 
       inherit (cfg) package;
+      extraConfig = ''
+        set $mod ${cfg.mod-key}
+      '';
       config = rec {
         bars = [ ];
         modifier = cfg.mod-key;
@@ -322,105 +325,105 @@ in
                 "google-chrome"
               ];
         };
-        defaultWorkspace = keybindings."${modifier}+2";
+        defaultWorkspace = keybindings."$mod+2";
         keybindings = {
           # Navigation.
-          "${modifier}+j" = "focus left";
-          "${modifier}+k" = "focus down";
-          "${modifier}+l" = "focus up";
-          "${modifier}+semicolon" = "focus right";
-          "${modifier}+Left" = "focus left";
-          "${modifier}+Down" = "focus down";
-          "${modifier}+Up" = "focus up";
-          "${modifier}+Right" = "focus right";
+          "$mod+j" = "focus left";
+          "$mod+k" = "focus down";
+          "$mod+l" = "focus up";
+          "$mod+semicolon" = "focus right";
+          "$mod+Left" = "focus left";
+          "$mod+Down" = "focus down";
+          "$mod+Up" = "focus up";
+          "$mod+Right" = "focus right";
 
           # Move windows.
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+l" = "move right";
-          "${modifier}+Shift+Left" = "move left";
-          "${modifier}+Shift+Down" = "move down";
-          "${modifier}+Shift+Up" = "move up";
-          "${modifier}+Shift+Right" = "move right";
+          "$mod+Shift+h" = "move left";
+          "$mod+Shift+j" = "move down";
+          "$mod+Shift+k" = "move up";
+          "$mod+Shift+l" = "move right";
+          "$mod+Shift+Left" = "move left";
+          "$mod+Shift+Down" = "move down";
+          "$mod+Shift+Up" = "move up";
+          "$mod+Shift+Right" = "move right";
 
           # Split windows.
-          "${modifier}+h" = "split h";
-          "${modifier}+v" = "split v";
+          "$mod+h" = "split h";
+          "$mod+v" = "split v";
 
           # Enter fullscreen mode for the focused container.
-          "${modifier}+f" = "fullscreen toggle";
+          "$mod+f" = "fullscreen toggle";
 
           # Change container layout (stacked, tabbed, toggle split).
-          "${modifier}+s" = "layout stacking";
-          "${modifier}+w" = "layout tabbed";
-          "${modifier}+e" = "layout toggle split";
+          "$mod+s" = "layout stacking";
+          "$mod+w" = "layout tabbed";
+          "$mod+e" = "layout toggle split";
 
           # Toggle tiling / floating.
-          "${modifier}+Shift+space" = "floating toggle";
+          "$mod+Shift+space" = "floating toggle";
 
           # Change focus between tiling / floating windows.
-          "${modifier}+space" = "focus mode_toggle";
+          "$mod+space" = "focus mode_toggle";
 
           # Focus the parent container.
-          "${modifier}+a" = "focus parent";
+          "$mod+a" = "focus parent";
 
           # Switch to workspace.
           # FIXME: How to sync with polybar workspaces?
-          "${modifier}+1" = "workspace 1:";
-          "${modifier}+2" = "workspace 2:";
-          "${modifier}+3" = "workspace 3:";
-          "${modifier}+4" = "workspace 4:";
-          "${modifier}+5" = "workspace 5:";
-          "${modifier}+6" = "workspace 6:•";
-          "${modifier}+7" = "workspace 7:•";
-          "${modifier}+8" = "workspace 8:•";
-          "${modifier}+9" = "workspace 9:•";
-          "${modifier}+0" = "workspace 10:•";
-          "${modifier}+p" = "workspace 11:";
-          "${modifier}+c" = "workspace 12:";
-          "${modifier}+b" = "workspace 13:";
+          "$mod+1" = "workspace 1:";
+          "$mod+2" = "workspace 2:";
+          "$mod+3" = "workspace 3:";
+          "$mod+4" = "workspace 4:";
+          "$mod+5" = "workspace 5:";
+          "$mod+6" = "workspace 6:•";
+          "$mod+7" = "workspace 7:•";
+          "$mod+8" = "workspace 8:•";
+          "$mod+9" = "workspace 9:•";
+          "$mod+0" = "workspace 10:•";
+          "$mod+p" = "workspace 11:";
+          "$mod+c" = "workspace 12:";
+          "$mod+b" = "workspace 13:";
 
           # Move focused container to workspace.
-          "${modifier}+Shift+1" = "move container to workspace 1:";
-          "${modifier}+Shift+2" = "move container to workspace 2:";
-          "${modifier}+Shift+3" = "move container to workspace 3:";
-          "${modifier}+Shift+4" = "move container to workspace 4:";
-          "${modifier}+Shift+5" = "move container to workspace 5:";
-          "${modifier}+Shift+6" = "move container to workspace 6:•";
-          "${modifier}+Shift+7" = "move container to workspace 7:•";
-          "${modifier}+Shift+8" = "move container to workspace 8:•";
-          "${modifier}+Shift+9" = "move container to workspace 9:•";
-          "${modifier}+Shift+0" = "move container to workspace 10:•";
-          "${modifier}+Shift+p" = "move container to workspace 11:";
-          "${modifier}+Shift+c" = "move container to workspace 12:";
-          "${modifier}+Shift+b" = "move container to workspace 13:";
+          "$mod+Shift+1" = "move container to workspace 1:";
+          "$mod+Shift+2" = "move container to workspace 2:";
+          "$mod+Shift+3" = "move container to workspace 3:";
+          "$mod+Shift+4" = "move container to workspace 4:";
+          "$mod+Shift+5" = "move container to workspace 5:";
+          "$mod+Shift+6" = "move container to workspace 6:•";
+          "$mod+Shift+7" = "move container to workspace 7:•";
+          "$mod+Shift+8" = "move container to workspace 8:•";
+          "$mod+Shift+9" = "move container to workspace 9:•";
+          "$mod+Shift+0" = "move container to workspace 10:•";
+          "$mod+Shift+p" = "move container to workspace 11:";
+          "$mod+Shift+c" = "move container to workspace 12:";
+          "$mod+Shift+b" = "move container to workspace 13:";
 
           # Move between workspaces.
-          "${modifier}+Prior" = "workspace prev";
-          "${modifier}+Next" = "workspace next";
-          "${modifier}+Shift+n" = "move workspace to output next";
-          "${modifier}+n" = "focus output next";
+          "$mod+Prior" = "workspace prev";
+          "$mod+Next" = "workspace next";
+          "$mod+Shift+n" = "move workspace to output next";
+          "$mod+n" = "focus output next";
 
           # Reload the configuration file.
-          "${modifier}+Shift+o" = "reload";
+          "$mod+Shift+o" = "reload";
 
           # Restart i3 inplace (preserves layout/session, can be used to upgrade i3)
-          "${modifier}+Shift+r" = "restart";
+          "$mod+Shift+r" = "restart";
 
           # Exit i3 (logs out of an X session).
-          "${modifier}+Shift+e" = ''
+          "$mod+Shift+e" = ''
             exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
           '';
 
           # Shortcuts.
-          "${modifier}+Shift+q" = "kill";
-          "${modifier}+r" = ''mode "resize"'';
+          "$mod+Shift+q" = "kill";
+          "$mod+r" = ''mode "resize"'';
 
           # Interact with applications.
           # Can not refer to the Nix store package here because thunar is installed system-wide, with
           # some modifications.
-          "${modifier}+backslash" = "exec thunar";
+          "$mod+backslash" = "exec thunar";
 
           # Audio + video controls.
           "XF86AudioRaiseVolume" =
@@ -434,14 +437,14 @@ in
           "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
 
           # System controls.
-          "${modifier}+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
-          "${modifier}+Shift+x" = "exec ${lock-sh}";
+          "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
+          "$mod+Shift+x" = "exec ${lock-sh}";
         }
         // lib.optionalAttrs ghosttyEnabled {
-          "${modifier}+Return" = "exec ${ghosttyPackage}/bin/ghostty";
+          "$mod+Return" = "exec ${ghosttyPackage}/bin/ghostty";
         }
         // lib.optionalAttrs rofiEnabled {
-          "${modifier}+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+          "$mod+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
         };
         startup = [
           {
