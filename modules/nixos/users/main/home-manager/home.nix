@@ -8,6 +8,8 @@
 }:
 let
   inherit (lib) types;
+
+  cfg = config.nixsys.home;
 in
 {
   options.nixsys.home = {
@@ -39,6 +41,7 @@ in
       username = user.name;
       homeDirectory = user.home-directory;
       preferXdgDirectories = true;
+      sessionVariables = cfg.session-variables;
 
       # FIXME: Find out where to best put this.
       file.".config/libvirt/qemu.conf" = lib.mkIf config.nixsys.home.system.libvirtd.enable {
