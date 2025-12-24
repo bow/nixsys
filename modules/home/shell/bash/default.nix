@@ -266,6 +266,15 @@ in
         EOF
         }
 
+        # .local/bin config
+        case ":''${PATH}:" in
+            *:"''${HOME}/.local/bin":*)
+                ;;
+            *)
+                export PATH="''${HOME}/.local/bin:''${PATH}"
+                ;;
+        esac
+
         # Load private and local settings if it exists.
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
