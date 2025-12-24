@@ -282,6 +282,7 @@ in
         pkgs.unstable.postgres-language-server
       ];
       tools = [
+        pkgs.unstable.postgresql
         pkgs.unstable.sqlfluff
       ];
       extraConfig = {
