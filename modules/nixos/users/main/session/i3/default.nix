@@ -58,7 +58,7 @@ in
       lib.mkIf (homeCfg != null && homeCfg.desktop.i3.enable) {
         services."${templateName}@" = {
           enable = true;
-          description = "i3 screen locker script template ";
+          description = "i3 screen locker script";
           wantedBy = [ "sleep.target" ];
           before = [ "sleep.target" ];
 
@@ -69,7 +69,7 @@ in
               "DISPLAY=:0"
               "NOFORK=0"
             ];
-            ExecStart = "${homeCfg.desktop.i3.lock-script}";
+            ExecStart = "-${homeCfg.desktop.i3.lock-script}";
           };
         };
         services."${templateName}@${mainUserName}" = {
