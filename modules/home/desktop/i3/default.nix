@@ -160,6 +160,11 @@ in
   options.nixsys.home.desktop.i3 = {
     enable = lib.mkEnableOption "nixsys.home.desktop.i3";
 
+    extra-keybindings = lib.mkOption {
+      type = types.attrs;
+      default = { };
+    };
+
     lock-script = lib.mkOption {
       description = "Screen lock script";
       type = types.package;
@@ -445,7 +450,8 @@ in
         }
         // lib.optionalAttrs rofiEnabled {
           "$mod+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-        };
+        }
+        // cfg.extra-keybindings;
         startup = [
           {
             command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
