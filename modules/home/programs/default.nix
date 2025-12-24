@@ -139,6 +139,7 @@ in
       openconnect
       pavucontrol
       protonmail-bridge
+      seahorse
       solaar
       spotify
       sxiv

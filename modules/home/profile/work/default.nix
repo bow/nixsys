@@ -52,6 +52,7 @@ in
         gparted = enabled;
         maim = enabled;
         obsidian = enabled;
+        seahorse = enabled;
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
