@@ -109,7 +109,7 @@ let
       ${pkgs.i3lock-color}/bin/i3lock \
           "''$( ([[ "''${NOFORK}" -eq 1 ]] && echo "\--nofork") || echo "" )" \
           -i "${theme.lock-screen.bg}" \
-          --scale \
+          --fill \
           --ignore-empty-password \
           --show-failed-attempts \
           --verif-text "" \
@@ -453,7 +453,7 @@ in
             always = true;
           }
           {
-            command = "${pkgs.feh}/bin/feh --bg-scale ${theme.desktop.bg}";
+            command = "${pkgs.feh}/bin/feh --bg-fill ${theme.desktop.bg}";
             notification = false;
             always = true;
           }
