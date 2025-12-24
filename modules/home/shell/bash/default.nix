@@ -345,6 +345,8 @@ in
       ''
       + lib.optionalString dockerEnabled ''
 
+        alias dc='docker-compose'
+
         # Execute interactive container, e.g. dexi base /bin/bash
         function dexi() { ${pkgs.docker}/bin/docker exec -it "''${1}" "''${2:-/bin/bash}"; }
 
