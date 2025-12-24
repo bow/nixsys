@@ -56,7 +56,6 @@ in
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
-        thunar = enabled;
         todoist-electron = enabled;
         yubikey-personalization = enabled;
         yubioath-flutter = enabled;

@@ -418,7 +418,9 @@ in
           "${modifier}+r" = ''mode "resize"'';
 
           # Interact with applications.
-          "${modifier}+backslash" = "exec ${pkgs.xfce.thunar}/bin/thunar";
+          # Can not refer to the Nix store package here because thunar is installed system-wide, with
+          # some modifications.
+          "${modifier}+backslash" = "exec thunar";
 
           # Audio + video controls.
           "XF86AudioRaiseVolume" =

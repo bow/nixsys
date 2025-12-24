@@ -72,7 +72,6 @@ in
         spotify = enabled;
         sxiv = enabled;
         synology-drive-client = enabled;
-        thunar = enabled;
         thunderbird-latest = enabled;
         todoist-electron = enabled;
         veracrypt = enabled;
