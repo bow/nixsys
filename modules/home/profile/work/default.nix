@@ -27,6 +27,12 @@ in
         devel = enabled;
       };
 
+      desktop.xdg.directories = {
+        music = ".xdg-music";
+        pictures = ".xdg-pictures";
+        videos = ".xdg-videos";
+      };
+
       programs = {
         # Backup.
         restic = enabled;
