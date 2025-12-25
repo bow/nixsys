@@ -21,6 +21,25 @@ in
       type = types.bool;
       description = "Sets xdg.userDirs.createDirectories";
     };
+    directories =
+      let
+        mkDirOption =
+          dirName:
+          lib.mkOption {
+            type = types.str;
+            default = dirName;
+          };
+      in
+      {
+        desktop = mkDirOption "dsk";
+        download = mkDirOption "dl";
+        templates = mkDirOption ".xdg-templates";
+        public-share = mkDirOption ".xdg-public";
+        documents = mkDirOption "docs";
+        music = mkDirOption "music";
+        pictures = mkDirOption "pics";
+        videos = mkDirOption "vids";
+      };
   };
 
   config = lib.mkIf cfg.enable {
@@ -29,14 +48,14 @@ in
       userDirs = with config.home; {
         enable = true;
         createDirectories = cfg.create-directories;
-        desktop = "${homeDirectory}/dsk";
-        download = "${homeDirectory}/dl";
-        templates = "${homeDirectory}/.xdg-templates";
-        publicShare = "${homeDirectory}/.xdg-public";
-        documents = "${homeDirectory}/docs";
-        music = "${homeDirectory}/music";
-        pictures = "${homeDirectory}/pics";
-        videos = "${homeDirectory}/vids";
+        desktop = "${homeDirectory}/${cfg.directories.desktop}";
+        download = "${homeDirectory}/${cfg.directories.download}";
+        templates = "${homeDirectory}/${cfg.directories.templates}";
+        publicShare = "${homeDirectory}/${cfg.directories.public-share}";
+        documents = "${homeDirectory}/${cfg.directories.documents}";
+        music = "${homeDirectory}/${cfg.directories.music}";
+        pictures = "${homeDirectory}/${cfg.directories.pictures}";
+        videos = "${homeDirectory}/${cfg.directories.videos}";
       };
     };
   };
