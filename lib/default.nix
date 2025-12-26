@@ -159,13 +159,13 @@ rec {
       modules = [
         inputs.sops-nix.homeManagerModules.sops
         outputs.homeManagerModules.nixsys
-        ../modules/nixos/users/main/home-manager/home.nix
+        ../modules/os/users/main/home/home-manager.nix
       ]
       ++ modules;
     };
 
   # nixos modules config-related library functions.
-  nixos = import ./nixos.nix { inherit lib; };
+  os = import ./os.nix { inherit lib; };
 
   # home modules config-related library functions.
   home = import ./home.nix { inherit lib; };
@@ -247,8 +247,8 @@ rec {
     ```nix
     listDefaultNixFilesRecursive ./.
     => [
-      ".../modules/nixos/default.nix"
-      ".../modules/nixos/users/default.nix"
+      ".../modules/os/default.nix"
+      ".../modules/os/users/default.nix"
     ]
     ```
 

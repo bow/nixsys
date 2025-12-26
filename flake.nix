@@ -75,7 +75,7 @@
 
       overlays = import ./overlays { inherit inputs; };
 
-      nixosModules = import ./modules/nixos/mod.nix { inherit inputs outputs lib; };
+      nixosModules = import ./modules/os/mod.nix { inherit inputs outputs lib; };
 
       homeManagerModules = import ./modules/home/mod.nix { inherit inputs outputs lib; };
 
@@ -110,7 +110,7 @@
               ./systems/workstation
               ./examples/machines/workstation-qemu/hardware.nix
               ./examples/machines/workstation-qemu/secrets.nix
-              ./examples/machines/workstation-qemu/local.nix
+              ./examples/machines/workstation-qemu/os.nix
             ];
           };
         }
@@ -128,7 +128,7 @@
             ./examples/machines/workstation-qemu/disk.nix
             ./examples/machines/workstation-qemu/hardware.nix
             ./examples/machines/workstation-qemu/secrets.nix
-            ./examples/machines/workstation-qemu/local.nix
+            ./examples/machines/workstation-qemu/os.nix
           ];
         };
       };

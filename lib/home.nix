@@ -49,35 +49,35 @@ _: rec {
   isDesktopEnabled = isXorgEnabled;
 
   /**
-    Return whether a system-set attribute with the given name exists
+    Return whether a os-set attribute with the given name exists
     and is set to enabled.
   */
-  isSystemAttrEnabled =
+  isOSAttrEnabled =
     attrName: config:
     let
-      sysAttrs = config.nixsys.home.system;
+      osAttrs = config.nixsys.home.os;
     in
-    builtins.hasAttr attrName sysAttrs && sysAttrs.${attrName}.enable;
+    builtins.hasAttr attrName osAttrs && osAttrs.${attrName}.enable;
 
   /**
     Return whether the current config enables btrfs.
   */
-  isBTRFSEnabled = isSystemAttrEnabled "btrfs";
+  isBTRFSEnabled = isOSAttrEnabled "btrfs";
 
   /**
     Return whether the current config enables docker.
   */
-  isDockerEnabled = isSystemAttrEnabled "docker";
+  isDockerEnabled = isOSAttrEnabled "docker";
 
   /**
     Return whether the current config enables pulseaudio.
   */
-  isPulseaudioEnabled = isSystemAttrEnabled "pulseaudio";
+  isPulseaudioEnabled = isOSAttrEnabled "pulseaudio";
 
   /**
     Return whether the current config enables bluetooth.
   */
-  isBluetoothEnabled = isSystemAttrEnabled "bluetooth";
+  isBluetoothEnabled = isOSAttrEnabled "bluetooth";
 
   /**
     Return whether the current config enables audio.
