@@ -117,11 +117,11 @@ in
         drni = "${pkgs.docker}/bin/docker run --rm -itP";
       };
 
-      profileExtra = lib.optionalString gpgEnabled ''
-        # Reset GPG and SSH agents.
-        function credsreset() {
-            ${gpgPackage}/bin/gpgconf --kill gpg-agent && eval "''$(${pkgs.openssh}/bin/ssh-agent -s)" && . "''${HOME}/.profile"
-        }
+      profileExtra = ''
+        # Load private and local settings if it exists.
+        # shellcheck disable=SC1091
+        [[ -f ~/.profile_private ]] && . "''${HOME}/.profile_private"
+        [[ -f ~/.profile_local ]] && . "''${HOME}/.profile_local"
       '';
 
       bashrcExtra = ''
@@ -279,6 +279,13 @@ in
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
         [[ -f ~/.bash_local ]] && . "''${HOME}/.bash_local"
+      ''
+      + lib.optionalString gpgEnabled ''
+
+        # Reset GPG and SSH agents.
+        function credsreset() {
+            ${gpgPackage}/bin/gpgconf --kill gpg-agent && eval "''$(${pkgs.openssh}/bin/ssh-agent -s)" && . "''${HOME}/.profile"
+        }
       ''
       + lib.optionalString (user.location.city != "") ''
 
