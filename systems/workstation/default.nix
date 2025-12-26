@@ -11,6 +11,11 @@ let
   btrfsEnabled = libcfg.isBTRFSEnabled config;
 in
 {
+  boot.extraModprobeConfig =
+    with config.boot;
+    lib.optionalString (builtins.elem "kvm-intel" kernelModules) "options kvm_intel nested=1"
+    + lib.optionalString (builtins.elem "kvm-amd" kernelModules) "options kvm_amd nested=1";
+
   nixsys.os = enabledWith {
     inherit hostname;
     backup.snapper = {
