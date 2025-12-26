@@ -37,11 +37,6 @@ in
   # packages we want ~ without interference from env-wrapping or aliases.
   imports = mkProgramModuleImports {
 
-    inherit (pkgs.unstable)
-      # Nix.
-      nh
-      ;
-
     inherit (pkgs)
       # Backup tools.
       restic
