@@ -123,28 +123,19 @@
       nixosConfigurations = {
         workstation-qemu = lib.nixsys.mkMachine {
           inherit user;
-          systemModuleName = "workstation";
-          modules = [
-            ./examples/machines/workstation-qemu/disk.nix
-            ./examples/machines/workstation-qemu/hardware.nix
-            ./examples/machines/workstation-qemu/secrets.nix
-            ./examples/machines/workstation-qemu/os.nix
-          ];
+          modules = [ ./examples/machines/workstation-qemu ];
         };
       };
 
       # Home configuration examples.
       # usage: home-manager build --flake .#example
-      homeConfigurations =
-        let
+      homeConfigurations = {
+        headless = lib.nixsys.mkHome {
+          inherit user;
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-        in
-        {
-          user = lib.nixsys.mkHome {
-            inherit user pkgs;
-            modules = [ ./examples/homes/user ];
-          };
+          modules = [ { nixsys.home.profile.personal.enable = true; } ];
         };
+      };
 
       apps = forEachSupportedSystem (
         { pkgs }:
