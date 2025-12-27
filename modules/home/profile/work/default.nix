@@ -18,6 +18,7 @@ in
   options.nixsys.home.profile.work = {
     enable = lib.mkEnableOption "nixsys.home.profile.work";
   };
+
   config = lib.mkIf cfg.enable {
 
     nixsys.home = {

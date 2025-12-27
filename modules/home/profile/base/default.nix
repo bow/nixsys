@@ -12,6 +12,7 @@ in
   options.nixsys.home.profile.base = {
     enable = lib.mkEnableOption "nixsys.home.profile.base";
   };
+
   config = lib.mkIf cfg.enable {
 
     nixsys.home = {
