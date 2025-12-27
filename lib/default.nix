@@ -159,7 +159,7 @@ rec {
       modules = [
         inputs.sops-nix.homeManagerModules.sops
         outputs.homeManagerModules.nixsys
-        ../modules/os/users/main/home/home-manager.nix
+        ../modules/os/users/main/home-manager/home.nix
       ]
       ++ modules;
     };
