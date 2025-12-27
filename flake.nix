@@ -107,7 +107,6 @@
                   writableStoreUseTmpfs = false;
                 };
               }
-              ./systems/workstation
               ./examples/machines/workstation-qemu/hardware.nix
               ./examples/machines/workstation-qemu/secrets.nix
               ./examples/machines/workstation-qemu/os.nix
@@ -123,6 +122,7 @@
       nixosConfigurations = {
         workstation-qemu = lib.nixsys.mkMachine {
           inherit user;
+          hostname = "workstation-qemu";
           modules = [ ./examples/machines/workstation-qemu ];
         };
       };

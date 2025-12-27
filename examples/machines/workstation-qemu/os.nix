@@ -10,6 +10,7 @@ in
   home-manager.users.${user.name}.imports = [ ./home.nix ];
 
   nixsys.os = enabledWith {
+    profile.workstation = enabled;
     servers.ssh = enabled;
     users.main.home-manager.desktop.i3 = enabled;
     virtualization.guest = enabledWith {

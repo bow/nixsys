@@ -55,7 +55,6 @@ rec {
         };
         timezone = "UTC";
       };
-      systemModuleName = "workstation";
       modules = [
         ./hardware-configuration.nix;
         ./config.nix
@@ -81,9 +80,8 @@ rec {
   mkMachine =
     {
       user,
-      systemModuleName,
       modules,
-      hostName ? null,
+      hostname,
     }:
     lib.nixosSystem {
       specialArgs = {
@@ -92,14 +90,13 @@ rec {
           outputs
           lib
           user
+          hostname
           ;
-        hostname = if hostName != null then hostName else systemModuleName;
       };
       modules = [
         inputs.disko.nixosModules.disko
         inputs.sops-nix.nixosModules.sops
         outputs.nixosModules.nixsys
-        ../systems/${systemModuleName}
       ]
       ++ modules;
     };
@@ -132,20 +129,16 @@ rec {
   mkHome =
     {
       user,
-      pkgs,
       modules,
+      pkgs,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit
-          inputs
-          outputs
-          ;
+        inherit inputs outputs;
         # FIXME: Find out how to avoid repeating this nixos module logic.
         user = {
           home-directory = "/home/${user.name}";
-          shell = "bash";
         }
         // user;
         asStandalone = true;
