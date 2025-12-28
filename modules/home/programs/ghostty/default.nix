@@ -5,12 +5,13 @@
   ...
 }:
 let
+  inherit (lib) types;
   libcfg = lib.nixsys.home;
 
   handlerScriptName = "ghostty-text-handler";
   ghostty-text-handler = pkgs.writeShellScriptBin "${handlerScriptName}" ''
     FILE_PATH="''${1}"
-    ${cfg.package}/bin/ghostty -e ${pkgs.runtimeShell} -c "''${EDITOR} \"''${FILE_PATH}\"" &
+    ${cfg.package}/bin/ghostty --gtk-single-instance=true -e ${pkgs.runtimeShell} -c "''${EDITOR} \"''${FILE_PATH}\"" &
   '';
 
   mimeTypes = [
@@ -38,11 +39,19 @@ in
       default = libcfg.isDesktopEnabled config;
     };
     package = lib.mkPackageOption pkgs.unstable "ghostty" { };
+    default-terminal = lib.mkOption {
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
 
     home.packages = [ cfg.package ];
+
+    home.sessionVariables = lib.optionalAttrs cfg.default-terminal {
+      TERMINAL = "ghostty";
+    };
 
     xdg =
       let
@@ -72,7 +81,7 @@ in
         };
 
         desktopEntries.${desktopEntryName} = {
-          name = "Ghostty editor";
+          name = "Ghostty (text handler)";
           comment = ''Open text files in ''$EDITOR in a new Ghostty terminal'';
           exec = "${ghostty-text-handler}/bin/${handlerScriptName} %f";
           terminal = false;
