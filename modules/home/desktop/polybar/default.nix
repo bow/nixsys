@@ -112,6 +112,7 @@ let
   '';
 
   i3Enabled = libcfg.isI3Enabled config;
+  i3Cfg = config.nixsys.home.desktop.i3;
 
   cfg = config.nixsys.home.desktop.polybar;
 in
@@ -437,22 +438,7 @@ in
         index.sort = true;
         wrapping.scroll = false;
 
-        # FIXME: How to sync with i3 workspaces?
-        ws.icon = [
-          "1;"
-          "2;"
-          "3;"
-          "4;"
-          "5;"
-          "6;•"
-          "7;•"
-          "8;•"
-          "9;•"
-          "10;•"
-          "11;"
-          "12;"
-          "13;"
-        ];
+        ws.icon = builtins.map (ws: "${builtins.toString ws.index};${ws.symbol}") i3Cfg.workspaces;
 
         label = {
           mode = {

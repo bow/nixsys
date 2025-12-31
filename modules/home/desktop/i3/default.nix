@@ -234,6 +234,72 @@ in
         sha256 = "sha256-BbAWNMOggHet7muY+pdsiXR2RKPUOOAX3o/v83sgh/k=";
       };
     };
+
+    workspaces = lib.mkOption {
+      type = types.listOf (
+        types.submodule {
+          options = {
+            key = lib.mkOption { type = types.str; };
+            symbol = lib.mkOption { type = types.str; };
+          };
+        }
+      );
+      apply = workspaces: lib.imap1 (index: value: { inherit index; } // value) workspaces;
+      default = [
+        {
+          key = "1";
+          symbol = "";
+        }
+        {
+          key = "2";
+          symbol = "";
+        }
+        {
+          key = "3";
+          symbol = "";
+        }
+        {
+          key = "4";
+          symbol = "";
+        }
+        {
+          key = "5";
+          symbol = "";
+        }
+        {
+          key = "6";
+          symbol = "•";
+        }
+        {
+          key = "7";
+          symbol = "•";
+        }
+        {
+          key = "8";
+          symbol = "•";
+        }
+        {
+          key = "9";
+          symbol = "•";
+        }
+        {
+          key = "0";
+          symbol = "•";
+        }
+        {
+          key = "p";
+          symbol = "";
+        }
+        {
+          key = "c";
+          symbol = "";
+        }
+        {
+          key = "b";
+          symbol = "";
+        }
+      ];
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -331,127 +397,118 @@ in
               ];
         };
         defaultWorkspace = keybindings."$mod+2";
-        keybindings = {
-          # Navigation.
-          "$mod+j" = "focus left";
-          "$mod+k" = "focus down";
-          "$mod+l" = "focus up";
-          "$mod+semicolon" = "focus right";
-          "$mod+Left" = "focus left";
-          "$mod+Down" = "focus down";
-          "$mod+Up" = "focus up";
-          "$mod+Right" = "focus right";
+        keybindings =
+          let
+            mkWorkspaceBindings =
+              workspaces:
+              let
+                bindings =
+                  # [ { index = ...; key = "..."; symbol = "..."; } ]
+                  # => [ { "$mod+${key}" = "workspace ${index}:${symbol}"; ... } ]
+                  builtins.map (
+                    ws:
+                    let
+                      wsID = "${builtins.toString ws.index}:${ws.symbol}";
+                    in
+                    {
+                      "$mod+${ws.key}" = "workspace ${wsID}";
+                      "$mod+Shift+${ws.key}" = "move container to workspace ${wsID}";
+                    }
+                  ) workspaces;
+              in
+              builtins.foldl' (acc: item: acc // item) { } bindings;
+          in
+          {
+            # Navigation.
+            "$mod+j" = "focus left";
+            "$mod+k" = "focus down";
+            "$mod+l" = "focus up";
+            "$mod+semicolon" = "focus right";
+            "$mod+Left" = "focus left";
+            "$mod+Down" = "focus down";
+            "$mod+Up" = "focus up";
+            "$mod+Right" = "focus right";
 
-          # Move windows.
-          "$mod+Shift+h" = "move left";
-          "$mod+Shift+j" = "move down";
-          "$mod+Shift+k" = "move up";
-          "$mod+Shift+l" = "move right";
-          "$mod+Shift+Left" = "move left";
-          "$mod+Shift+Down" = "move down";
-          "$mod+Shift+Up" = "move up";
-          "$mod+Shift+Right" = "move right";
+            # Move windows.
+            "$mod+Shift+h" = "move left";
+            "$mod+Shift+j" = "move down";
+            "$mod+Shift+k" = "move up";
+            "$mod+Shift+l" = "move right";
+            "$mod+Shift+Left" = "move left";
+            "$mod+Shift+Down" = "move down";
+            "$mod+Shift+Up" = "move up";
+            "$mod+Shift+Right" = "move right";
 
-          # Split windows.
-          "$mod+h" = "split h";
-          "$mod+v" = "split v";
+            # Split windows.
+            "$mod+h" = "split h";
+            "$mod+v" = "split v";
 
-          # Enter fullscreen mode for the focused container.
-          "$mod+f" = "fullscreen toggle";
+            # Enter fullscreen mode for the focused container.
+            "$mod+f" = "fullscreen toggle";
 
-          # Change container layout (stacked, tabbed, toggle split).
-          "$mod+s" = "layout stacking";
-          "$mod+w" = "layout tabbed";
-          "$mod+e" = "layout toggle split";
+            # Change container layout (stacked, tabbed, toggle split).
+            "$mod+s" = "layout stacking";
+            "$mod+w" = "layout tabbed";
+            "$mod+e" = "layout toggle split";
 
-          # Toggle tiling / floating.
-          "$mod+Shift+space" = "floating toggle";
+            # Toggle tiling / floating.
+            "$mod+Shift+space" = "floating toggle";
 
-          # Change focus between tiling / floating windows.
-          "$mod+space" = "focus mode_toggle";
+            # Change focus between tiling / floating windows.
+            "$mod+space" = "focus mode_toggle";
 
-          # Focus the parent container.
-          "$mod+a" = "focus parent";
+            # Focus the parent container.
+            "$mod+a" = "focus parent";
 
-          # Switch to workspace.
-          # FIXME: How to sync with polybar workspaces?
-          "$mod+1" = "workspace 1:";
-          "$mod+2" = "workspace 2:";
-          "$mod+3" = "workspace 3:";
-          "$mod+4" = "workspace 4:";
-          "$mod+5" = "workspace 5:";
-          "$mod+6" = "workspace 6:•";
-          "$mod+7" = "workspace 7:•";
-          "$mod+8" = "workspace 8:•";
-          "$mod+9" = "workspace 9:•";
-          "$mod+0" = "workspace 10:•";
-          "$mod+p" = "workspace 11:";
-          "$mod+c" = "workspace 12:";
-          "$mod+b" = "workspace 13:";
+            # Move between workspaces.
+            "$mod+Prior" = "workspace prev";
+            "$mod+Next" = "workspace next";
+            "$mod+Shift+n" = "move workspace to output next";
+            "$mod+n" = "focus output next";
 
-          # Move focused container to workspace.
-          "$mod+Shift+1" = "move container to workspace 1:";
-          "$mod+Shift+2" = "move container to workspace 2:";
-          "$mod+Shift+3" = "move container to workspace 3:";
-          "$mod+Shift+4" = "move container to workspace 4:";
-          "$mod+Shift+5" = "move container to workspace 5:";
-          "$mod+Shift+6" = "move container to workspace 6:•";
-          "$mod+Shift+7" = "move container to workspace 7:•";
-          "$mod+Shift+8" = "move container to workspace 8:•";
-          "$mod+Shift+9" = "move container to workspace 9:•";
-          "$mod+Shift+0" = "move container to workspace 10:•";
-          "$mod+Shift+p" = "move container to workspace 11:";
-          "$mod+Shift+c" = "move container to workspace 12:";
-          "$mod+Shift+b" = "move container to workspace 13:";
+            # Reload the configuration file.
+            "$mod+Shift+o" = "reload";
 
-          # Move between workspaces.
-          "$mod+Prior" = "workspace prev";
-          "$mod+Next" = "workspace next";
-          "$mod+Shift+n" = "move workspace to output next";
-          "$mod+n" = "focus output next";
+            # Restart i3 inplace (preserves layout/session, can be used to upgrade i3)
+            "$mod+Shift+r" = "restart";
 
-          # Reload the configuration file.
-          "$mod+Shift+o" = "reload";
+            # Exit i3 (logs out of an X session).
+            "$mod+Shift+e" = ''
+              exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
+            '';
 
-          # Restart i3 inplace (preserves layout/session, can be used to upgrade i3)
-          "$mod+Shift+r" = "restart";
+            # Shortcuts.
+            "$mod+Shift+q" = "kill";
+            "$mod+r" = ''mode "resize"'';
 
-          # Exit i3 (logs out of an X session).
-          "$mod+Shift+e" = ''
-            exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
-          '';
+            # Interact with applications.
+            # Can not refer to the Nix store package here because thunar is installed system-wide, with
+            # some modifications.
+            "$mod+backslash" = "exec thunar";
 
-          # Shortcuts.
-          "$mod+Shift+q" = "kill";
-          "$mod+r" = ''mode "resize"'';
+            # Audio + video controls.
+            "XF86AudioRaiseVolume" =
+              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
+            "XF86AudioLowerVolume" =
+              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+            "XF86AudioMute" =
+              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer set Capture toggle";
+            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
+            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
 
-          # Interact with applications.
-          # Can not refer to the Nix store package here because thunar is installed system-wide, with
-          # some modifications.
-          "$mod+backslash" = "exec thunar";
-
-          # Audio + video controls.
-          "XF86AudioRaiseVolume" =
-            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
-          "XF86AudioLowerVolume" =
-            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
-          "XF86AudioMute" =
-            "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer set Capture toggle";
-          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
-          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
-
-          # System controls.
-          "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
-          "$mod+Shift+x" = "exec ${lock-sh}";
-        }
-        // lib.optionalAttrs ghosttyEnabled {
-          "$mod+Return" = "exec ${ghosttyPackage}/bin/ghostty";
-        }
-        // lib.optionalAttrs rofiEnabled {
-          "$mod+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
-        }
-        // cfg.extra-keybindings;
+            # System controls.
+            "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
+            "$mod+Shift+x" = "exec ${lock-sh}";
+          }
+          // mkWorkspaceBindings cfg.workspaces
+          // lib.optionalAttrs ghosttyEnabled {
+            "$mod+Return" = "exec ${ghosttyPackage}/bin/ghostty";
+          }
+          // lib.optionalAttrs rofiEnabled {
+            "$mod+Tab" = "exec ${pkgs.rofi}/bin/rofi -show combi";
+          }
+          // cfg.extra-keybindings;
         startup = [
           {
             command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
