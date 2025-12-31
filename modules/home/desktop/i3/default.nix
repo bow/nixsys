@@ -160,42 +160,6 @@ in
   options.nixsys.home.desktop.i3 = {
     enable = lib.mkEnableOption "nixsys.home.desktop.i3";
 
-    extra-keybindings = lib.mkOption {
-      type = types.attrs;
-      default = { };
-    };
-
-    lock-script = lib.mkOption {
-      description = "Screen lock script";
-      type = types.package;
-      default = lock-sh;
-    };
-
-    mod-key = lib.mkOption {
-      description = "Mod key for i3";
-      type = types.str;
-      default = "Mod4";
-    };
-
-    package = lib.mkPackageOption pkgs "i3" { };
-
-    wallpaper = lib.mkOption {
-      default = {
-        name = "adrien-olichon-RCAhiGJsUUE-unsplash";
-        ext = "jpg";
-        url = "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-        sha256 = "sha256-BbAWNMOggHet7muY+pdsiXR2RKPUOOAX3o/v83sgh/k=";
-      };
-      type = types.submodule {
-        options = {
-          name = lib.mkOption { type = types.str; };
-          ext = lib.mkOption { type = types.str; };
-          url = lib.mkOption { type = types.str; };
-          sha256 = lib.mkOption { type = types.str; };
-        };
-      };
-    };
-
     colors =
       let
         mkColorOption =
@@ -234,6 +198,42 @@ in
           ring-sep = mkColorOption "#00000000";
         };
       };
+
+    extra-keybindings = lib.mkOption {
+      type = types.attrs;
+      default = { };
+    };
+
+    lock-script = lib.mkOption {
+      description = "Screen lock script";
+      type = types.package;
+      default = lock-sh;
+    };
+
+    mod-key = lib.mkOption {
+      description = "Mod key for i3";
+      type = types.str;
+      default = "Mod4";
+    };
+
+    package = lib.mkPackageOption pkgs "i3" { };
+
+    wallpaper = lib.mkOption {
+      type = types.submodule {
+        options = {
+          name = lib.mkOption { type = types.str; };
+          ext = lib.mkOption { type = types.str; };
+          url = lib.mkOption { type = types.str; };
+          sha256 = lib.mkOption { type = types.str; };
+        };
+      };
+      default = {
+        name = "adrien-olichon-RCAhiGJsUUE-unsplash";
+        ext = "jpg";
+        url = "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        sha256 = "sha256-BbAWNMOggHet7muY+pdsiXR2RKPUOOAX3o/v83sgh/k=";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
