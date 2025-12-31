@@ -117,12 +117,20 @@ in
         drni = "${pkgs.docker}/bin/docker run --rm -itP";
       };
 
-      profileExtra = ''
-        # Load private and local settings if it exists.
-        # shellcheck disable=SC1091
-        [[ -f ~/.profile_private ]] && . "''${HOME}/.profile_private"
-        [[ -f ~/.profile_local ]] && . "''${HOME}/.profile_local"
-      '';
+      profileExtra =
+        lib.optionalString gpgEnabled ''
+          for keygrip in $(gpg --with-keygrip --list-secret-keys --keyid-format long | ${pkgs.gawk}/bin/awk '/\[[CES]?A[CES]?\]/{getline; print $3}'); do
+            (gpg-connect-agent "keyattr $keygrip Use-for-ssh: true" /bye | ${pkgs.gnugrep}/bin/grep -v "OK") || true
+          done
+
+        ''
+        + ''
+          # Load private and local settings if it exists.
+          # shellcheck disable=SC1091
+          [[ -f ~/.profile_private ]] && . "''${HOME}/.profile_private"
+          # shellcheck disable=SC1091
+          [[ -f ~/.profile_local ]] && . "''${HOME}/.profile_local"
+        '';
 
       bashrcExtra = ''
         # Fallback for plain console.
@@ -278,6 +286,7 @@ in
         # Load private and local settings if it exists.
         # shellcheck disable=SC1091
         [[ -f ~/.bash_private ]] && . "''${HOME}/.bash_private"
+        # shellcheck disable=SC1091
         [[ -f ~/.bash_local ]] && . "''${HOME}/.bash_local"
       ''
       + lib.optionalString gpgEnabled ''
