@@ -97,7 +97,7 @@ in
         CaptivePortal = true;
         Cookies = {
           Behavior = "reject-tracker";
-          BehaviorPrivateBrowsing = "reject";
+          BehaviorPrivateBrowsing = "reject-tracker-and-partition-foreign";
         };
         DisableFirefoxAccounts = true;
         DisableFirefoxStudies = true;
