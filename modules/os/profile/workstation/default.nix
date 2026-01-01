@@ -31,7 +31,6 @@ in
       bluetooth = enabled;
       boot.systemd = enabled;
       networking.networkmanager = enabled;
-      nix.nixos-cli = enabled;
       touchpad = enabled;
       udev.rulesets = {
         qmk = enabled;

@@ -25,11 +25,6 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixos-cli = {
-      url = "github:nix-community/nixos-cli";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs =
