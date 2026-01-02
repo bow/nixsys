@@ -75,6 +75,8 @@ in
         pkgs.unstable.ccls
       ];
       tools = [
+        # See: https://github.com/nix-community/home-manager/issues/1668#issuecomment-1264298055
+        (lib.meta.hiPrio pkgs.unstable.gcc)
         pkgs.unstable.clang_21
         pkgs.unstable.clang-tools
         pkgs.unstable.cmake
