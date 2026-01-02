@@ -23,6 +23,11 @@ in
       lib.optionalString (builtins.elem "kvm-intel" kernelModules) "options kvm_intel nested=1"
       + lib.optionalString (builtins.elem "kvm-amd" kernelModules) "options kvm_amd nested=1";
 
+    # FIXME: Only do this if the home-manager setup enables SSH agents.
+    security.sudo.extraConfig = ''
+      Defaults    env_keep+=SSH_AUTH_SOCK
+    '';
+
     nixsys.os = enabledWith {
       inherit hostname;
       backup.snapper = {
