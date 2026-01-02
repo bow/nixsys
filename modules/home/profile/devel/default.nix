@@ -169,6 +169,7 @@ in
         pkgs.unstable.delve
         pkgs.unstable.go
         pkgs.unstable.gofumpt
+        pkgs.unstable.gotools
       ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
