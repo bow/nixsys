@@ -22,7 +22,9 @@ in
 
     nixpkgs.config.pulseaudio = true;
 
-    hardware.pulseaudio = {
+    services.pipewire.enable = false;
+
+    services.pulseaudio = {
       enable = true;
       extraConfig = ''
         load-module module-switch-on-connect

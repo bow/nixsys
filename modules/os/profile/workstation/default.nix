@@ -30,6 +30,7 @@ in
 
     nixsys.os = enabledWith {
       inherit hostname;
+      audio.pulseaudio = enabled;
       backup.snapper = {
         enable-home-snapshots = btrfsEnabled;
       };
