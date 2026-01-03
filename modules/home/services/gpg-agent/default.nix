@@ -30,6 +30,11 @@ in
       default = 86400;
     };
 
+    enable-bash-integration = lib.mkOption {
+      type = types.bool;
+      default = shellBash;
+    };
+
     exported-as-ssh = lib.mkOption {
       description = "Sets services.gpg-agent.sshKeys";
       type = types.nullOr (types.listOf types.str);
@@ -57,12 +62,20 @@ in
       enable = true;
       defaultCacheTtl = cfg.default-cache-ttl;
       defaultCacheTtlSsh = cfg.default-cache-ttl-ssh;
-      enableBashIntegration = shellBash;
+      enableBashIntegration = cfg.enable-bash-integration;
       enableSshSupport = true;
       maxCacheTtl = cfg.max-cache-ttl;
       maxCacheTtlSsh = cfg.max-cache-ttl-ssh;
       pinentry.package = if xorgEnabled then pkgs.pinentry-gtk2 else pkgs.pinentry-tty;
       sshKeys = cfg.exported-as-ssh;
+    };
+
+    programs.bash = lib.optionalAttrs cfg.enable-bash-integration {
+      profileExtra = ''
+        for keygrip in $(gpg --with-keygrip --list-secret-keys --keyid-format long | awk '/\[[CES]?A[CES]?\]/{getline; print $3}'); do
+          (gpg-connect-agent "keyattr $keygrip Use-for-ssh: true" /bye | grep -v "OK") || true
+        done
+      '';
     };
   };
 }
