@@ -53,6 +53,7 @@ in
         # Security.
         gpg = enabled;
         pass = enabled;
+        pwgen = enabled;
         sequoia-sq = enabled;
       }
       // lib.optionalAttrs desktopEnabled {

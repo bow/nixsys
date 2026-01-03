@@ -48,6 +48,7 @@ in
         # Security.
         gpg = enabled;
         pass = enabled;
+        pwgen = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
         arandr = enabled;
