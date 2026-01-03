@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  user,
   ...
 }:
 let
@@ -8,6 +9,7 @@ let
   libcfg = lib.nixsys.home;
 
   desktopEnabled = libcfg.isDesktopEnabled config;
+  shellBash = libcfg.isShellBash user;
 
   cfg = config.nixsys.home.desktop.xdg;
 in
@@ -40,6 +42,10 @@ in
         pictures = mkDirOption "pics";
         videos = mkDirOption "vids";
       };
+    enable-bash-integration = lib.mkOption {
+      type = types.bool;
+      default = shellBash;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -57,6 +63,14 @@ in
         pictures = "${homeDirectory}/${cfg.directories.pictures}";
         videos = "${homeDirectory}/${cfg.directories.videos}";
       };
+    };
+
+    programs.bash = lib.optionalAttrs cfg.enable-bash-integration {
+      bashrcExtra = ''
+        alias dl='cd ${cfg.directories.download}'
+        alias dk='cd ${cfg.directories.desktop}'
+        alias dsk='cd ${cfg.directories.desktop}'
+      '';
     };
   };
 }
