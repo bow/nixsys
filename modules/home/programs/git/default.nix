@@ -74,7 +74,7 @@ in
         };
         alias = {
           # list all alias
-          lsalias = "!${cfg.package}/bin/git config -l | ${pkgs.gnugrep}/bin/grep alias | ${pkgs.coreutils}/bin/cut -c 7-";
+          lsalias = "!${cfg.package}/bin/git config -l | ${pkgs.gnugrep}/bin/grep alias | cut -c 7-";
 
           # basic shortcuts
           co = "checkout";
@@ -112,11 +112,11 @@ in
           shs = ''!f() { ${cfg.package}/bin/git stash show -p stash@{''${1:-0}}; }; f'';
           shp = ''!f() { ${cfg.package}/bin/git stash pop stash@{''${1:-0}}; }; f'';
           shd = ''!f() { ${cfg.package}/bin/git stash drop stash@{''${1:-0}}; }; f'';
-          ed = ''!f() { ${cfg.package}/bin/git rebase -i HEAD~''${1:-''$(${cfg.package}/bin/git rev-list --left-right --count ''$(${cfg.package}/bin/git rev-parse --abbrev-ref ''$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)@{upstream})...''$(${cfg.package}/bin/git branch --show-current) | ${pkgs.coreutils}/bin/cut -f2)}; }; f'';
+          ed = ''!f() { ${cfg.package}/bin/git rebase -i HEAD~''${1:-''$(${cfg.package}/bin/git rev-list --left-right --count ''$(${cfg.package}/bin/git rev-parse --abbrev-ref ''$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)@{upstream})...''$(${cfg.package}/bin/git branch --show-current) | cut -f2)}; }; f'';
           brstat = "for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(objectname:short)%(color:reset) %(color:blue)%(committerdate:short)%(color:reset) • %(color:red)(%(refname:short))%(color:reset) %(contents:subject) %(color:cyan)[%(authorname)]%(color:reset)'";
           up = ''!${cfg.package}/bin/git pull --rebase --prune ''$@ && ${cfg.package}/bin/git submodule update --init --recursive'';
-          linediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ print $1+$2"\t"$0 }' | ${pkgs.coreutils}/bin/sort -nrk1,1; }; f'';
-          clinediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ if (!($1 ~ /0/ || $2 ~ /0/ || ($1+$2) ~ /0/)) print $1+$2"\t"$0 }' | ${pkgs.coreutils}/bin/sort -nrk1,1; }; f'';
+          linediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ print $1+$2"\t"$0 }' | sort -nrk1,1; }; f'';
+          clinediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ if (!($1 ~ /0/ || $2 ~ /0/ || ($1+$2) ~ /0/)) print $1+$2"\t"$0 }' | sort -nrk1,1; }; f'';
 
           # assume / unassume changed
           assume = "update-index --assume-unchanged";

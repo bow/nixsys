@@ -60,25 +60,25 @@ in
 
       shellAliases = {
         # chmod +x.
-        chmox = "${pkgs.coreutils}/bin/chmod +x";
+        chmox = "chmod +x";
         # cp, interactive, verbose.
         cp = "cp -iv";
         # df, with total size, with human-readable output.
-        df = "${pkgs.coreutils}/bin/df -h -T --total";
+        df = "df -h -T --total";
         # du, with human-readable output.
-        du = "${pkgs.coreutils}/bin/du -sh";
+        du = "du -sh";
         # grep, colorized.
         grep = "grep --color=auto";
         # less, without wrapping, with line numbers.
         less = "${pkgs.less}/bin/less -SN";
         # ls, colorized.
-        ls = "${pkgs.coreutils}/bin/ls -F --color=auto";
+        ls = "ls -F --color=auto";
         # ls, sorted by name.
-        lname = "${pkgs.coreutils}/bin/ls -alF";
+        lname = "ls -alF";
         # ls, sorted by size.
-        lsize = "${pkgs.coreutils}/bin/ls -lSrh";
+        lsize = "ls -lSrh";
         # ls, sorted by mtime.
-        ltime = "${pkgs.coreutils}/bin/ls -ltrh";
+        ltime = "ls -ltrh";
         # mkdir, create parents.
         mkdir = "mkdir -p";
         # mv, interactive.
@@ -98,7 +98,7 @@ in
         grest = "history | ${pkgs.gnugrep}/bin/grep";
       }
       // lib.optionalAttrs xorgEnabled {
-        clip = "${pkgs.findutils}/bin/xargs ${pkgs.coreutils}/bin/echo -n | ${pkgs.xclip}/bin/xclip -selection c";
+        clip = "${pkgs.findutils}/bin/xargs echo -n | ${pkgs.xclip}/bin/xclip -selection c";
       }
       // lib.optionalAttrs dockerEnabled {
         # List container processes.
@@ -128,22 +128,22 @@ in
       bashrcExtra = ''
         # Fallback for plain console.
         if [[ "$TERM" == "linux" ]]; then
-            ${pkgs.coreutils}/bin/echo -en "\e]P0111111" # black
-            ${pkgs.coreutils}/bin/echo -en "\e]P8111111" # darkgrey
-            ${pkgs.coreutils}/bin/echo -en "\e]P1803232" # darkred
-            ${pkgs.coreutils}/bin/echo -en "\e]P9c43232" # red
-            ${pkgs.coreutils}/bin/echo -en "\e]P23d762f" # darkgreen
-            ${pkgs.coreutils}/bin/echo -en "\e]PA5ab23a" # green
-            ${pkgs.coreutils}/bin/echo -en "\e]P3aa9943" # brown
-            ${pkgs.coreutils}/bin/echo -en "\e]PBefef60" # yellow
-            ${pkgs.coreutils}/bin/echo -en "\e]P427528e" # darkblue
-            ${pkgs.coreutils}/bin/echo -en "\e]PC4388e1" # blue
-            ${pkgs.coreutils}/bin/echo -en "\e]P5706c9a" # darkmagenta
-            ${pkgs.coreutils}/bin/echo -en "\e]PDa07de7" # magenta
-            ${pkgs.coreutils}/bin/echo -en "\e]P65da5a5" # darkcyan
-            ${pkgs.coreutils}/bin/echo -en "\e]PE98e1e1" # cyan
-            ${pkgs.coreutils}/bin/echo -en "\e]P7d0d0d0" # lightgrey
-            ${pkgs.coreutils}/bin/echo -en "\e]PFffffff" # white
+            echo -en "\e]P0111111" # black
+            echo -en "\e]P8111111" # darkgrey
+            echo -en "\e]P1803232" # darkred
+            echo -en "\e]P9c43232" # red
+            echo -en "\e]P23d762f" # darkgreen
+            echo -en "\e]PA5ab23a" # green
+            echo -en "\e]P3aa9943" # brown
+            echo -en "\e]PBefef60" # yellow
+            echo -en "\e]P427528e" # darkblue
+            echo -en "\e]PC4388e1" # blue
+            echo -en "\e]P5706c9a" # darkmagenta
+            echo -en "\e]PDa07de7" # magenta
+            echo -en "\e]P65da5a5" # darkcyan
+            echo -en "\e]PE98e1e1" # cyan
+            echo -en "\e]P7d0d0d0" # lightgrey
+            echo -en "\e]PFffffff" # white
             clear                  # for background artifacting
 
             # shellcheck disable=SC2034
@@ -170,12 +170,12 @@ in
                 export GIT_PS1_SHOWUNTRACKEDFILES=true
                 export GIT_PS1_SHOWUPSTREAM="verbose"
                 nick=''$(__git_ps1 "(  %s) ")
-                [[ -n "''$nick" ]] && ${pkgs.coreutils}/bin/echo "''$nick"
+                [[ -n "''$nick" ]] && echo "''$nick"
                 return 0
             }
 
             function set_prompt {
-                PS1="\n''${nocol}\`if [[ \''$? -eq 0 ]]; then ${pkgs.coreutils}/bin/echo ''${blue}; else ${pkgs.coreutils}/bin/echo ''${red}; fi\`-\[''${nocol}\] \[''${blue}\]\u@\h\[''${nocol}\] ''$(get_git_stat)\[''${nocol}\]\[''${yellow}\]\w\[''${nocol}\]\n> "
+                PS1="\n''${nocol}\`if [[ \''$? -eq 0 ]]; then echo ''${blue}; else echo ''${red}; fi\`-\[''${nocol}\] \[''${blue}\]\u@\h\[''${nocol}\] ''$(get_git_stat)\[''${nocol}\]\[''${yellow}\]\w\[''${nocol}\]\n> "
             }
             PROMPT_COMMAND=set_prompt
         else
@@ -201,7 +201,7 @@ in
                 zst | zstd)
                     ${pkgs.gnutar}/bin/tar --zstd -cvf "''${target}.tar.zst" "''${target}" ;;
                 *)
-                    ${pkgs.coreutils}/bin/echo "Usage: pack [gzip|bzip2|xz|7z|rar|zip|zst] [target]" ;;
+                    echo "Usage: pack [gzip|bzip2|xz|7z|rar|zip|zst] [target]" ;;
             esac
         }
 
@@ -223,19 +223,19 @@ in
                 *.zst | *.zstd)
                     ${pkgs.zstd}/bin/zst -d "''${1}" ;;
                 *)
-                    ${pkgs.coreutils}/bin/echo "Usage: unpack [target]" ;;
+                    echo "Usage: unpack [target]" ;;
             esac
         }
 
         # Create dir and cd into it.
         # shellcheck disable=SC2164
-        function mkcd() { ${pkgs.coreutils}/bin/mkdir -p "''${1}" && cd "''${1}"; }
+        function mkcd() { mkdir -p "''${1}" && cd "''${1}"; }
 
         # cd into the directory in which a file is contained.
         function fcd() { cd "''$(dirname "''${1}")" || exit 1; }
 
         # Change owner to current user.
-        function mkmine() { sudo ${pkgs.coreutils}/bin/chown -R "''${USER}" "''${1:-.}"; }
+        function mkmine() { sudo chown -R "''${USER}" "''${1:-.}"; }
 
         # Open an ssh connection and run tmux.
         function sshx() {
@@ -246,11 +246,11 @@ in
         function open() { ${pkgs.handlr-regex}/bin/handlr open "''${1:-.}"; }
 
         # Calculator.
-        function calc() { ${pkgs.coreutils}/bin/echo "''$*" | ${pkgs.bc}/bin/bc; }
+        function calc() { echo "''$*" | ${pkgs.bc}/bin/bc; }
 
         # Show the absolute path of a command executable.
         # shellcheck disable=SC2164
-        function wx() { ${pkgs.coreutils}/bin/readlink -f "''$(${pkgs.which}/bin/which "''${1}")"; }
+        function wx() { readlink -f "''$(${pkgs.which}/bin/which "''${1}")"; }
 
         # Get absolute path to python module.
         function wpymod() {
@@ -304,25 +304,25 @@ in
 
         # Resolve path and copy it to clipboard.
         function pcp() {
-            target=''$(${pkgs.coreutils}/bin/readlink -f "''${1:-.}")
-            ${pkgs.coreutils}/bin/echo -n "''${target}" | ${pkgs.xclip}/bin/xclip -selection c && ${pkgs.coreutils}/bin/echo "''${target}"
+            target=''$(readlink -f "''${1:-.}")
+            echo -n "''${target}" | ${pkgs.xclip}/bin/xclip -selection c && echo "''${target}"
         }
 
         # cat file and copy it to clipboard.
         function pcat() {
             if [ ''$# -ne 1 ]; then
-                ${pkgs.coreutils}/bin/echo "Usage: pcat [FILE]" >&2
+                echo "Usage: pcat [FILE]" >&2
                 return 1
             fi
             if [[ -f "''${1}" ]]; then
-                if [[ ''$(${pkgs.coreutils}/bin/stat -c%s "''${1}") -ge 1048576 ]]; then
-                    ${pkgs.coreutils}/bin/echo "Error: ''${1} exceeds maximum allowed size of 1 MiB"
+                if [[ ''$(stat -c%s "''${1}") -ge 1048576 ]]; then
+                    echo "Error: ''${1} exceeds maximum allowed size of 1 MiB"
                     return 1
                 else
-                    ${pkgs.coreutils}/bin/tee >(${pkgs.findutils}/bin/xargs ${pkgs.coreutils}/bin/echo -n | ${pkgs.xclip}/bin/xclip -selection c) < "''${1}"
+                    tee >(${pkgs.findutils}/bin/xargs echo -n | ${pkgs.xclip}/bin/xclip -selection c) < "''${1}"
                 fi
             else
-                ${pkgs.coreutils}/bin/echo "Error: ''${1} not found"
+                echo "Error: ''${1} not found"
                 return 1
             fi
         }
@@ -347,7 +347,7 @@ in
                     --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
             )
             file="''${result%%:*}"
-            linenumber=''$(${pkgs.coreutils}/bin/echo "''${result}" | ${pkgs.coreutils}/bin/cut -d: -f2)
+            linenumber=''$(echo "''${result}" | cut -d: -f2)
             if [[ -n "''${file}" ]]; then
                 ''${EDITOR} +"''${linenumber}" "''${file}"
             fi
