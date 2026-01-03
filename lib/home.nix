@@ -107,7 +107,7 @@ _: rec {
   /**
     Return whether the current config enables gpg.
   */
-  isGpgEnabled = isProgramEnabled "ghostty";
+  isGpgEnabled = isProgramEnabled "gpg";
 
   /**
     Return whether the current config enables neovim.
