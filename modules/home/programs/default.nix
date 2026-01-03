@@ -110,7 +110,6 @@ in
       # Encryption.
       age
       gnupg
-      pass
       sequoia-sq
 
       # Virtualization.
