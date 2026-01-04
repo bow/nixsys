@@ -32,6 +32,7 @@ in
     # Because NixOS's programs.thunar also adds to environment.systemPackages.
     environment.systemPackages = [
       pkgs.adwaita-icon-theme
+      pkgs.sshfs
     ];
 
     programs = {
