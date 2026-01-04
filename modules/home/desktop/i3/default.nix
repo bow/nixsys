@@ -11,6 +11,8 @@ let
 
   ghosttyEnabled = libcfg.isGhosttyEnabled config;
   ghosttyPackage = libcfg.getGhosttyPackage config;
+  pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
+  pipewireEnabled = libcfg.isPipewireEnabled config;
 
   theme =
     let
@@ -486,7 +488,15 @@ in
             # some modifications.
             "$mod+backslash" = "exec thunar";
 
-            # Audio + video controls.
+            # Video controls.
+            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
+            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
+
+            # System controls.
+            "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
+            "$mod+Shift+x" = "exec ${lock-sh}";
+          }
+          // lib.optionalAttrs pulseaudioEnabled {
             "XF86AudioRaiseVolume" =
               "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
             "XF86AudioLowerVolume" =
@@ -494,12 +504,16 @@ in
             "XF86AudioMute" =
               "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
             "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.alsa-utils}/bin/amixer set Capture toggle";
-            "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
-            "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
-
-            # System controls.
-            "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
-            "$mod+Shift+x" = "exec ${lock-sh}";
+          }
+          // lib.optionalAttrs pipewireEnabled {
+            "XF86AudioRaiseVolume" =
+              "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+";
+            "XF86AudioLowerVolume" =
+              "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+            "XF86AudioMute" =
+              "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            "XF86AudioMicMute" =
+              "exec --no-startup-id ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
           }
           // mkWorkspaceBindings cfg.workspaces
           // lib.optionalAttrs ghosttyEnabled {

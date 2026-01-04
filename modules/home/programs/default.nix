@@ -133,6 +133,7 @@ in
       openconnect
       pavucontrol
       protonmail-bridge
+      pwvucontrol
       seahorse
       solaar
       spotify

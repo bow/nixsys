@@ -75,6 +75,11 @@ _: rec {
   isPulseaudioEnabled = isOSAttrEnabled "pulseaudio";
 
   /**
+    Return whether the current config enables pulseaudio.
+  */
+  isPipewireEnabled = isOSAttrEnabled "pipewire";
+
+  /**
     Return whether the current config enables bluetooth.
   */
   isBluetoothEnabled = isOSAttrEnabled "bluetooth";
@@ -82,7 +87,7 @@ _: rec {
   /**
     Return whether the current config enables audio.
   */
-  isAudioEnabled = isPulseaudioEnabled;
+  isAudioEnabled = config: isPipewireEnabled config || isPulseaudioEnabled config;
 
   /**
     Return whether the current config enables the given program.

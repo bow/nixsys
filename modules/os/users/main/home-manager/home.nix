@@ -30,6 +30,7 @@ in
           docker.enable = lib.mkEnableOption "nixsys.home.os.docker";
           libvirtd.enable = lib.mkEnableOption "nixsys.home.os.libvirtd";
           pulseaudio.enable = lib.mkEnableOption "nixsys.home.os.pulseaudio";
+          pipewire.enable = lib.mkEnableOption "nixsys.home.os.pipewire";
         };
       };
     };
