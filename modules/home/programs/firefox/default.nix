@@ -311,6 +311,8 @@ in
             "general.smoothScroll.mouseWheel.duration.MaxMS" = 400;
             "general.autoScroll" = true;
             "layout.css.devPixelsPerPx" = cfg.dev-pixels-per-px;
+            # Enable dark theme by default.
+            "layout.css.prefers-color-scheme.content-override" = 0;
             "mousewheel.min_line_scroll_amount" = 50;
           };
         };
