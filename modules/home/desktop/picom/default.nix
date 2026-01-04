@@ -19,11 +19,6 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # FIXME: This should be systemctl --user import-environment DISPLAY XAUTHORITY somewhere.
-    systemd.user.services.picom = {
-      Service.Environment = [ "DISPLAY=:0" ];
-    };
-
     services.picom = {
       enable = true;
       backend = "xrender";

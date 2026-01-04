@@ -28,8 +28,10 @@ in
 
     systemd.user.services.blueman-applet = {
       Install.WantedBy = lib.mkForce [ "default.target" ];
-      # FIXME: This should be systemctl --user import-environment DISPLAY XAUTHORITY somewhere.
-      Service.Environment = [ "DISPLAY=:0" ];
+      Service = {
+        Restart = "on-failure";
+        RestartSec = 3;
+      };
       Unit.After = lib.mkForce [ "display-manager.service" ];
     };
   };

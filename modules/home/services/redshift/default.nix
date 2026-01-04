@@ -33,8 +33,6 @@ in
 
     systemd.user.services.redshift = {
       Install.WantedBy = lib.mkForce [ "default.target" ];
-      # FIXME: This should be systemctl --user import-environment DISPLAY XAUTHORITY somewhere.
-      Service.Environment = [ "DISPLAY=:0" ];
       Unit.After = lib.mkForce [ "display-manager.service" ];
     };
   };
