@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -15,7 +14,6 @@ in
 {
   options.nixsys.os.audio.pulseaudio = {
     enable = lib.mkEnableOption "nixsys.os.audio.pulseaudio";
-    package = lib.mkPackageOption pkgs "pulseaudioFull" { };
   };
 
   config = lib.mkIf cfg.enable {
