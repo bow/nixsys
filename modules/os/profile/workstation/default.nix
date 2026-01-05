@@ -36,12 +36,10 @@ in
       };
       bluetooth = enabled;
       boot.systemd = enabled;
+      keyboard.qmk = enabled;
       networking.networkmanager = enabled;
       touchpad = enabled;
-      udev.rulesets = {
-        qmk = enabled;
-        wake-on-device = enabled;
-      };
+      udev.rulesets.wake-on-device = enabled;
       users.main = {
         inherit (user)
           name
