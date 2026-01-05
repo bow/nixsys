@@ -286,8 +286,7 @@ in
       ];
       tools = [
         pkgs.unstable.postgresql
-        # FIXME: Revert back to unstable when it works again.
-        pkgs.sqlfluff
+        pkgs.unstable.sqlfluff
       ];
       extraConfig = {
         home.file.".psqlrc".text = ''
@@ -436,8 +435,7 @@ in
 
     sqlite = {
       tools = [
-        # FIXME: Revert back to unstable when it works again.
-        pkgs.sqlfluff
+        pkgs.unstable.sqlfluff
       ];
       extraConfig = {
         home.file.".sqliterc".text = ''
