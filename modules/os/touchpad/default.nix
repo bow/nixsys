@@ -4,10 +4,6 @@
   ...
 }:
 let
-  libcfg = lib.nixsys.os;
-
-  xorgEnabled = libcfg.isXorgEnabled config;
-
   cfg = config.nixsys.os.touchpad;
 in
 {
@@ -15,7 +11,7 @@ in
     enable = lib.mkEnableOption "nixsys.os.touchpad";
   };
 
-  config = lib.mkIf (cfg.enable && xorgEnabled) {
+  config = lib.mkIf cfg.enable {
     services.libinput = {
       enable = true;
       touchpad = {
