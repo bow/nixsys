@@ -10,6 +10,7 @@ let
   audioEnabled = libcfg.isAudioEnabled config;
   btrfsEnabled = libcfg.isBTRFSEnabled config;
   desktopEnabled = libcfg.isDesktopEnabled config;
+  pipewireEnabled = libcfg.isPipewireEnabled config;
   pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
 
   cfg = config.nixsys.home.profile.work;
@@ -71,6 +72,9 @@ in
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
         pavucontrol = enabled;
+      }
+      // lib.optionalAttrs (desktopEnabled && pipewireEnabled) {
+        pwvucontrol = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && btrfsEnabled) {
         btrfs-assistant = enabled;
