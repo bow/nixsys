@@ -85,6 +85,11 @@ _: rec {
   isBluetoothEnabled = isOSAttrEnabled "bluetooth";
 
   /**
+    Return whether the current config enables yubikey.
+  */
+  isYubikeyEnabled = isOSAttrEnabled "yubikey";
+
+  /**
     Return whether the current config enables audio.
   */
   isAudioEnabled = config: isPipewireEnabled config || isPulseaudioEnabled config;

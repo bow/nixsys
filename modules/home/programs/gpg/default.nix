@@ -10,6 +10,7 @@ let
   libcfg = lib.nixsys.home;
 
   shellBash = libcfg.isShellBash user;
+  yubikeyEnabled = libcfg.isYubikeyEnabled config;
 
   cfg = config.nixsys.home.programs.gpg;
 in
@@ -44,6 +45,10 @@ in
       inherit (cfg) package;
       mutableKeys = cfg.mutable-keys;
       mutableTrust = cfg.mutable-trust;
+
+      scdaemonSettings = lib.mkIf yubikeyEnabled {
+        disable-ccid = true;
+      };
     };
 
     programs.bash = lib.optionalAttrs cfg.enable-bash-integration {

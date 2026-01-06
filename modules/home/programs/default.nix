@@ -143,8 +143,6 @@ in
       todoist-electron
       veracrypt
       vlc
-      yubikey-personalization
-      yubioath-flutter
       ;
   };
 }

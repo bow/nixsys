@@ -31,6 +31,7 @@ in
           libvirtd.enable = lib.mkEnableOption "nixsys.home.os.libvirtd";
           pulseaudio.enable = lib.mkEnableOption "nixsys.home.os.pulseaudio";
           pipewire.enable = lib.mkEnableOption "nixsys.home.os.pipewire";
+          yubikey.enable = lib.mkEnableOption "nixsys.home.os.yubikey";
         };
       };
     };

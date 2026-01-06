@@ -66,8 +66,6 @@ in
         spotify = enabled;
         sxiv = enabled;
         todoist-electron = enabled;
-        yubikey-personalization = enabled;
-        yubioath-flutter = enabled;
         zathura = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {

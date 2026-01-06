@@ -71,6 +71,7 @@ in
             libvirtd.enable = config.nixsys.os.virtualization.host.libvirtd.enable;
             pulseaudio.enable = config.nixsys.os.audio.pulseaudio.enable;
             pipewire.enable = config.nixsys.os.audio.pipewire.enable;
+            yubikey.enable = config.nixsys.os.security.yubikey.enable;
           };
         };
       };
