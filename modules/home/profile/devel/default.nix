@@ -455,6 +455,7 @@ in
       pkgs.unstable.curlie
       pkgs.unstable.dos2unix
       pkgs.unstable.entr
+      pkgs.unstable.fx
       pkgs.unstable.glow
       pkgs.unstable.gnumake
       pkgs.unstable.gnupatch
