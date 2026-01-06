@@ -25,14 +25,5 @@ in
       inherit (cfg) package;
       enable = true;
     };
-
-    systemd.user.services.blueman-applet = {
-      Install.WantedBy = lib.mkForce [ "default.target" ];
-      Service = {
-        Restart = "on-failure";
-        RestartSec = 3;
-      };
-      Unit.After = lib.mkForce [ "display-manager.service" ];
-    };
   };
 }

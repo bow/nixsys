@@ -145,7 +145,7 @@ in
           format = "[·](dimmed white)[$symbol](dimmed white)";
           repeat = true;
           symbol = "/";
-          repeat_offset = 2;
+          repeat_offset = 3;
         };
 
         sudo = {

@@ -30,10 +30,5 @@ in
         night = 4000;
       };
     };
-
-    systemd.user.services.redshift = {
-      Install.WantedBy = lib.mkForce [ "default.target" ];
-      Unit.After = lib.mkForce [ "display-manager.service" ];
-    };
   };
 }
