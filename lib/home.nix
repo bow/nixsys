@@ -75,7 +75,7 @@ _: rec {
   isPulseaudioEnabled = isOSAttrEnabled "pulseaudio";
 
   /**
-    Return whether the current config enables pulseaudio.
+    Return whether the current config enables pipewire.
   */
   isPipewireEnabled = isOSAttrEnabled "pipewire";
 
