@@ -30,5 +30,14 @@ in
         "restart-i3" = "${homeCfg.desktop.i3.package}/bin/i3-msg restart";
       };
     };
+
+    systemd.services.autorandr = {
+      startLimitIntervalSec = lib.mkForce 12;
+      startLimitBurst = lib.mkForce 3;
+      serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = 4;
+      };
+    };
   };
 }
