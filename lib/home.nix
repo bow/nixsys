@@ -33,8 +33,9 @@ _: rec {
     Return whether the current config enables i3.
   */
   isI3Enabled = config: config.nixsys.home.desktop.i3.enable;
+
   /**
-    Return the package used by the ripgrep module.
+    Return the package used by the i3 module.
   */
   getI3Package = config: config.nixsys.home.desktop.i3.package;
 
