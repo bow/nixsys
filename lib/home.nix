@@ -116,6 +116,11 @@ _: rec {
   isGhosttyEnabled = isProgramEnabled "ghostty";
 
   /**
+    Return whether the current config enables git.
+  */
+  isGitEnabled = isProgramEnabled "git";
+
+  /**
     Return whether the current config enables gpg.
   */
   isGpgEnabled = isProgramEnabled "gpg";

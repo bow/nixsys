@@ -129,8 +129,8 @@ in
         };
       };
 
-      includes = [
-        { path = "~/.gitconfig-local"; }
+      includes = lib.mkAfter [
+        { path = "${user.home-directory}/.config/git/local"; }
       ];
 
       ignores = [
