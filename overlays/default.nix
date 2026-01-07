@@ -15,7 +15,7 @@ let
   };
 
   # Temporary fixes.
-  fixesUnstable = final: prev: { };
+  fixesUnstable = _final: _prev: { };
 in
 {
   additions = final: prev: {
