@@ -66,10 +66,10 @@ in
     };
 
     programs.bash = lib.optionalAttrs cfg.enable-bash-integration {
-      bashrcExtra = ''
-        alias dl='cd ${cfg.directories.download}'
-        alias dk='cd ${cfg.directories.desktop}'
-        alias dsk='cd ${cfg.directories.desktop}'
+      bashrcExtra = with config.home; ''
+        alias dl='cd ${homeDirectory}/${cfg.directories.download}'
+        alias dk='cd ${homeDirectory}/${cfg.directories.desktop}'
+        alias dsk='cd ${homeDirectory}/${cfg.directories.desktop}'
       '';
     };
   };
