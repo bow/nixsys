@@ -84,6 +84,7 @@ in
       iproute2
       ldns
       lshw
+      lsof
       ltrace
       mtr
       nmap

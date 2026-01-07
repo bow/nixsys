@@ -54,6 +54,7 @@ in
         iproute2 = enabled;
         ldns = enabled;
         lshw = enabled;
+        lsof = enabled;
         ltrace = enabled;
         mtr = enabled;
         nmap = enabled;
