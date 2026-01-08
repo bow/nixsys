@@ -94,6 +94,8 @@ in
                 # vim: set ft=gitconfig:
                 [user]
                     signingkey = ''${selected_key_id}!
+                [gpg]
+                    format = "openpgp"
                 [commit]
                     gpgSign = true
                 [tag]
