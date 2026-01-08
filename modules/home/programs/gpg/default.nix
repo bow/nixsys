@@ -91,10 +91,13 @@ in
                         selected_key_id="''${key_id}"
                         gitconfig=$(
                             ${pkgs.coreutils}/bin/cat <<EOF
+                # vim: set ft=gitconfig:
                 [user]
                     signingkey = ''${selected_key_id}!
                 [commit]
-                    gpgsign = true
+                    gpgSign = true
+                [tag]
+                    gpgSign = true
                 EOF
                         )
                         first=0
