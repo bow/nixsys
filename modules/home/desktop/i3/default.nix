@@ -308,6 +308,9 @@ in
     xsession = {
       enable = true;
       scriptPath = ".xinitrc";
+      initExtra = ''
+        setxkbmap -option "compose:menu"
+      '';
     };
     xsession.windowManager.i3 = {
       enable = true;
