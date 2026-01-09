@@ -197,13 +197,13 @@
               pkgs.ssh-to-age
 
               pkgs.deadnix
-              pkgs.nixfmt-rfc-style
+              pkgs.nixfmt
               pkgs.statix
             ];
           };
         }
       );
 
-      formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt-rfc-style);
+      formatter = forEachSupportedSystem ({ pkgs, ... }: pkgs.nixfmt);
     };
 }

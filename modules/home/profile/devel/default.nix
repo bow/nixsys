@@ -253,7 +253,7 @@ in
       ];
       tools = [
         pkgs.unstable.deadnix
-        pkgs.unstable.nixfmt-rfc-style
+        pkgs.unstable.nixfmt
         pkgs.unstable.statix
       ];
     };
