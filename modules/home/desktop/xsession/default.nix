@@ -31,10 +31,8 @@ in
       '';
     };
 
-    home.activation = lib.mkIf cfg.symlink-to-xinitrc {
-      mkXinitRC = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run ln -sf $VERBOSE_ARG $HOME/${xsession.scriptPath} $HOME/.xinitrc
-      '';
-    };
+    home.file.".xinitrc".text = ''
+      exec "$HOME/${xsession.scriptPath}"
+    '';
   };
 }
