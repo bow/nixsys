@@ -30,21 +30,33 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    services.displayManager.autoLogin = lib.mkIf autologinEnabled {
-      enable = true;
-      user = mainUser.name;
-    };
+    programs.seahorse.enable = true;
 
-    services.greetd = lib.mkIf cfg.enable {
-      enable = true;
-      settings = {
-        terminal.vt = lib.mkForce cfg.vt;
-        default_session = lib.mkIf xorgEnabled {
-          command = "${pkgs.xorg.xinit}/bin/startx";
-        };
-        initial_session = lib.mkIf (autologinEnabled && xorgEnabled) {
-          command = "${pkgs.xorg.xinit}/bin/startx";
-          user = mainUser.name;
+    security.pam.services.greetd.enableGnomeKeyring = true;
+
+    services = {
+
+      displayManager.autoLogin = lib.mkIf autologinEnabled {
+        enable = true;
+        user = mainUser.name;
+      };
+
+      gnome = {
+        gcr-ssh-agent.enable = lib.mkDefault false;
+        gnome-keyring.enable = lib.mkDefault true;
+      };
+
+      greetd = lib.mkIf cfg.enable {
+        enable = true;
+        settings = {
+          terminal.vt = lib.mkForce cfg.vt;
+          default_session = lib.mkIf xorgEnabled {
+            command = "${pkgs.xorg.xinit}/bin/startx";
+          };
+          initial_session = lib.mkIf (autologinEnabled && xorgEnabled) {
+            command = "${pkgs.xorg.xinit}/bin/startx";
+            user = mainUser.name;
+          };
         };
       };
     };

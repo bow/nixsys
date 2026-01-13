@@ -70,7 +70,6 @@ in
         obsidian = enabled;
         openconnect = enabled;
         protonmail-bridge = enabled;
-        seahorse = enabled;
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
