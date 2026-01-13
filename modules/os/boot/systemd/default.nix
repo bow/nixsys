@@ -10,7 +10,7 @@ let
 in
 {
   options.nixsys.os.boot.systemd = {
-    enable = lib.mkEnableOption "Enable boot module";
+    enable = lib.mkEnableOption "nixsys.os.boot.systemd";
 
     console-mode = lib.mkOption {
       description = "Sets boot.loader.systemd-boot.consoleMode";
@@ -18,38 +18,27 @@ in
       default = "auto";
     };
 
-    loader-timeout = lib.mkOption {
-      description = "Sets boot.loader.timeout";
-      type = types.nullOr types.ints.positive;
-      default = 1;
-    };
-
     num-entries-max = lib.mkOption {
       type = types.ints.positive;
       default = 30;
     };
 
-    quiet = lib.mkOption {
-      type = types.bool;
-      default = true;
+    timeout = lib.mkOption {
+      description = "Sets boot.loader.timeout";
+      type = types.nullOr types.ints.positive;
+      default = 1;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    boot = {
-      consoleLogLevel = if cfg.quiet then 0 else 4;
-      initrd.verbose = !cfg.quiet;
-      kernelParams = lib.optionals cfg.quiet [ "quiet" ];
-      loader = {
-        timeout = lib.mkForce cfg.loader-timeout;
-        systemd-boot = {
-          enable = true;
-          configurationLimit = cfg.num-entries-max;
-          consoleMode = cfg.console-mode;
-        };
-        efi.canTouchEfiVariables = true;
+    boot.loader = {
+      efi.canTouchEfiVariables = lib.mkDefault true;
+      timeout = lib.mkForce cfg.loader-timeout;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = cfg.num-entries-max;
+        consoleMode = cfg.console-mode;
       };
-      tmp.cleanOnBoot = true;
     };
   };
 }
