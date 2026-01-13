@@ -493,7 +493,7 @@ in
             "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
 
             # System controls.
-            "$mod+Shift+z" = "exec ${pkgs.systemd}/bin/systemctl suspend";
+            "$mod+Shift+z" = "exec /run/current-system/systemd/bin/systemctl suspend";
             "$mod+Shift+x" = "exec ${lock-sh}";
           }
           // lib.optionalAttrs pulseaudioEnabled {
