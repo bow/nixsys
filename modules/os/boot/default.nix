@@ -24,7 +24,7 @@ in
     boot = {
       consoleLogLevel = if cfg.quiet then 0 else 4;
       initrd.verbose = !cfg.quiet;
-      kernelParams = [ "nomodeset" ] ++ lib.optionals cfg.quiet [ "quiet" ];
+      kernelParams = lib.optionals cfg.quiet [ "quiet" ];
       tmp.cleanOnBoot = true;
     };
   };
