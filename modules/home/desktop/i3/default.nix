@@ -525,17 +525,7 @@ in
           // cfg.extra-keybindings;
         startup = [
           {
-            command = "${pkgs.systemd}/bin/systemctl --user restart polybar";
-            notification = false;
-            always = true;
-          }
-          {
             command = "${pkgs.feh}/bin/feh --bg-fill ${theme.desktop.bg}";
-            notification = false;
-            always = true;
-          }
-          {
-            command = "${pkgs.systemd}/bin/systemctl --user start picom";
             notification = false;
             always = true;
           }
