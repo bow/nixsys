@@ -50,7 +50,7 @@ in
           timezone
           ;
         trusted = true;
-        session.greetd = enabledWith {
+        session.greetd = {
           settings.auto-login = true;
         };
         home-manager = enabled;

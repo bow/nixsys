@@ -10,13 +10,16 @@ let
 
   autologinEnabled = lib.hasAttr "auto-login" cfg.settings && cfg.settings.auto-login;
   mainUser = libcfg.getMainUser config;
+  desktopEnabled = libcfg.isDesktopEnabled config;
   xorgEnabled = libcfg.isXorgEnabled config;
 
   cfg = mainUser.session.greetd;
 in
 {
   options.nixsys.os.users.main.session.greetd = {
-    enable = lib.mkEnableOption "nixsys.os.users.main.session.greetd";
+    enable = lib.mkEnableOption "nixsys.os.users.main.session.greetd" // {
+      default = desktopEnabled;
+    };
     vt = lib.mkOption {
       type = types.ints.positive;
       default = 7;
@@ -46,7 +49,7 @@ in
         gnome-keyring.enable = lib.mkDefault true;
       };
 
-      greetd = lib.mkIf cfg.enable {
+      greetd = {
         enable = true;
         settings = {
           terminal.vt = lib.mkForce cfg.vt;
