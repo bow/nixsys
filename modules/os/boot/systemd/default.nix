@@ -33,7 +33,7 @@ in
   config = lib.mkIf cfg.enable {
     boot.loader = {
       efi.canTouchEfiVariables = lib.mkDefault true;
-      timeout = lib.mkForce cfg.loader-timeout;
+      timeout = lib.mkForce cfg.timeout;
       systemd-boot = {
         enable = true;
         configurationLimit = cfg.num-entries-max;
