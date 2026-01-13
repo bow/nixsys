@@ -9,8 +9,8 @@ let
   cfg = config.nixsys.os.boot;
 in
 {
-  options.nixsys.os.boot.systemd = {
-    enable = lib.mkEnableOption "nixsys.os.boot.systemd" // {
+  options.nixsys.os.boot = {
+    enable = lib.mkEnableOption "nixsys.os.boot" // {
       default = config.nixsys.os.boot.systemd.enable;
     };
 
