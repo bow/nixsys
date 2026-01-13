@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   inputs,
   outputs,
   ...
@@ -30,7 +31,12 @@ in
   };
 
   config = lib.mkIf config.nixsys.os.enable {
-    environment.etc."nix/path/nixpkgs".source = inputs.nixpkgs;
+    environment = {
+      etc."nix/path/nixpkgs".source = inputs.nixpkgs;
+      systemPackages = [
+        pkgs.nvd
+      ];
+    };
 
     nix = {
       channel.enable = false;
