@@ -14,6 +14,11 @@ in
       default = config.nixsys.os.boot.systemd.enable;
     };
 
+    enable-systemd = lib.mkOption {
+      type = types.bool;
+      default = true;
+    };
+
     quiet = lib.mkOption {
       type = types.bool;
       default = true;
@@ -23,7 +28,10 @@ in
   config = lib.mkIf cfg.enable {
     boot = {
       consoleLogLevel = if cfg.quiet then 0 else 4;
-      initrd.verbose = !cfg.quiet;
+      initrd = {
+        systemd.enable = cfg.enable-systemd;
+        verbose = !cfg.quiet;
+      };
       kernelParams = lib.optionals cfg.quiet [ "quiet" ];
       tmp.cleanOnBoot = true;
     };
