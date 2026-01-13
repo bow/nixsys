@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (lib) types;
   libcfg = lib.nixsys.os;
 
   mainUserName = libcfg.getMainUserName config;
@@ -16,6 +17,10 @@ in
   options.nixsys.os.users.main.session.i3 = {
     enable = lib.mkEnableOption "nixsys.user.main.session.i3" // {
       default = config.nixsys.os.users.main.home-manager.desktop.i3.enable;
+    };
+    enable-autorandr-integration = lib.mkOption {
+      type = types.bool;
+      default = config.nixsys.os.display.autorandr.enable;
     };
   };
 
@@ -37,6 +42,10 @@ in
         windowManager.i3 = {
           enable = true;
         };
+      };
+
+      autorandr.hooks.postswitch = lib.mkIf cfg.enable-autorandr-integration {
+        "restart-i3" = "${homeCfg.desktop.i3.package}/bin/i3-msg restart";
       };
     };
 

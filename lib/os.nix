@@ -52,12 +52,7 @@ _: rec {
   /**
     Return whether the current config enables i3.
   */
-  isI3Enabled = config: config.nixsys.os.users.main.session.i3.enable;
-
-  /**
-    Return whether the current config enables Xorg.
-  */
-  isXorgEnabled = isI3Enabled;
+  isXorgEnabled = config: config.nixsys.os.users.main.session.xorg.enable;
 
   /**
     Return whether the current config enables a desktop.
