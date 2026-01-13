@@ -530,11 +530,6 @@ in
             always = true;
           }
           {
-            command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-            notification = false;
-            always = true;
-          }
-          {
             command = "${pkgs.feh}/bin/feh --bg-fill ${theme.desktop.bg}";
             notification = false;
             always = true;
