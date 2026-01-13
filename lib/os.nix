@@ -50,7 +50,7 @@ _: rec {
     builtins.hasAttr "btrfs" fs && fs.btrfs;
 
   /**
-    Return whether the current config enables i3.
+    Return whether the current config enables Xorg.
   */
   isXorgEnabled = config: config.nixsys.os.users.main.session.xorg.enable;
 
