@@ -61,6 +61,7 @@ in
         gparted = enabled;
         maim = enabled;
         obsidian = enabled;
+        slack = enabled;
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;

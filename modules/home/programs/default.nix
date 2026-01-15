@@ -135,6 +135,7 @@ in
       pavucontrol
       protonmail-bridge
       pwvucontrol
+      slack
       solaar
       spotify
       sxiv
