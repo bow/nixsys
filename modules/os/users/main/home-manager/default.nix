@@ -37,6 +37,8 @@ in
 
       useGlobalPkgs = true;
 
+      useUserPackages = true;
+
       backupFileExtension = "hm-backup";
 
       extraSpecialArgs = {
