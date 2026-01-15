@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   user,
   ...
 }:
@@ -51,6 +52,15 @@ in
   config = lib.mkIf cfg.enable {
     xdg = {
       enable = true;
+      portal = {
+        enable = true;
+        config = {
+          preferred.default = "gtk";
+        };
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+        ];
+      };
       userDirs = with config.home; {
         enable = true;
         createDirectories = cfg.create-directories;
