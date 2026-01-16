@@ -39,7 +39,6 @@ in
           dates = "daily";
           flags = [
             "--force"
-            "--all"
             "--volumes"
           ];
         };
