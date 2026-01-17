@@ -57,6 +57,7 @@ in
 
       # Media editors.
       pdftk
+      chafa
       imagemagick
 
       # Network clients.

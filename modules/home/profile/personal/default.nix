@@ -41,6 +41,7 @@ in
 
         # Media tools.
         pdftk = enabled;
+        chafa = enabled;
         imagemagick = enabled;
 
         # Network clients.
