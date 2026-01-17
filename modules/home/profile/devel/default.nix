@@ -342,7 +342,6 @@ in
       tools = [
         pkgs.unstable.basedpyright
         pkgs.unstable.mypy
-        pkgs.unstable.poetry
         pkgs.unstable.pyrefly
         pkgs.unstable.python3
         pkgs.unstable.ruff
