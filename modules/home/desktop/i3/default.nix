@@ -362,9 +362,9 @@ in
         };
         floating = { inherit modifier; };
         gaps = {
-          inner = 2;
-          outer = 23;
-          bottom = 22;
+          inner = 4;
+          outer = 1;
+          bottom = 1;
           top = 0;
         };
         modes = {
