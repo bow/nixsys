@@ -45,6 +45,7 @@ in
         NIXOS_CONFIG = "${cfg.flake-location}#${hostName}";
       };
       systemPackages = [
+        pkgs.nix-output-monitor
         pkgs.nvd
       ];
     };
