@@ -65,6 +65,7 @@ in
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
+        thunderbird-latest = enabled;
         todoist-electron = enabled;
         zathura = enabled;
       }
