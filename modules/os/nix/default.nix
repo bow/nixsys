@@ -87,6 +87,12 @@ in
       enable = true;
     };
 
+    programs.bash = {
+      shellAliases = {
+        nhance = "nix flake --update $NIXOS_FLAKE && nixos apply -y";
+      };
+    };
+
     services.nixos-cli = {
       enable = true;
       config = {
