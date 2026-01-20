@@ -89,7 +89,11 @@ in
 
     programs.bash = {
       shellAliases = {
-        nhance = "nix flake --update $NIXOS_FLAKE && nixos apply -y";
+        nhance =
+          if cfg.flake-location != null then
+            "nix flake update --flake ${cfg.flake-location} && nixos apply -y"
+          else
+            "nixos apply -y";
       };
     };
 
