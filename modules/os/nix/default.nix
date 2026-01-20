@@ -8,6 +8,10 @@
 }:
 let
   inherit (lib) types;
+  libcfg = lib.nixsys.os;
+
+  hostName = libcfg.getHostName config;
+  mainUserOrNull = libcfg.getMainUserOrNull config;
 
   cfg = config.nixsys.os.nix;
 in
@@ -28,11 +32,18 @@ in
       default = 1073741824; # 1 GiB
       description = "Sets nix.settings.min-free";
     };
+    flake-location = lib.mkOption {
+      type = types.nullOr types.str;
+      default = if mainUserOrNull != null then "${mainUserOrNull.home-directory}/.nixcfg" else null;
+    };
   };
 
   config = lib.mkIf config.nixsys.os.enable {
     environment = {
       etc."nix/path/nixpkgs".source = inputs.nixpkgs;
+      sessionVariables = lib.optionalAttrs (cfg.flake-location != null) {
+        NIXOS_CONFIG = "${cfg.flake-location}#${hostName}";
+      };
       systemPackages = [
         pkgs.nvd
       ];
@@ -72,6 +83,32 @@ in
 
     programs.nix-ld = {
       enable = true;
+    };
+
+    services.nixos-cli = {
+      enable = true;
+      config = {
+        use_nvd = true;
+        aliases = {
+          g = [ "generation" ];
+          gd = [
+            "generation"
+            "diff"
+          ];
+          gl = [
+            "generation"
+            "list"
+          ];
+          glt = [
+            "generation"
+            "list"
+            "--table"
+          ];
+        };
+        apply = {
+          use_nom = true;
+        };
+      };
     };
   };
 }
