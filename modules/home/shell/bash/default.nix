@@ -101,20 +101,21 @@ in
         clip = "${pkgs.findutils}/bin/xargs echo -n | ${pkgs.xclip}/bin/xclip -selection c";
       }
       // lib.optionalAttrs dockerEnabled {
+        dc = "docker-compose";
         # List container processes.
-        dps = "${pkgs.docker}/bin/docker ps";
+        dps = "docker ps";
         # List container processes including stopped containers.
-        dpsa = "${pkgs.docker}/bin/docker ps -a";
+        dpsa = "docker ps -a";
         # List images.
-        dlsi = "${pkgs.docker}/bin/docker images";
+        dlsi = "docker images";
         # List volumes.
-        dlsv = "${pkgs.docker}/bin/docker volume ls";
+        dlsv = "docker volume ls";
         # List networks.
-        dlsn = "${pkgs.docker}/bin/docker network ls";
+        dlsn = "docker network ls";
         # Run daemonized container, e.g., drnd base /bin/echo hello.
-        drnd = "${pkgs.docker}/bin/docker run -dP";
+        drnd = "docker run -dP";
         # Run interactive container, e.g. drni base /bin/bash.
-        drni = "${pkgs.docker}/bin/docker run --rm -itP";
+        drni = "docker run --rm -itP";
       };
 
       profileExtra = lib.mkAfter ''
@@ -354,8 +355,6 @@ in
         }
       ''
       + lib.optionalString dockerEnabled ''
-
-        alias dc='docker-compose'
 
         # Execute interactive container, e.g. dexi base /bin/bash
         function dexi() { ${pkgs.docker}/bin/docker exec -it "''${1}" "''${2:-/bin/bash}"; }
