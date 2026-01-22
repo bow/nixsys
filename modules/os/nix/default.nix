@@ -72,6 +72,7 @@ in
         ];
         max-jobs = "auto";
         min-free = cfg.gc-min-free-space;
+        use-xdg-base-directories = true;
       };
     };
 
