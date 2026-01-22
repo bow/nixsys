@@ -363,8 +363,8 @@ in
         floating = { inherit modifier; };
         gaps = {
           inner = 4;
-          outer = 1;
-          bottom = 1;
+          outer = 20;
+          bottom = 20;
           top = 0;
         };
         modes = {
