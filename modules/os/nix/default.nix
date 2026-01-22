@@ -19,17 +19,17 @@ in
   options.nixsys.os.nix = {
     download-buffer-size = lib.mkOption {
       type = types.ints.positive;
-      default = 134217728; # 128 MiB
+      default = 268435456; # 256 MiB
       description = "Sets nix.settings.download-buffer-size";
     };
     gc-max-retention-days = lib.mkOption {
       type = types.ints.positive;
-      default = 30;
+      default = 7;
       description = "The age of the oldest item to keep (in days) after garbage collection";
     };
     gc-min-free-space = lib.mkOption {
       type = types.ints.positive;
-      default = 1073741824; # 1 GiB
+      default = 17179869184; # 16 GiB
       description = "Sets nix.settings.min-free";
     };
     flake-location = lib.mkOption {
