@@ -11,6 +11,7 @@ let
   mainUserName = libcfg.getMainUserName config;
   homeCfg = libcfg.getHomeConfigOrNull config;
 
+  polybarCfg = config.nixsys.os.users.main.session.polybar;
   cfg = config.nixsys.os.users.main.session.i3;
 in
 {
@@ -45,7 +46,12 @@ in
       };
 
       autorandr.hooks.postswitch = lib.mkIf cfg.enable-autorandr-integration {
-        "restart-i3" = "${homeCfg.desktop.i3.package}/bin/i3-msg restart";
+        "restart-i3" =
+          # So that polybar is restarted after i3 is restarted.
+          if polybarCfg.enable then
+            "${homeCfg.desktop.i3.package}/bin/i3-msg restart && /run/current-system/systemd/bin/systemctl --user -M ${mainUserName}@ restart polybar"
+          else
+            "${homeCfg.desktop.i3.package}/bin/i3-msg restart";
       };
     };
 
