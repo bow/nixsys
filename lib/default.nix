@@ -82,9 +82,8 @@ rec {
       user,
       modules,
       hostname,
-      # FIXME: This is a workaround so that importing flakes can pass their flake-specific
-      #        attributes.
-      flake ? null
+      # FIXME: This is a workaround so that importing flakes can pass their own specialArgs.
+      specialArgs ? { },
     }:
     lib.nixosSystem {
       specialArgs = {
@@ -94,9 +93,9 @@ rec {
           lib
           user
           hostname
-          flake
           ;
-      };
+      }
+      // specialArgs;
       modules = [
         inputs.disko.nixosModules.disko
         inputs.sops-nix.nixosModules.sops
