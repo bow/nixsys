@@ -82,6 +82,9 @@ rec {
       user,
       modules,
       hostname,
+      # FIXME: This is a workaround so that importing flakes can pass their flake-specific
+      #        attributes.
+      flake ? null
     }:
     lib.nixosSystem {
       specialArgs = {
@@ -91,6 +94,7 @@ rec {
           lib
           user
           hostname
+          flake
           ;
       };
       modules = [
