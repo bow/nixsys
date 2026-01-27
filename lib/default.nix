@@ -7,7 +7,7 @@
 }:
 rec {
   # Publicly-exported functions.
-  pub = { inherit forEachSystem mkMachine mkHome; };
+  pub = { inherit forEachSystem mkMachine mkHome resolveFlakeRev; };
 
   /**
     Loop over the given systems to apply the given functions that use nixpkgs for that system.
@@ -235,6 +235,29 @@ rec {
   disabled = {
     enable = false;
   };
+
+  /**
+    Return a string to identify a flake revision.
+
+    # Example
+
+    ```nix
+    resolveFlakeRev flake
+    => "817c0ad"
+    ```
+
+    # Type
+
+    ```
+    resolveFlakeRev :: AttrSet -> String
+
+    # Arguments
+
+    **flake**
+    : The attribute set representing the whole flake. This is usually the `self` argument in `output`.
+    ```
+  */
+  resolveFlakeRev = flake: flake.dirtyShortRev or flake.shortRev or "unknown";
 
   /**
     Return a list of absolute string paths to all default.nix files that are children of the given directory.
