@@ -135,6 +135,7 @@ in
       openconnect
       pavucontrol
       protonmail-bridge
+      protonvpn-gui
       pwvucontrol
       slack
       solaar

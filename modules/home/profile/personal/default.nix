@@ -71,6 +71,7 @@ in
         obsidian = enabled;
         openconnect = enabled;
         protonmail-bridge = enabled;
+        protonvpn-gui = enabled;
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
