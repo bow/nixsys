@@ -278,6 +278,14 @@ in
       langservers = [
         pkgs.unstable.perlnavigator
       ];
+      tools = [
+        pkgs.unstable.perl
+      ];
+      extraConfig = {
+        home.file.".perlcriticrc".text = ''
+          [-Subroutines::ProhibitSubroutinePrototypes]
+        '';
+      };
     };
 
     postgresql = {
