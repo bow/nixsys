@@ -75,7 +75,6 @@ in
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;
-        synology-drive-client = enabled;
         thunderbird-latest = enabled;
         todoist-electron = enabled;
         veracrypt = enabled;

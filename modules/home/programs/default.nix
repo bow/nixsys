@@ -141,7 +141,6 @@ in
       solaar
       spotify
       sxiv
-      synology-drive-client
       thunderbird-latest
       todoist-electron
       veracrypt
