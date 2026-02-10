@@ -411,6 +411,9 @@ in
       langservers = [
         pkgs.unstable.ruby-lsp
       ];
+      tools = [
+        pkgs.unstable.ruby
+      ];
     };
 
     rust = {
