@@ -171,7 +171,8 @@ in
         pkgs.unstable.gofumpt
         # Because pkgs.unstable.ruby also provides 'bundle'
         (pkgs.symlinkJoin {
-          name = "gotools-modified";
+          inherit (pkgs.unstable.gotools) version;
+          pname = "gotools-modified";
           paths = [ pkgs.unstable.gotools ];
           postBuild = ''
             rm $out/bin/bundle
@@ -422,7 +423,8 @@ in
       tools = [
         # Because pkgs.unstable.gotools also provides 'bundle'
         (pkgs.symlinkJoin {
-          name = "ruby-modified";
+          inherit (pkgs.unstable.ruby) version;
+          pname = "ruby-modified";
           paths = [ pkgs.unstable.ruby ];
           postBuild = ''
             rm $out/bin/bundle
