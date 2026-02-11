@@ -169,7 +169,15 @@ in
         pkgs.unstable.delve
         pkgs.unstable.go
         pkgs.unstable.gofumpt
-        pkgs.unstable.gotools
+        # Because pkgs.unstable.ruby also provides 'bundle'
+        (pkgs.symlinkJoin {
+          name = "gotools-modified";
+          paths = [ pkgs.unstable.gotools ];
+          postBuild = ''
+            rm $out/bin/bundle
+            ln -s ${pkgs.unstable.gotools}/bin/bundle $out/bin/bundle-gotools
+          '';
+        })
       ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
@@ -412,6 +420,15 @@ in
         pkgs.unstable.ruby-lsp
       ];
       tools = [
+        # Because pkgs.unstable.gotools also provides 'bundle'
+        (pkgs.symlinkJoin {
+          name = "ruby-modified";
+          paths = [ pkgs.unstable.ruby ];
+          postBuild = ''
+            rm $out/bin/bundle
+            ln -s ${pkgs.unstable.ruby}/bin/bundle $out/bin/bundle-ruby
+          '';
+        })
         pkgs.unstable.ruby
       ];
     };
