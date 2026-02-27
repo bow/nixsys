@@ -327,6 +327,11 @@ in
                 return 1
             fi
         }
+
+        # copy the git commit hash
+        function psha() {
+            git rev-parse "''${1:-HEAD}" | tee >(${pkgs.findutils}/bin/xargs echo -n | ${pkgs.xclip}/bin/xclip -selection c)
+        }
       ''
       + lib.optionalString batEnabled ''
 
