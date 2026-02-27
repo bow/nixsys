@@ -197,6 +197,11 @@ function pcp() {
     echo -n "${target}" | xclip -selection c && echo "${target}"
 }
 
+# copy the git commit hash
+function psha() {
+    git rev-parse "${1:-HEAD}" | tee >(xargs echo -n | xclip -selection c)
+}
+
 # cat file and copy it to clipboard
 function pcat() {
     if [ $# -ne 1 ]; then
@@ -584,7 +589,7 @@ if has_exe eza; then
 fi
 
 export PAGER="less"
-export LESS="-F -X -g -S -w -z-2 -#.1 -M -R"
+export LESS="-F -X -g -S -w -#.1 -M -R"
 
 # load own copy of .git-completion.bash if it exists
 # shellcheck source=/dev/null
