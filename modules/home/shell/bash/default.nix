@@ -53,7 +53,7 @@ in
 
       sessionVariables = {
         PAGER = "less";
-        LESS = "-F -X -g -S -w -z-2 -#.1 -M -R";
+        LESS = "-F -X -g -S -w -#.1 -M -R";
         EDITOR = if neovimEnabled then "nvim" else "vi";
       }
       // lib.optionalAttrs zoxideEnabled { _ZO_ECHO = 1; };
