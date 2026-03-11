@@ -303,6 +303,8 @@ in
       ''
       + lib.optionalString xorgEnabled ''
 
+        ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "compose:menu"
+
         # Resolve path and copy it to clipboard.
         function pcp() {
             target=''$(readlink -f "''${1:-.}")
