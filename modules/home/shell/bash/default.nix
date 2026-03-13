@@ -364,21 +364,21 @@ in
       + lib.optionalString dockerEnabled ''
 
         # Execute interactive container, e.g. dexi base /bin/bash
-        function dexi() { ${pkgs.docker}/bin/docker exec -it "''${1}" "''${2:-/bin/bash}"; }
+        function dexi() { docker exec -it "''${1}" "''${2:-/bin/bash}"; }
 
         # Remove exited containers.
         # shellcheck disable=SC2046
-        function drm() { ${pkgs.docker}/bin/docker rm ''$(${pkgs.docker}/bin/docker ps -qf 'status=exited'); }
+        function drm() { docker rm ''$(docker ps -qf 'status=exited'); }
 
         # Remove dangling images.
         # shellcheck disable=SC2046
-        function drmi() { ${pkgs.docker}/bin/docker rmi ''$(${pkgs.docker}/bin/docker images -qf 'dangling=true'); }
+        function drmi() { docker rmi ''$(docker images -qf 'dangling=true'); }
 
         # Shell into running container.
-        function dsh() { ${pkgs.docker}/bin/docker exec -it "''$(${pkgs.docker}/bin/docker ps -aqf 'name=''${1}')" "''${2:-sh}"; }
+        function dsh() { docker exec -it "''$(docker ps -aqf 'name=''${1}')" "''${2:-sh}"; }
 
         # Dockerfile build, e.g. dbu tcnksm/test.
-        function dbu() { ${pkgs.docker}/bin/docker build -t="''$1" .; }
+        function dbu() { docker build -t="''$1" .; }
       '';
     };
   };
