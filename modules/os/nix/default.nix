@@ -70,6 +70,9 @@ in
           "flakes" # nix flakes.
           "nix-command" # new nix subcommands.
         ];
+        keep-derivations = true;
+        keep-env-derivations = true;
+        keep-outputs = true;
         max-jobs = "auto";
         min-free = cfg.gc-min-free-space;
         use-xdg-base-directories = true;
