@@ -38,6 +38,7 @@ in
       boot.systemd = enabled;
       keyboard.qmk = enabled;
       networking.networkmanager = enabled;
+      nix.gc-max-retention-days = 28;
       touchpad = enabled;
       udev.rulesets.wake-on-device = enabled;
       users.main = {
