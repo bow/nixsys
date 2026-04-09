@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/bow/dotfiles.git
+	branch = master
+	commit = ba6aebb4e8af62fad3b6ea5adaee281cd964d544
+	parent = f92086d37577ff906359142c1cf106421bd5c0d9
+	method = merge
+	cmdver = 0.4.9

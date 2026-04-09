@@ -1,0 +1,99 @@
+[user]
+    name = Wibowo Arindrarto
+    email = contact@arindrarto.dev
+[core]
+    autocrlf = input
+    safecrlf = warn
+    editor = nvim
+    excludesFile = ~/.config/git/ignore
+
+[branch]
+    sort = -committerdate
+[commit]
+    verbose = true
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    compactionHeuristic = true
+    mnemonicprefix = true
+    renames = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[init]
+    defaultBranch = master
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    autosquash = true
+    autoStash = true
+    updateRefs = true
+[tag]
+    sort = version:refname
+
+[color]
+    ui = auto
+
+[alias]
+    # list all alias
+    lsalias = "!git config -l | grep alias | cut -c 7-"
+
+    # basic shortcuts
+    co = checkout
+    ci = commit
+    cp = cherry-pick
+    st = status
+    br = branch
+    mg = merge
+    sh = stash
+    wt = worktree
+
+    # various commit displays
+    hist  = log --pretty=format:'%C(yellow)%h %Cblue%ad %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --date=short
+    histh = log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --abbrev-commit --
+    histf = log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%cn • %G?]' --decorate --numstat
+    histo = log --format=format:'%C(yellow)%h %Creset• %<(50,trunc)%s %C(cyan)[%cN • %G?] %C(blue)%cr%Creset %Cred%d' --graph -20 --branches --remotes --tags --date-order
+    histb = "!f() { git log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --abbrev-commit ${1:-$(git rev-parse --abbrev-ref HEAD)} --not ${2:-master}; }; f"
+    histp = log -u
+
+    # handy aliases
+    adp = add -p
+    ec = config --global -e
+    cia = commit --amend
+    ciam = commit --no-edit --amend
+    stn = status -uno
+    difc = diff --cached
+    diffc = diff --cached
+    punch = push -f
+    rsh = reset -q HEAD --
+    discard = checkout --
+    uncommit = reset --mixed HEAD~
+    syncr = fetch --all --prune
+    shi = stash --staged
+    shl = stash list
+    shs = "!f() { git stash show -p stash@{${1:-0}}; }; f"
+    shp = "!f() { git stash pop stash@{${1:-0}}; }; f"
+    shd = "!f() { git stash drop stash@{${1:-0}}; }; f"
+    ed = "!f() { git rebase -i HEAD~${1:-$(git rev-list --left-right --count $(git rev-parse --abbrev-ref $(git rev-parse --abbrev-ref HEAD)@{upstream})...$(git branch --show-current) | cut -f2)}; }; f"
+    brstat = for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(objectname:short)%(color:reset) %(color:blue)%(committerdate:short)%(color:reset) • %(color:red)(%(refname:short))%(color:reset) %(contents:subject) %(color:cyan)[%(authorname)]%(color:reset)'
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    linediff = "!f() { git diff --numstat --pretty $1 | awk '{ print $1+$2\"\t\"$0 }' | sort -nrk1,1; }; f"
+    clinediff = "!f() { git diff --numstat --pretty $1 | awk '{ if (!($1 ~ /0/ || $2 ~ /0/ || ($1+$2) ~ /0/)) print $1+$2\"\t\"$0 }' | sort -nrk1,1; }; f"
+
+    # assume / unassume changed
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    # show assumed files
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+    # unassume / assume all
+    unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+    assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+
+[include]
+    path = ~/.gitconfig-local

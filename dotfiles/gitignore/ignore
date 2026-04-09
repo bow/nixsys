@@ -1,0 +1,101 @@
+# Local dev
+.direnv
+.env
+.envrc-private
+.ignore
+.tool-versions
+sandbox
+
+# C/C++
+.ccls
+
+# Python
+*.pyc
+*.pyo
+*.egg-info
+.cache
+.coverage
+.coverage.*
+.eggs
+.dmypy.json
+.ipynb_checkpoints/
+.mypy_cache
+.tox
+.pytest_cache
+.python-version
+.venv
+htmlcov
+test.py
+venv
+
+# Rust
+tarpaulin-report.html
+
+# Java
+.settings/
+.project
+.classpath
+
+# JavaScript
+.node-version
+.nvmrc
+node_modules
+
+# R
+*.RData
+*.RHistory
+*.Rout
+
+# Ruby
+.rspec
+
+# Scala
+test.sc
+
+# Compiled
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# SQLite
+*.sqlite
+test.db
+
+# Vim
+*.swp
+*.swo
+
+# IntelliJ
+*.iml
+.idea
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS-specific
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Misc
+.luarc.json
+*.log
+.scannerwork
+.~lock.*
+*.sif
+.evans.toml
+.todo
+.bak
+.tdst.toml
+.vagrant
+.null-ls*
