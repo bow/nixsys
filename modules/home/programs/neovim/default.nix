@@ -34,6 +34,7 @@ in
       extraPackages = lib.mkIf cfg.extended [
         pkgs.unstable.tree-sitter
         pkgs.unstable.lua54Packages.jsregexp
+        pkgs.unstable.lua54Packages.tree-sitter-cli
       ];
     };
 
@@ -51,6 +52,7 @@ in
           };
         in
         ''
+          vim.opt.runtimepath:append("${pkgs.unstable.lua54Packages.tree-sitter-cli}")
           vim.opt.runtimepath:append("${pkgs.unstable.vimPlugins.nvim-treesitter}")
           vim.opt.runtimepath:append("${grammars-path}")
         '';
