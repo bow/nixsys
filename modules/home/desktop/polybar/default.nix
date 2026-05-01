@@ -121,7 +121,7 @@ in
     enable = lib.mkEnableOption "nixsys.home.desktop.polybar" // {
       default = i3Enabled;
     };
-    package = lib.mkPackageOption pkgs.unstable "polybar" { };
+    package = lib.mkPackageOption pkgs "polybar" { };
   };
 
   config = lib.mkIf cfg.enable {
