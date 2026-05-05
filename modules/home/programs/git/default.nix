@@ -135,6 +135,7 @@ in
 
       ignores = [
         # Local dev
+        ".claude"
         ".direnv"
         ".env"
         ".envrc-private"
