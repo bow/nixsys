@@ -66,8 +66,6 @@ in
       elinks
       wget
 
-      # Nix.
-
       # Ops.
       btop
       dmidecode
@@ -111,11 +109,13 @@ in
       xz
       zip
       zstd
-
       # Encryption.
       age
       gnupg
       sequoia-sq
+
+      # Presentation.
+      presenterm
 
       # Virtualization.
       distrobox

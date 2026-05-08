@@ -50,6 +50,9 @@ in
         nh = enabled;
         nxn = enabled;
 
+        # Presentation.
+        presenterm = enabled;
+
         # Security.
         gpg = enabled;
         pass = enabled;
