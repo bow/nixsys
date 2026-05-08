@@ -66,6 +66,8 @@ in
       elinks
       wget
 
+      # Nix.
+
       # Ops.
       btop
       dmidecode
@@ -147,5 +149,7 @@ in
       veracrypt
       vlc
       ;
+
+    inherit (pkgs.local) nxn;
   };
 }

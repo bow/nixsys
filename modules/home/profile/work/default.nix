@@ -48,6 +48,7 @@ in
 
         # Nix tools.
         nh = enabled;
+        nxn = enabled;
 
         # Security.
         gpg = enabled;
