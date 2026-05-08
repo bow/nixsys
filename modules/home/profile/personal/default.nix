@@ -43,6 +43,7 @@ in
         pdftk = enabled;
         chafa = enabled;
         imagemagick = enabled;
+        timg = enabled;
 
         # Network clients.
         aria2 = enabled;

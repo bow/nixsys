@@ -43,6 +43,9 @@ in
         aria2 = enabled;
         wget = enabled;
 
+        # Media tools.
+        timg = enabled;
+
         # Nix tools.
         nh = enabled;
 

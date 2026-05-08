@@ -55,10 +55,11 @@ in
       # Chat.
       weechat
 
-      # Media editors.
+      # Media tools.
       pdftk
       chafa
       imagemagick
+      timg
 
       # Network clients.
       aria2
