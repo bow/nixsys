@@ -67,12 +67,12 @@ let
         exit 0
         ;;
       -*)
-        echo "''${CMD}: unknown option: ''$1" >&2
+        echo "''${CMD}: error: unknown option: ''$1" >&2
         usage >&2
         exit 1
         ;;
       *)
-        echo "''${CMD}: unknown command: ''$1" >&2
+        echo "''${CMD}: error: unknown command: ''$1" >&2
         usage >&2
         exit 1
         ;;

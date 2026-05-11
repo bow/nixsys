@@ -69,7 +69,7 @@ in
           break
           ;;
         -*)
-          echo "''${CMD} ${name}: unknown option: ''$1" >&2
+          echo "''${CMD} ${name}: error: unknown option: ''$1" >&2
           ${usageFuncName} >&2
           exit 1
           ;;
@@ -81,7 +81,13 @@ in
       done
 
       if [[ -z "''${input}" ]]; then
-        echo "''${CMD} ${name}: <name-or-store-path> is required" >&2
+        echo "''${CMD} ${name}: error: required <name-or-store-path> is missing" >&2
+        ${usageFuncName} >&2
+        exit 1
+      fi
+
+      if [[ $# -gt 1 ]]; then
+        echo "''${CMD} ${name}: error: unexpected argument: ''$1" >&2
         ${usageFuncName} >&2
         exit 1
       fi
@@ -94,7 +100,7 @@ in
       else
         local which_path
         which_path=''$(${which}/bin/which "''${input}") || {
-          echo "''${CMD} ${name}: ''${input} not found in PATH" >&2
+          echo "''${CMD} ${name}: error: ''${input} not found in PATH" >&2
           exit 1
         }
         path=''$(${coreutils}/bin/readlink -f "''${which_path}")
