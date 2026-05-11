@@ -22,7 +22,7 @@ let
 
   fgColor = "#427b58";
   bgColor = "#f9f5d7";
-  maxGraphLines = "100";
+  maxGraphNodes = "100";
 in
 {
   inherit name description cmdFuncName;
@@ -38,7 +38,7 @@ in
       <name-or-store-path>  An executable name in PATH, a file path, or an absolute /nix/store/... path.
 
     Options:
-      -f, --force           Ignore the line limit (${maxGraphLines} lines) and render regardless of graph size.
+      -f, --force           Ignore the node limit (${maxGraphNodes}) and render regardless of graph size.
       -h, --help            Show this help message and exit.
 
     Examples:
@@ -112,8 +112,9 @@ in
       if (( !force )); then
         local line_count
         line_count=''$(printf '%s\n' "''${graph}" | ${coreutils}/bin/wc -l)
-        if (( line_count > ${maxGraphLines} )); then
-          echo "''${CMD} ${name}: graph has ''${line_count} lines (limit: ${maxGraphLines}). Use -f/--force to render anyway." >&2
+        node_count=$((line_count - 2))
+        if (( node_count > ${maxGraphNodes} )); then
+          echo "''${CMD} ${name}: error: graph has ''${node_count} nodes (limit: ${maxGraphNodes}). Use -f/--force to render anyway." >&2
           exit 1
         fi
       fi
