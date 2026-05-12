@@ -43,9 +43,9 @@ in
 
     Examples:
       ''${CMD} ${name} git
-      ''${CMD} ${name} /nix/store/wrxyd3k2f4bmh52pr5rpdjxxsm5r2qxm-gcc-15.2.0
+      ''${CMD} ${name} ${coreutils}
       ''${CMD} ${name} ./result/bin/tool
-      ''${CMD} ${name} --force git
+      ''${CMD} ${name} --force firefox
     EOF
     }
 
@@ -74,6 +74,11 @@ in
           exit 1
           ;;
         *)
+          if [[ ! -z "''${input}" ]]; then
+            echo "''${CMD} ${name}: error: unexpected argument: ''$1" >&2
+            ${usageFuncName} >&2
+            exit 1
+          fi
           input="''$1"
           shift
           ;;
