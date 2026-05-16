@@ -43,7 +43,7 @@ in
       etc."nix/path/nixpkgs".source = inputs.nixpkgs;
       sessionVariables = lib.optionalAttrs (cfg.flake-location != null) {
         NIXOS_FLAKE = "${cfg.flake-location}";
-        NIXOS_CONFIG = "${cfg.flake-location}#${hostName}";
+        NIXOS_CONFIG = ''"${cfg.flake-location}#${hostName}"'';
       };
       systemPackages = [
         pkgs.nix-output-monitor
