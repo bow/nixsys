@@ -12,10 +12,13 @@ in
 {
   options.nixsys.home.programs.git = {
     enable = lib.mkEnableOption "nixsys.home.programs.git";
+    subrepoPackage = lib.mkPackageOption pkgs "git-subrepo" { };
     inherit (options.programs.git) package;
   };
 
   config = lib.mkIf cfg.enable {
+
+    home.packages = lib.optionals (cfg.subrepoPackage != null) [ cfg.subrepoPackage ];
 
     programs.git = {
       enable = true;
