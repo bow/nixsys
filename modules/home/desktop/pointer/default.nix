@@ -34,10 +34,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    inherit (cfg) size;
-    name = cfg.themeName;
-    package = cfg.themePackage;
-    x11.enable = xorgEnabled;
-    gtk.enable = true;
+
+    home.pointerCursor = {
+      inherit (cfg) size;
+      name = cfg.themeName;
+      package = cfg.themePackage;
+      x11.enable = xorgEnabled;
+      gtk.enable = true;
+    };
   };
 }
