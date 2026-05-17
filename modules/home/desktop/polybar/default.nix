@@ -479,19 +479,25 @@ in
       script = ''
         #!/usr/bin/env sh
 
-        # Terminate already running bar instances
-        ${pkgs.coreutils}/bin/pkill polybar
-
-        # Wait until the processes have been shut down
-        while ${pkgs.procps}/bin/pgrep -x polybar >/dev/null; do sleep 1; done
+        # Terminate already running bar instances and force kill after grace period of 1s.
+        ${pkgs.coreutils}/bin/pkill -x polybar
+        sleep 1
+        ${pkgs.coreutils}/bin/pkill -9 -x polybar 2>/dev/null || true
 
         # Get network interface names that might be shown
         wireless_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/wl|wlan/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ')"
         eth_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/^( *[0-9]+: (en|eth))/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ' | ${pkgs.coreutils}/bin/head -n1)"
 
-        # Launch polybar in all connected monitors
-        for mon in ''$(${pkgs.xorg.xrandr}/bin/xrandr | ${pkgs.gnugrep}/bin/grep " connected " | ${pkgs.gawk}/bin/awk '{ print $1 }' | ${pkgs.coreutils}/bin/sort -r); do
-            POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
+        monitors=''$(${pkgs.xorg.xrandr}/bin/xrandr | ${pkgs.gnugrep}/bin/grep " connected " | ${pkgs.gawk}/bin/awk '{ print $1 }' | ${pkgs.coreutils}/bin/sort -r)
+        last_monitor=''$(echo "''${monitors}" | tail -n 1)
+
+        # Launch polybar in all connected monitors and keep the last one in foreground so systemd can see PID.
+        for mon in ''${monitors}; do
+            if [[ "''${mon}" == "''${last_monitor}" ]]; then
+              exec env POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
+            else
+              POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
+            fi
         done
       '';
     };
@@ -499,6 +505,11 @@ in
     systemd.user.services.polybar = {
       # NOTE: upower dependency is explicit in battery script.
       Unit.After = [ "upower.service" ];
+      Service = {
+        ExecStop = "${pkgs.coreutils}/bin/pkill -9 -x polybar";
+        TimeoutStopSec = 3;
+        KillMode = "mixed";
+      };
     };
   };
 }
