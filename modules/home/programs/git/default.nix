@@ -94,7 +94,7 @@ in
           histh = "log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --abbrev-commit --";
           histf = "log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%cn • %G?]' --decorate --numstat";
           histo = "log --format=format:'%C(yellow)%h %Creset• %<(50,trunc)%s %C(cyan)[%cN • %G?] %C(blue)%cr%Creset %Cred%d' --graph -20 --branches --remotes --tags --date-order";
-          histb = ''!f() { ${cfg.package}/bin/git log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --abbrev-commit ''${1:-''$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)} --not ''${2:-master}; }; f'';
+          histb = "!f() { ${cfg.package}/bin/git log --pretty=format:'%C(yellow)%h %Cblue%cr %Creset• %s%C(red)%d%Creset %C(cyan)[%an • %G?]%Creset' --graph --abbrev-commit \${1:-\$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)} --not \${2:-master}; }; f";
           histp = "log -u";
 
           # handy aliases
@@ -112,12 +112,12 @@ in
           syncr = "fetch --all --prune";
           shi = "stash --staged";
           shl = "stash list";
-          shs = ''!f() { ${cfg.package}/bin/git stash show -p stash@{''${1:-0}}; }; f'';
-          shp = ''!f() { ${cfg.package}/bin/git stash pop stash@{''${1:-0}}; }; f'';
-          shd = ''!f() { ${cfg.package}/bin/git stash drop stash@{''${1:-0}}; }; f'';
-          ed = ''!f() { ${cfg.package}/bin/git rebase -i HEAD~''${1:-''$(${cfg.package}/bin/git rev-list --left-right --count ''$(${cfg.package}/bin/git rev-parse --abbrev-ref ''$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)@{upstream})...''$(${cfg.package}/bin/git branch --show-current) | cut -f2)}; }; f'';
+          shs = "!f() { ${cfg.package}/bin/git stash show -p stash@{\${1:-0}}; }; f";
+          shp = "!f() { ${cfg.package}/bin/git stash pop stash@{\${1:-0}}; }; f";
+          shd = "!f() { ${cfg.package}/bin/git stash drop stash@{\${1:-0}}; }; f";
+          ed = "!f() { ${cfg.package}/bin/git rebase -i HEAD~\${1:-\$(${cfg.package}/bin/git rev-list --left-right --count \$(${cfg.package}/bin/git rev-parse --abbrev-ref \$(${cfg.package}/bin/git rev-parse --abbrev-ref HEAD)@{upstream})...\$(${cfg.package}/bin/git branch --show-current) | cut -f2)}; }; f";
           brstat = "for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(objectname:short)%(color:reset) %(color:blue)%(committerdate:short)%(color:reset) • %(color:red)(%(refname:short))%(color:reset) %(contents:subject) %(color:cyan)[%(authorname)]%(color:reset)'";
-          up = ''!${cfg.package}/bin/git pull --rebase --prune ''$@ && ${cfg.package}/bin/git submodule update --init --recursive'';
+          up = "!${cfg.package}/bin/git pull --rebase --prune \$@ && ${cfg.package}/bin/git submodule update --init --recursive";
           linediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ print $1+$2"\t"$0 }' | sort -nrk1,1; }; f'';
           clinediff = ''!f() { ${cfg.package}/bin/git diff --numstat --pretty ''${1} | ${pkgs.gawk}/bin/awk '{ if (!($1 ~ /0/ || $2 ~ /0/ || ($1+$2) ~ /0/)) print $1+$2"\t"$0 }' | sort -nrk1,1; }; f'';
 
