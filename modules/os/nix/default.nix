@@ -41,8 +41,11 @@ in
   config = lib.mkIf config.nixsys.os.enable {
     environment = {
       etc."nix/path/nixpkgs".source = inputs.nixpkgs;
-      sessionVariables = lib.optionalAttrs (cfg.flake-location != null) {
+      # Not sessionVariables, because that sets things in PAM and PAM thinks
+      # everything after the '#' separator below is a comment.
+      variables = lib.optionalAttrs (cfg.flake-location != null) {
         NIXOS_FLAKE = "${cfg.flake-location}";
+        NIXOS_CONFIG = "${cfg.flake-location}#${hostName}";
       };
       systemPackages = [
         pkgs.nix-output-monitor
