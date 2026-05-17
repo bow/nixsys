@@ -10,7 +10,7 @@ let
 
   xorgEnabled = libcfg.isXorgEnabled config;
 
-  cfg = config.nixsys.home.desktop.xsession;
+  cfg = config.nixsys.home.desktop.pointer;
 in
 {
   options.nixsys.home.desktop.pointer = {
