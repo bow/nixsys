@@ -27,7 +27,7 @@ in
     themePackage = lib.mkPackageOption pkgs "bibata-cursors" { };
 
     themeName = lib.mkOption {
-      types = types.str;
+      type = types.str;
       default = "Bibata-Modern-Classic";
       description = "Sets home.pointerCursor.name";
     };
