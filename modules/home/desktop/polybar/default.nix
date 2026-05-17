@@ -502,6 +502,14 @@ in
       '';
     };
 
+    xsession.windowManager.i3.config.startup = lib.optionals i3Enabled [
+      {
+        command = "systemctl --user restart polybar.service";
+        always = true;
+        notification = false;
+      }
+    ];
+
     systemd.user.services.polybar = {
       # NOTE: upower dependency is explicit in battery script.
       Unit.After = [ "upower.service" ];
