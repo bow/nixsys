@@ -233,7 +233,7 @@ in
         name = "adrien-olichon-RCAhiGJsUUE-unsplash";
         ext = "jpg";
         url = "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-        sha256 = "sha256-BbAWNMOggHet7muY+pdsiXR2RKPUOOAX3o/v83sgh/k=";
+        sha256 = "sha256-SWln+L1WdYWkIgtNsU3yu0SNYwT4eQRzqBXFOGVT2oo=";
       };
     };
 
