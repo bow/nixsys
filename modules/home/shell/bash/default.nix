@@ -220,7 +220,7 @@ in
                 *.xz)
                     ${pkgs.xz}/bin/unxz "''${1}" ;;
                 *.zip)
-                    ${pkgs.zip}/bin/unzip "''${1}" ;;
+                    ${pkgs.unzip}/bin/unzip "''${1}" ;;
                 *.zst | *.zstd)
                     ${pkgs.zstd}/bin/zst -d "''${1}" ;;
                 *)
