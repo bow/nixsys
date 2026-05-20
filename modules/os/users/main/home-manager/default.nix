@@ -64,8 +64,6 @@ in
         nixsys.home = removeAttrs cfg [ "enable" ] // {
           # Façade for system-level config.
           os = {
-            pulseaudio.enable = config.nixsys.os.audio.pulseaudio.enable;
-            pipewire.enable = config.nixsys.os.audio.pipewire.enable;
             yubikey.enable = config.nixsys.os.security.yubikey.enable;
           };
         };

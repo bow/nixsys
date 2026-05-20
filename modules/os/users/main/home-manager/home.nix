@@ -28,8 +28,6 @@ in
       # Make this a typed submodule to prevent this from becoming a random bag of stuff.
       type = types.submodule {
         options = {
-          pulseaudio.enable = lib.mkEnableOption "nixsys.home.os.pulseaudio";
-          pipewire.enable = lib.mkEnableOption "nixsys.home.os.pipewire";
           yubikey.enable = lib.mkEnableOption "nixsys.home.os.yubikey";
         };
       };

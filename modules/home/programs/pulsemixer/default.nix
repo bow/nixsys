@@ -2,12 +2,11 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
-  libcfg = lib.nixsys.home;
-
-  pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
+  pulseaudioEnabled = osConfig.nixsys.os.audio.pulseaudio.enable or false;
 
   cfg = config.nixsys.home.programs.pulsemixer;
 in

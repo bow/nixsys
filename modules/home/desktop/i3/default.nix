@@ -3,16 +3,18 @@
   pkgs,
   lib,
   user,
+  osConfig,
   ...
 }:
 let
   inherit (lib) types;
   libcfg = lib.nixsys.home;
 
+  pulseaudioEnabled = osConfig.nixsys.os.audio.pulseaudio.enable or false;
+  pipewireEnabled = osConfig.nixsys.os.audio.pipewire.enable or false;
+
   ghosttyEnabled = libcfg.isGhosttyEnabled config;
   ghosttyPackage = libcfg.getGhosttyPackage config;
-  pulseaudioEnabled = libcfg.isPulseaudioEnabled config;
-  pipewireEnabled = libcfg.isPipewireEnabled config;
 
   theme =
     let

@@ -61,24 +61,9 @@ _: rec {
     builtins.hasAttr attrName osAttrs && osAttrs.${attrName}.enable;
 
   /**
-    Return whether the current config enables pulseaudio.
-  */
-  isPulseaudioEnabled = isOSAttrEnabled "pulseaudio";
-
-  /**
-    Return whether the current config enables pipewire.
-  */
-  isPipewireEnabled = isOSAttrEnabled "pipewire";
-
-  /**
     Return whether the current config enables yubikey.
   */
   isYubikeyEnabled = isOSAttrEnabled "yubikey";
-
-  /**
-    Return whether the current config enables audio.
-  */
-  isAudioEnabled = config: isPipewireEnabled config || isPulseaudioEnabled config;
 
   /**
     Return whether the current config enables the given program.
