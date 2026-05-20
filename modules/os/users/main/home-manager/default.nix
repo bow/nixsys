@@ -7,9 +7,6 @@
 }:
 let
   inherit (lib) types;
-  libcfg = lib.nixsys.os;
-
-  btrfsEnabled = libcfg.isBTRFSEnabled config;
 
   cfgMainUser = config.nixsys.os.users.main;
   cfg = cfgMainUser.home-manager;
@@ -67,7 +64,6 @@ in
         nixsys.home = removeAttrs cfg [ "enable" ] // {
           # Façade for system-level config.
           os = {
-            btrfs.enable = btrfsEnabled;
             docker.enable = config.nixsys.os.virtualization.host.docker.enable;
             libvirtd.enable = config.nixsys.os.virtualization.host.libvirtd.enable;
             pulseaudio.enable = config.nixsys.os.audio.pulseaudio.enable;

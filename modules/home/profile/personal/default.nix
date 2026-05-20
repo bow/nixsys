@@ -1,14 +1,16 @@
 {
   config,
   lib,
+  osConfig,
   ...
 }:
 let
   inherit (lib.nixsys) enabled;
   libcfg = lib.nixsys.home;
 
+  btrfsEnabled = osConfig.boot.supportedFilesystems.btrfs or false;
+
   audioEnabled = libcfg.isAudioEnabled config;
-  btrfsEnabled = libcfg.isBTRFSEnabled config;
   desktopEnabled = libcfg.isDesktopEnabled config;
   pipewireEnabled = libcfg.isPipewireEnabled config;
   pulseaudioEnabled = libcfg.isPulseaudioEnabled config;

@@ -61,11 +61,6 @@ _: rec {
     builtins.hasAttr attrName osAttrs && osAttrs.${attrName}.enable;
 
   /**
-    Return whether the current config enables btrfs.
-  */
-  isBTRFSEnabled = isOSAttrEnabled "btrfs";
-
-  /**
     Return whether the current config enables docker.
   */
   isDockerEnabled = isOSAttrEnabled "docker";
