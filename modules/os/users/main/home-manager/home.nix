@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  osConfig,
   outputs,
   user,
   asStandalone ? true,
@@ -8,6 +9,8 @@
 }:
 let
   inherit (lib) types;
+
+  libvirtdEnabled = osConfig.nixsys.os.virtualization.host.libvirtd.enable or false;
 
   cfg = config.nixsys.home;
 in
@@ -25,7 +28,6 @@ in
       # Make this a typed submodule to prevent this from becoming a random bag of stuff.
       type = types.submodule {
         options = {
-          libvirtd.enable = lib.mkEnableOption "nixsys.home.os.libvirtd";
           pulseaudio.enable = lib.mkEnableOption "nixsys.home.os.pulseaudio";
           pipewire.enable = lib.mkEnableOption "nixsys.home.os.pipewire";
           yubikey.enable = lib.mkEnableOption "nixsys.home.os.yubikey";
@@ -43,7 +45,7 @@ in
       sessionVariables = cfg.session-variables;
 
       # FIXME: Find out where to best put this.
-      file.".config/libvirt/qemu.conf" = lib.mkIf config.nixsys.home.os.libvirtd.enable {
+      file.".config/libvirt/qemu.conf" = lib.mkIf libvirtdEnabled {
         text = ''
           nvram = [
             "/run/libvirt/nix-ovmf/edk2-aarch64-code.fd:/run/libvirt/nix-ovmf/edk2-arm-vars.fd",
