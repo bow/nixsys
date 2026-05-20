@@ -25,7 +25,6 @@ in
       # Make this a typed submodule to prevent this from becoming a random bag of stuff.
       type = types.submodule {
         options = {
-          docker.enable = lib.mkEnableOption "nixsys.home.os.docker";
           libvirtd.enable = lib.mkEnableOption "nixsys.home.os.libvirtd";
           pulseaudio.enable = lib.mkEnableOption "nixsys.home.os.pulseaudio";
           pipewire.enable = lib.mkEnableOption "nixsys.home.os.pipewire";

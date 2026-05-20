@@ -3,13 +3,15 @@
   lib,
   pkgs,
   user,
+  osConfig,
   ...
 }:
 let
   libcfg = lib.nixsys.home;
 
+  dockerEnabled = osConfig.nixsys.os.virtualization.host.docker.enable or false;
+
   batEnabled = libcfg.isBatEnabled config;
-  dockerEnabled = libcfg.isDockerEnabled config;
   fzfEnabled = libcfg.isFzfEnabled config;
   fzfPackage = libcfg.getFzfPackage config;
   gpgEnabled = libcfg.isGpgEnabled config;

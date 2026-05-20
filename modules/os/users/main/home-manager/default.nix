@@ -64,7 +64,6 @@ in
         nixsys.home = removeAttrs cfg [ "enable" ] // {
           # Façade for system-level config.
           os = {
-            docker.enable = config.nixsys.os.virtualization.host.docker.enable;
             libvirtd.enable = config.nixsys.os.virtualization.host.libvirtd.enable;
             pulseaudio.enable = config.nixsys.os.audio.pulseaudio.enable;
             pipewire.enable = config.nixsys.os.audio.pipewire.enable;
