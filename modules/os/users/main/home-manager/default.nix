@@ -51,7 +51,6 @@ in
             shell
             ;
         };
-        asStandalone = false;
       };
 
       users.${cfgMainUser.name} = {

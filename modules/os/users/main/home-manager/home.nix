@@ -1,10 +1,9 @@
 {
   config,
   lib,
-  osConfig,
   outputs,
   user,
-  asStandalone ? true,
+  osConfig,
   ...
 }:
 let
@@ -41,7 +40,7 @@ in
       };
     };
 
-    nixpkgs = lib.mkIf asStandalone {
+    nixpkgs = lib.mkIf (osConfig == null) {
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications

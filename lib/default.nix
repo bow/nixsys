@@ -145,7 +145,6 @@ rec {
           home-directory = "/home/${user.name}";
         }
         // user;
-        asStandalone = true;
         lib = pkgs.lib.extend (
           _final: _prev: {
             inherit (inputs.home-manager.lib) hm;
