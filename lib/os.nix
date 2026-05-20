@@ -40,16 +40,6 @@ _: rec {
   isMainUserDefined = config: config.nixsys.os.users.main.name != null;
 
   /**
-    Return whether the current config enables the BTRFS filesystem.
-  */
-  isBTRFSEnabled =
-    config:
-    let
-      fs = config.boot.supportedFilesystems;
-    in
-    builtins.hasAttr "btrfs" fs && fs.btrfs;
-
-  /**
     Return whether the current config enables Xorg.
   */
   isXorgEnabled = config: config.nixsys.os.users.main.session.xorg.enable;

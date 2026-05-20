@@ -7,8 +7,8 @@
 }:
 let
   inherit (lib.nixsys) enabled enabledWith;
-  libcfg = lib.nixsys.os;
-  btrfsEnabled = libcfg.isBTRFSEnabled config;
+
+  btrfsEnabled = config.boot.supportedFilesystems.btrfs or false;
 
   cfg = config.nixsys.os.profile.workstation;
 in
