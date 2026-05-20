@@ -67,7 +67,6 @@ in
         nixsys.home = removeAttrs cfg [ "enable" ] // {
           # Façade for system-level config.
           os = {
-            bluetooth.enable = config.nixsys.os.bluetooth.enable;
             btrfs.enable = btrfsEnabled;
             docker.enable = config.nixsys.os.virtualization.host.docker.enable;
             libvirtd.enable = config.nixsys.os.virtualization.host.libvirtd.enable;

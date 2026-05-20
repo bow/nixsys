@@ -2,22 +2,23 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
-  libcfg = lib.nixsys.home;
-
-  bluetoothEnabled = libcfg.isBluetoothEnabled config;
+  bluetoothEnabled = osConfig.nixsys.os.bluetooth.enable or false;
 
   cfg = config.nixsys.home.services.mpris-proxy;
 in
 {
   options.nixsys.home.services.mpris-proxy = {
-    enable = lib.mkEnableOption "nixsys.home.services.mpris-proxy";
+    enable = lib.mkEnableOption "nixsys.home.services.mpris-proxy" // {
+      default = bluetoothEnabled;
+    };
     package = lib.mkPackageOption pkgs "bluez" { };
   };
 
-  config = lib.mkIf (cfg.enable && bluetoothEnabled) {
+  config = lib.mkIf cfg.enable {
     services.mpris-proxy = {
       inherit (cfg) package;
       enable = true;

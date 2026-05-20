@@ -2,12 +2,14 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
   libcfg = lib.nixsys.home;
 
-  bluetoothEnabled = libcfg.isBluetoothEnabled config;
+  bluetoothEnabled = osConfig.nixsys.os.bluetooth.enable or false;
+
   desktopEnabled = libcfg.isDesktopEnabled config;
 
   cfg = config.nixsys.home.services.blueman-applet;

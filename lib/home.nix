@@ -81,11 +81,6 @@ _: rec {
   isPipewireEnabled = isOSAttrEnabled "pipewire";
 
   /**
-    Return whether the current config enables bluetooth.
-  */
-  isBluetoothEnabled = isOSAttrEnabled "bluetooth";
-
-  /**
     Return whether the current config enables yubikey.
   */
   isYubikeyEnabled = isOSAttrEnabled "yubikey";

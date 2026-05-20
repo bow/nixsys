@@ -25,7 +25,6 @@ in
       # Make this a typed submodule to prevent this from becoming a random bag of stuff.
       type = types.submodule {
         options = {
-          bluetooth.enable = lib.mkEnableOption "nixsys.home.os.bluetooth";
           btrfs.enable = lib.mkEnableOption "nixsys.home.os.btrfs";
           docker.enable = lib.mkEnableOption "nixsys.home.os.docker";
           libvirtd.enable = lib.mkEnableOption "nixsys.home.os.libvirtd";

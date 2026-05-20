@@ -2,13 +2,13 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 let
   inherit (lib) types;
-  libcfg = lib.nixsys.home;
 
-  bluetoothEnabled = libcfg.isBluetoothEnabled config;
+  bluetoothEnabled = osConfig.nixsys.os.bluetooth.enable or false;
 
   cfg = config.nixsys.home.programs.bluetui;
 in
