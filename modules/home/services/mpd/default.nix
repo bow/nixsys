@@ -37,7 +37,7 @@ in
 
     playlist-directory = lib.mkOption {
       type = types.str;
-      default = "${config.xdg.userDirs.music}";
+      default = "${config.xdg.userDirs.music}/.playlists";
     };
 
     state-file = lib.mkOption {
