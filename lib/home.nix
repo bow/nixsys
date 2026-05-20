@@ -50,22 +50,6 @@ _: rec {
   isDesktopEnabled = isXorgEnabled;
 
   /**
-    Return whether a os-set attribute with the given name exists
-    and is set to enabled.
-  */
-  isOSAttrEnabled =
-    attrName: config:
-    let
-      osAttrs = config.nixsys.home.os;
-    in
-    builtins.hasAttr attrName osAttrs && osAttrs.${attrName}.enable;
-
-  /**
-    Return whether the current config enables yubikey.
-  */
-  isYubikeyEnabled = isOSAttrEnabled "yubikey";
-
-  /**
     Return whether the current config enables the given program.
   */
   isProgramEnabled = progName: config: config.nixsys.home.programs.${progName}.enable;

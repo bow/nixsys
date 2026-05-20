@@ -61,12 +61,7 @@ in
         ];
 
         # Everything in cfg that is not `enable` is meant for nixsys.home.
-        nixsys.home = removeAttrs cfg [ "enable" ] // {
-          # Façade for system-level config.
-          os = {
-            yubikey.enable = config.nixsys.os.security.yubikey.enable;
-          };
-        };
+        nixsys.home = removeAttrs cfg [ "enable" ];
       };
     };
   };

@@ -16,21 +16,9 @@ let
 in
 {
   options.nixsys.home = {
-
     session-variables = lib.mkOption {
       type = types.attrs;
       default = { };
-    };
-
-    os = lib.mkOption {
-      default = { };
-      description = "Container for copied os-level settings";
-      # Make this a typed submodule to prevent this from becoming a random bag of stuff.
-      type = types.submodule {
-        options = {
-          yubikey.enable = lib.mkEnableOption "nixsys.home.os.yubikey";
-        };
-      };
     };
   };
 

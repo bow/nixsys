@@ -3,15 +3,17 @@
   lib,
   pkgs,
   user,
+  osConfig,
   ...
 }:
 let
   inherit (lib) types;
   libcfg = lib.nixsys.home;
 
+  yubikeyEnabled = osConfig.nixsys.os.security.yubikey.enable or false;
+
   gitEnabled = libcfg.isGitEnabled config;
   shellBash = libcfg.isShellBash user;
-  yubikeyEnabled = libcfg.isYubikeyEnabled config;
 
   cfg = config.nixsys.home.programs.gpg;
 in
