@@ -28,6 +28,19 @@ in
       Defaults    env_keep+=SSH_AUTH_SOCK
     '';
 
+    system.activationScripts =
+      let
+        mainUser = config.nixsys.os.users.main;
+        persistDir = "/persist";
+      in
+      lib.optionalAttrs (mainUser != null) {
+        createUserDataDir = ''
+          mkdir -p ${persistDir}/${mainUser.name}
+          chown ${mainUser.name}:root ${persistDir}/${mainUser.name}
+          chmod 0700 ${persistDir}/${mainUser.name}
+        '';
+      };
+
     nixsys.os = enabledWith {
       inherit hostname;
       audio.pipewire = enabled;
