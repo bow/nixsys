@@ -124,4 +124,9 @@ symlinkJoin {
     script
     bash-completion
   ];
+  meta = {
+    description = "Wrapper for various nix-related commands in combination with others";
+    platforms = lib.platforms.linux;
+    mainProgram = name;
+  };
 }
