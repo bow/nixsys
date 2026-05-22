@@ -56,9 +56,6 @@ in
         nh = enabled;
         nxn = enabled;
 
-        # Presentation.
-        presenterm = enabled;
-
         # Security.
         gpg = enabled;
         pass = enabled;
@@ -67,7 +64,6 @@ in
       }
       // lib.optionalAttrs desktopEnabled {
         arandr = enabled;
-        dropbox = enabled;
         evince = enabled;
         firefox = enabled;
         geany = enabled;
