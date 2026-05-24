@@ -21,46 +21,53 @@ in
     extended = lib.mkOption { type = types.bool; };
   };
 
-  config = lib.mkIf cfg.enable {
-    programs.neovim = {
-      inherit (cfg) package;
-      enable = true;
-      viAlias = false;
-      vimAlias = false;
-      vimdiffAlias = true;
-      plugins = [
-        pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars
-      ];
-      extraPackages = lib.mkIf cfg.extended [
-        pkgs.unstable.tree-sitter
-        pkgs.unstable.lua54Packages.jsregexp
-        pkgs.unstable.lua54Packages.tree-sitter-cli
-      ];
-    };
+  config =
+    let
+      luaPackages = pkgs.unstable.lua54Packages;
 
-    xdg.configFile = lib.mkIf cfg.extended {
-      "nvim" = {
-        source = ../../../../dotfiles/nvim;
-        recursive = true;
-      };
-      "nvim/lua/config/local.lua" = {
-        text =
-        let
-          grammars-path = pkgs.symlinkJoin {
-            name = "nvim-treesitter-grammars";
-            paths = pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-          };
-        in
-        ''
-          vim.opt.runtimepath:append("${pkgs.unstable.lua54Packages.tree-sitter-cli}")
-          vim.opt.runtimepath:append("${pkgs.unstable.vimPlugins.nvim-treesitter}")
-          vim.opt.runtimepath:append("${grammars-path}")
-        '';
-      };
-    };
+      inherit (luaPackages) jsregexp tree-sitter-cli;
+      inherit (pkgs.unstable) tree-sitter;
 
-    home.sessionVariables = lib.mkIf cfg.as-default-editor {
-      EDITOR = lib.mkForce "nvim";
+      tree-sitter-plugins-all = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+    in
+    lib.mkIf cfg.enable {
+      programs.neovim = {
+        inherit (cfg) package;
+        enable = true;
+        viAlias = false;
+        vimAlias = false;
+        vimdiffAlias = true;
+        plugins = [ tree-sitter-plugins-all ];
+        extraPackages = lib.mkIf cfg.extended [
+          jsregexp
+          tree-sitter
+          tree-sitter-cli
+        ];
+      };
+
+      xdg.configFile = lib.mkIf cfg.extended {
+        "nvim" = {
+          source = ../../../../dotfiles/nvim;
+          recursive = true;
+        };
+        "nvim/lua/config/local.lua" = {
+          text =
+            let
+              tree-sitter-grammars-path = pkgs.symlinkJoin {
+                name = "nvim-treesitter-grammars";
+                paths = tree-sitter-plugins-all.dependencies;
+              };
+            in
+            ''
+              vim.opt.runtimepath:append("${tree-sitter-cli}")
+              vim.opt.runtimepath:append("${tree-sitter-plugins-all}")
+              vim.opt.runtimepath:append("${tree-sitter-grammars-path}")
+            '';
+        };
+      };
+
+      home.sessionVariables = lib.mkIf cfg.as-default-editor {
+        EDITOR = lib.mkForce "nvim";
+      };
     };
-  };
 }
