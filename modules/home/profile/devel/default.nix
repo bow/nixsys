@@ -427,6 +427,7 @@ in
       pkgs.unstable.buf
       pkgs.unstable.cloc
       pkgs.unstable.curlie
+      pkgs.unstable.dive
       pkgs.unstable.dos2unix
       pkgs.unstable.entr
       pkgs.unstable.fx
