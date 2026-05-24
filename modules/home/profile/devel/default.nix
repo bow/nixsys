@@ -383,9 +383,6 @@ in
     };
 
     rust = {
-      tools = [
-        pkgs.unstable.rustup
-      ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
           # Cargo config.
