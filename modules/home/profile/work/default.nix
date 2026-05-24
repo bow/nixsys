@@ -84,7 +84,7 @@ in
         pwvucontrol = enabled;
       }
       // lib.optionalAttrs (desktopEnabled && btrfsEnabled) {
-        btrfs-assistant = enabled;
+        snapper-gui = enabled;
       };
 
       services = {
