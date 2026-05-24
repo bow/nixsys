@@ -130,7 +130,6 @@ in
 
       # Desktop.
       arandr
-      btrfs-assistant
       dbeaver-bin
       dropbox
       evince
@@ -145,6 +144,7 @@ in
       protonvpn-gui
       pwvucontrol
       slack
+      snapper-gui
       solaar
       spotify
       sxiv
