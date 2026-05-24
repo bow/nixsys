@@ -139,7 +139,6 @@ in
       gparted
       maim
       nomacs
-      obsidian
       openconnect
       pavucontrol
       protonmail-bridge

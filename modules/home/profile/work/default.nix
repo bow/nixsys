@@ -69,7 +69,6 @@ in
         google-chrome = enabled;
         gparted = enabled;
         maim = enabled;
-        obsidian = enabled;
         slack = enabled;
         solaar = enabled;
         spotify = enabled;

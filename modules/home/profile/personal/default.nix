@@ -75,7 +75,6 @@ in
         gparted = enabled;
         maim = enabled;
         nomacs = enabled;
-        obsidian = enabled;
         openconnect = enabled;
         protonmail-bridge = enabled;
         protonvpn-gui = enabled;
