@@ -31,6 +31,8 @@
         pkgs.p7zip
         pkgs.readline
         pkgs.ripgrep
+        pkgs.rsync
+        pkgs.strace
         pkgs.unzip
         pkgs.xz
         pkgs.zip

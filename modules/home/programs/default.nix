@@ -65,6 +65,7 @@ in
       # Network clients.
       aria2
       elinks
+      rsync
       wget
 
       # Ops.

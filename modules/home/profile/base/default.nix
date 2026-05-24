@@ -61,6 +61,7 @@ in
         ntfs3g = enabled;
         pciutils = enabled;
         pv = enabled;
+        rsync = enabled;
         socat = enabled;
         strace = enabled;
         sysstat = enabled;
