@@ -58,6 +58,7 @@ in
       # Media tools.
       pdftk
       chafa
+      graphviz
       imagemagick
       timg
 
@@ -118,10 +119,14 @@ in
       presenterm
 
       # Virtualization.
+      bubblewrap
       distrobox
       nerdctl
       packer
       virt-viewer
+
+      # Writing.
+      texliveFull
 
       # Desktop.
       arandr

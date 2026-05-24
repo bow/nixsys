@@ -44,6 +44,7 @@ in
         # Media tools.
         pdftk = enabled;
         chafa = enabled;
+        graphviz = enabled;
         imagemagick = enabled;
         timg = enabled;
 
@@ -61,6 +62,9 @@ in
         pass = enabled;
         pwgen = enabled;
         sequoia-sq = enabled;
+
+        # Writing tools.
+        texliveFull = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
         arandr = enabled;

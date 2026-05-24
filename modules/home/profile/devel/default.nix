@@ -63,13 +63,6 @@ in
       ];
     };
 
-    bazel = {
-      tools = [
-        pkgs.unstable.bazel
-        pkgs.unstable.starlark-rust
-      ];
-    };
-
     c = {
       langservers = [
         pkgs.unstable.ccls
@@ -167,7 +160,6 @@ in
       ];
       tools = [
         pkgs.unstable.delve
-        pkgs.unstable.go
         pkgs.unstable.gofumpt
         # Because pkgs.unstable.ruby also provides 'bundle'
         (pkgs.symlinkJoin {
@@ -199,9 +191,6 @@ in
       langservers = [
         pkgs.unstable.dot-language-server
       ];
-      tools = [
-        pkgs.graphviz
-      ];
     };
 
     haskell = {
@@ -223,18 +212,6 @@ in
       ];
     };
 
-    javascript = {
-      tools = [
-        pkgs.unstable.nodejs
-      ];
-    };
-
-    just = {
-      tools = [
-        pkgs.unstable.just
-      ];
-    };
-
     lua = {
       langservers = [
         pkgs.unstable.lua-language-server
@@ -247,9 +224,6 @@ in
     latex = {
       langservers = [
         pkgs.unstable.texlab
-      ];
-      tools = [
-        pkgs.unstable.texliveFull
       ];
     };
 
@@ -284,9 +258,6 @@ in
       langservers = [
         pkgs.unstable.perlnavigator
       ];
-      tools = [
-        pkgs.unstable.perl
-      ];
       extraConfig = {
         home.file.".perlcriticrc".text = ''
           [-Subroutines::ProhibitSubroutinePrototypes]
@@ -299,7 +270,6 @@ in
         pkgs.unstable.postgres-language-server
       ];
       tools = [
-        pkgs.unstable.postgresql
         pkgs.unstable.sqlfluff
       ];
       extraConfig = {
@@ -342,22 +312,15 @@ in
       };
     };
 
-    protobuff = {
-      tools = [
-        pkgs.unstable.buf
-      ];
-    };
-
     python = {
       langservers = [
-        pkgs.unstable.python313Packages.pyls-isort
-        pkgs.unstable.python313Packages.python-lsp-server
+        pkgs.unstable.python314Packages.pyls-isort
+        pkgs.unstable.python314Packages.python-lsp-server
       ];
       tools = [
         pkgs.unstable.basedpyright
         pkgs.unstable.mypy
         pkgs.unstable.pyrefly
-        pkgs.unstable.python3
         pkgs.unstable.ruff
       ];
       extraConfig = {
@@ -417,19 +380,6 @@ in
       langservers = [
         pkgs.unstable.ruby-lsp
       ];
-      tools = [
-        # Because pkgs.unstable.gotools also provides 'bundle'
-        (pkgs.symlinkJoin {
-          inherit (pkgs.unstable.ruby) version;
-          pname = "ruby-modified";
-          paths = [ pkgs.unstable.ruby ];
-          postBuild = ''
-            rm $out/bin/bundle
-            ln -s ${pkgs.unstable.ruby}/bin/bundle $out/bin/bundle-ruby
-          '';
-        })
-        pkgs.unstable.ruby
-      ];
     };
 
     rust = {
@@ -477,7 +427,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.unstable.bubblewrap
+      pkgs.unstable.buf
       pkgs.unstable.cloc
       pkgs.unstable.curlie
       pkgs.unstable.dos2unix
@@ -487,6 +437,7 @@ in
       pkgs.unstable.gnumake
       pkgs.unstable.gnupatch
       pkgs.unstable.grpcurl
+      pkgs.unstable.just
       pkgs.unstable.minify
       pkgs.unstable.wrk
       pkgs.unstable.xan
@@ -505,6 +456,7 @@ in
       zoxide = enabled;
 
       # Virtualization.
+      bubblewrap = enabled;
       distrobox = enabled;
       nerdctl = enabled;
       packer = enabled;
