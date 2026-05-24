@@ -87,8 +87,6 @@ in
         mv = "mv -i";
         # rm, interactive.
         rm = "rm -i";
-        # terraform.
-        tf = "${pkgs.terraform}/bin/terraform";
         # eza.
         z = "${pkgs.eza}/bin/eza";
         # eza list view.

@@ -211,9 +211,6 @@ in
     };
 
     terraform = {
-      tools = [
-        pkgs.unstable.terraform
-      ];
       langservers = [
         pkgs.unstable.terraform-ls
         pkgs.unstable.terraform-lsp
