@@ -480,6 +480,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
+      pkgs.unstable.bubblewrap
       pkgs.unstable.cloc
       pkgs.unstable.curlie
       pkgs.unstable.dos2unix
