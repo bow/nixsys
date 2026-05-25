@@ -245,6 +245,7 @@ in
 
         # Set file open handler.
         function open() { ${pkgs.handlr-regex}/bin/handlr open "''${1:-.}"; }
+        function o() { open "$@"; }
 
         # Calculator.
         function calc() { echo "''$*" | ${pkgs.bc}/bin/bc; }
