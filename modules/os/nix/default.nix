@@ -40,7 +40,6 @@ in
 
   config = lib.mkIf config.nixsys.os.enable {
     environment = {
-      defaultPackages = [ ];
       etc."nix/path/nixpkgs".source = inputs.nixpkgs;
       # Not sessionVariables, because that sets things in PAM and PAM thinks
       # everything after the '#' separator below is a comment.

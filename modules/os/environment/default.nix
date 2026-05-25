@@ -14,6 +14,8 @@
         "/share/applications"
         "/share/xdg-desktop-portal"
       ];
+      defaultPackages = [ ];
+
       systemPackages = [
         pkgs.coreutils-full
         pkgs.findutils
