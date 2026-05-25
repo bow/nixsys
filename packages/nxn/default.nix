@@ -11,6 +11,7 @@ let
   version = "0.1.0";
 
   subcmds = [
+    (callPackage ./subcmds/init-flake.nix { })
     (callPackage ./subcmds/show-deps.nix { })
   ];
 
