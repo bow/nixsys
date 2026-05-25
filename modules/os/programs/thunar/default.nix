@@ -7,24 +7,16 @@
   ...
 }:
 let
-  inherit (lib) types;
-  libcfg = lib.nixsys.os;
-
-  xorgEnabled = libcfg.isXorgEnabled config;
+  xorgEnabled = lib.nixsys.os.isXorgEnabled config;
 
   cfg = config.nixsys.os.programs.thunar;
 in
 {
   options.nixsys.os.programs.thunar = {
-    enable = lib.mkEnableOption "nixsys.home.programs.thunar" // {
+    enable = lib.mkEnableOption "nixsys.os.programs.thunar" // {
       default = xorgEnabled;
     };
     package = lib.mkPackageOption pkgs [ "xfce" "thunar" ] { };
-    # FIXME: Expose this cleanly in systems/ or profiles/.
-    with-dropbox-plugin = lib.mkOption {
-      type = types.bool;
-      default = false;
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -41,8 +33,7 @@ in
         plugins = [
           pkgs.xfce.thunar-archive-plugin
           pkgs.xfce.thunar-volman
-        ]
-        ++ lib.optionals cfg.with-dropbox-plugin [ pkgs.xfce.thunar-dropbox-plugin ];
+        ];
       };
       xfconf.enable = true;
     };
