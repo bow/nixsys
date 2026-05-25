@@ -65,7 +65,7 @@ in
         ];
       in
       lib.mkIf cfg.default-browser {
-        enable = true;
+        enable = lib.mkDefault true;
         defaultApplications = builtins.listToAttrs (
           builtins.map (name: {
             inherit name;

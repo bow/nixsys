@@ -64,7 +64,7 @@ in
           mimeType = mimeTypes;
         };
         mimeApps = {
-          enable = true;
+          enable = lib.mkDefault true;
           defaultApplications = builtins.listToAttrs (
             builtins.map (name: {
               inherit name;
