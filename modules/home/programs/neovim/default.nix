@@ -28,7 +28,7 @@ in
       inherit (luaPackages) jsregexp tree-sitter-cli;
       inherit (pkgs.unstable) tree-sitter;
 
-      tree-sitter-plugins-all = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+      tree-sitter-plugins-all = pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars;
     in
     lib.mkIf cfg.enable {
       programs.neovim = {
