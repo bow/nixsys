@@ -18,10 +18,10 @@ let
 
   theme =
     let
-      mkWallpaperDrv =
+      mkRemoteWallpaperDrv =
         wallpaper:
         pkgs.stdenvNoCC.mkDerivation {
-          pname = "${wallpaper.name}";
+          pname = "${wallpaper.name}-remote";
           version = "0.0.0";
 
           src = pkgs.fetchurl {
@@ -30,7 +30,7 @@ let
             url = "${wallpaper.url}";
           };
 
-          unpackPhase = "true";
+          dontUnpack = true;
 
           buildPhase = ''
             mkdir -p $out
@@ -39,14 +39,43 @@ let
           '';
         };
 
-      wallpaper = mkWallpaperDrv {
-        inherit (cfg.wallpaper)
-          name
-          ext
-          url
-          sha256
-          ;
-      };
+      mkLocalWallpaperDrv =
+        wallpaper:
+        pkgs.stdenvNoCC.mkDerivation {
+          pname = "${wallpaper.name}-local";
+          version = "0.0.0";
+
+          src = wallpaper.file;
+
+          dontUnpack = true;
+
+          buildPhase = ''
+            mkdir -p $out
+            cp $src $out/original
+            ${pkgs.imagemagick}/bin/magick $src -blur 0x8 $out/blurred
+          '';
+        };
+
+      wallpaper =
+        if cfg.wallpaper-remote != null && cfg.wallpaper-local == null then
+          mkRemoteWallpaperDrv {
+            inherit (cfg.wallpaper)
+              name
+              url
+              sha256
+              ;
+          }
+        else if cfg.wallpaper-remote == null && cfg.wallpaper-local != null then
+          mkLocalWallpaperDrv {
+            inherit (cfg.wallpaper-local)
+              name
+              file
+              ;
+          }
+        else if cfg.wallpaper-remote == null && cfg.wallpaper-local == null then
+          throw "nixsys.home.desktop.i3: exactly one of wallpaper-remote or wallpaper-local must be set (both unset)"
+        else
+          throw "nixsys.home.desktop.i3: exactly one of wallpaper-remote or wallpaper-local must be set (both set)";
     in
     {
       desktop = {
@@ -222,20 +251,31 @@ in
 
     package = lib.mkPackageOption pkgs "i3" { };
 
-    wallpaper = lib.mkOption {
-      type = types.submodule {
-        options = {
-          name = lib.mkOption { type = types.str; };
-          ext = lib.mkOption { type = types.str; };
-          url = lib.mkOption { type = types.str; };
-          sha256 = lib.mkOption { type = types.str; };
-        };
-      };
+    wallpaper-remote = lib.mkOption {
+      type = types.nullOr (
+        types.submodule {
+          options = {
+            name = lib.mkOption { type = types.str; };
+            url = lib.mkOption { type = types.str; };
+            sha256 = lib.mkOption { type = types.str; };
+          };
+        }
+      );
+      default = null;
+    };
+
+    wallpaper-local = lib.mkOption {
+      type = types.nullOr (
+        types.submodule {
+          options = {
+            name = lib.mkOption { type = types.str; };
+            file = lib.mkOption { type = types.path; };
+          };
+        }
+      );
       default = {
         name = "adrien-olichon-RCAhiGJsUUE-unsplash";
-        ext = "jpg";
-        url = "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-        sha256 = "sha256-SWln+L1WdYWkIgtNsU3yu0SNYwT4eQRzqBXFOGVT2oo=";
+        file = ./adrien-olichon-RCAhiGJsUUE-unsplash.jpg;
       };
     };
 
