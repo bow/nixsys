@@ -246,7 +246,11 @@ in
     mod-key = lib.mkOption {
       description = "Mod key for i3";
       type = types.str;
-      default = "Mod4";
+      default =
+        let
+          asQemuGuest = osConfig.virtualisation.qemu.guestAgent.enable or false;
+        in
+        if asQemuGuest then "Mod1" else "Mod4";
     };
 
     package = lib.mkPackageOption pkgs "i3" { };
