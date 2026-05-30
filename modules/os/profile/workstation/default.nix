@@ -31,13 +31,13 @@ in
     system.activationScripts =
       let
         mainUser = config.nixsys.os.users.main;
-        persistDir = "/persist";
+        dir = config.nixsys.os.machine-data-dir;
       in
       lib.optionalAttrs (mainUser != null) {
         createUserDataDir = ''
-          mkdir -p ${persistDir}/${mainUser.name}
-          chown ${mainUser.name}:root ${persistDir}/${mainUser.name}
-          chmod 0700 ${persistDir}/${mainUser.name}
+          mkdir -p ${dir}/${mainUser.name}
+          chown ${mainUser.name}:root ${dir}/${mainUser.name}
+          chmod 0700 ${dir}/${mainUser.name}
         '';
       };
 

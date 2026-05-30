@@ -23,11 +23,6 @@ in
       type = types.bool;
       default = false;
     };
-    machine-data-dir = lib.mkOption {
-      description = "Path to the data directory to snapshot";
-      type = types.str;
-      default = "/persist";
-    };
   };
 
   config = lib.mkIf cfg.enable-home-snapshots {
@@ -62,7 +57,7 @@ in
         }
         // lib.optionalAttrs cfg.enable-machine-data-dir-snapshots {
           machine-data-dir = {
-            SUBVOLUME = cfg.machine-data-dir;
+            SUBVOLUME = config.nixsys.os.machine-data-dir;
             FSTYPE = "btrfs";
             SPACE_LIMIT = 0.3;
             FREE_LIMIT = 0.25;
