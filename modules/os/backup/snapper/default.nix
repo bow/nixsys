@@ -18,10 +18,15 @@ in
       type = types.bool;
       default = false;
     };
-    enable-persist-snapshots = lib.mkOption {
-      description = "Whether to enable regular /persist snapshots or not";
+    enable-machine-data-dir-snapshots = lib.mkOption {
+      description = "Whether to enable regular machine data directory snapshots or not";
       type = types.bool;
       default = false;
+    };
+    machine-data-dir = lib.mkOption {
+      description = "Path to the data directory to snapshot";
+      type = types.str;
+      default = "/persist";
     };
   };
 
@@ -55,9 +60,9 @@ in
             EMPTY_PRE_POST_MIN_AGE = 3600;
           };
         }
-        // lib.optionalAttrs cfg.enable-persist-snapshots {
-          persist = {
-            SUBVOLUME = "/persist";
+        // lib.optionalAttrs cfg.enable-machine-data-dir-snapshots {
+          machine-data-dir = {
+            SUBVOLUME = cfg.machine-data-dir;
             FSTYPE = "btrfs";
             SPACE_LIMIT = 0.3;
             FREE_LIMIT = 0.25;

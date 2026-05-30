@@ -56,7 +56,7 @@ in
       audio.pipewire = enabled;
       backup.snapper = {
         enable-home-snapshots = btrfsEnabled;
-        enable-persist-snapshots = btrfsEnabled;
+        enable-machine-data-dir-snapshots = btrfsEnabled;
       };
       bluetooth = enabled;
       boot.systemd = enabled;
