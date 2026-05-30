@@ -41,6 +41,16 @@ in
         '';
       };
 
+    virtualisation.vmVariant = lib.mkDefault {
+      cores = 8;
+      diskSize = 80 * 1024;
+      memorySize = 8192 + 4096;
+      resolution = {
+        x = 1600;
+        y = 1900;
+      };
+    };
+
     nixsys.os = enabledWith {
       inherit hostname;
       audio.pipewire = enabled;

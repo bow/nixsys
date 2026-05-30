@@ -13,8 +13,5 @@ in
     profile.workstation = enabled;
     servers.ssh = enabled;
     users.main.home-manager.desktop.i3 = enabled;
-    virtualization.guest = enabledWith {
-      type = "qemu";
-    };
   };
 }
