@@ -53,15 +53,15 @@
                       "noatime"
                     ];
                   };
-                  "/persist" = {
-                    mountpoint = "/persist";
+                  "/kp" = {
+                    mountpoint = "/kp";
                     mountOptions = [
-                      "subvol=persist"
+                      "subvol=kp"
                       "compress=zstd"
                       "noatime"
                     ];
                   };
-                  "/persist/.snapshots" = { };
+                  "/kp/.snapshots" = { };
                   "/log" = {
                     mountpoint = "/var/log";
                     mountOptions = [
