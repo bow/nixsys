@@ -23,7 +23,6 @@ in
 
   config = {
     home = {
-      stateVersion = "25.05";
       username = user.name;
       homeDirectory = user.home-directory;
       preferXdgDirectories = true;
