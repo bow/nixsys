@@ -9,6 +9,8 @@ in
 {
   home-manager.users.${user.name}.imports = [ ./home.nix ];
 
+  system.stateVersion = "25.05";
+
   nixsys.os = enabledWith {
     profile.workstation = enabled;
     servers.ssh = enabled;
