@@ -15,6 +15,9 @@ in
 {
   options.nixsys.os.profile.workstation = {
     enable = lib.mkEnableOption "nixsys.os.profile.workstation";
+    create-user-data-dir = lib.mkEnableOption "nixsys.os.profile.workstation" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -33,10 +36,9 @@ in
         mainUser = config.nixsys.os.users.main;
         dir = config.nixsys.os.machine-data-dir;
       in
-      lib.optionalAttrs (mainUser != null) {
+      lib.optionalAttrs (mainUser != null && cfg.create-user-data-dir) {
         createUserDataDir = ''
-          test -d ${dir} || exit 0
-          mkdir ${dir}/${mainUser.name}
+          mkdir -p ${dir}/${mainUser.name}
           chown ${mainUser.name}:root ${dir}/${mainUser.name}
           chmod 0700 ${dir}/${mainUser.name}
         '';
