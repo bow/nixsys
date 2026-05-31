@@ -494,7 +494,7 @@ in
         # Launch polybar in all connected monitors and keep the last one in foreground so systemd can see PID.
         for mon in ''${monitors}; do
             if [[ "''${mon}" == "''${last_monitor}" ]]; then
-              exec env POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
+              exec ${pkgs.coreutils}/bin/env POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
             else
               POLYBAR_MONITOR="''${mon}" POLYBAR_WIRELESS_IF="''${wireless_if}" POLYBAR_ETH_IF="''${eth_if}" polybar top &
             fi
