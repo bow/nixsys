@@ -480,16 +480,16 @@ in
         #!/usr/bin/env sh
 
         # Terminate already running bar instances and force kill after grace period of 1s.
-        ${pkgs.coreutils}/bin/pkill -x polybar
+        ${pkgs.procps}/bin/pkill -x polybar
         sleep 1
-        ${pkgs.coreutils}/bin/pkill -9 -x polybar 2>/dev/null || true
+        ${pkgs.procps}/bin/pkill -9 -x polybar 2>/dev/null || true
 
         # Get network interface names that might be shown
         wireless_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/wl|wlan/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ')"
         eth_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/^( *[0-9]+: (en|eth))/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ' | ${pkgs.coreutils}/bin/head -n1)"
 
         monitors=''$(${pkgs.xorg.xrandr}/bin/xrandr | ${pkgs.gnugrep}/bin/grep " connected " | ${pkgs.gawk}/bin/awk '{ print $1 }' | ${pkgs.coreutils}/bin/sort -r)
-        last_monitor=''$(echo "''${monitors}" | tail -n 1)
+        last_monitor=''$(echo "''${monitors}" | ${pkgs.coreutils}/bin/tail -n 1)
 
         # Launch polybar in all connected monitors and keep the last one in foreground so systemd can see PID.
         for mon in ''${monitors}; do
@@ -514,7 +514,7 @@ in
       # NOTE: upower dependency is explicit in battery script.
       Unit.After = [ "upower.service" ];
       Service = {
-        ExecStop = "${pkgs.coreutils}/bin/pkill -9 -x polybar";
+        ExecStop = "${pkgs.procps}/bin/pkill -9 -x polybar";
         TimeoutStopSec = 3;
         KillMode = "mixed";
       };
