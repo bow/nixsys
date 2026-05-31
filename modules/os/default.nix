@@ -14,7 +14,7 @@ in
     machine-data-dir = lib.mkOption {
       description = "Path to directory containing machine data to be snapshotted";
       type = types.str;
-      default = "/persist";
+      default = "/kp";
     };
   };
 }
