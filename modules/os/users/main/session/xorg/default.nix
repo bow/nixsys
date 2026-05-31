@@ -37,21 +37,19 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    environment.etc."X11/xorg.conf.d/99-dpms.conf".text =
-      if cfg.enable-dpms then
-        ''
-          Section "ServerFlags"
-              Option "StandbyTime" "${toString cfg.standby-time}"
-              Option "SuspendTime" "${toString cfg.suspend-time}"
-              Option "BlankTime"   "${toString cfg.blank-time}"
-              Option "OffTime"     "${toString cfg.off-time}"
-          EndSection
-        ''
-      else
-        ''
-          Section "Extensions"
-              Option "DPMS" "false"
-          EndSection
-        '';
+    services.xserver.config = lib.optionalString (!cfg.enable-dpms) (
+      lib.mkAfter ''
+        Section "Extensions"
+            Option "DPMS" "false"
+        EndSection
+      ''
+    );
+
+    services.xserver.serverFlagsSection = lib.optionalString cfg.enable-dpms ''
+      Option "StandbyTime" "${toString cfg.standby-time}"
+      Option "SuspendTime" "${toString cfg.suspend-time}"
+      Option "BlankTime"   "${toString cfg.blank-time}"
+      Option "OffTime"     "${toString cfg.off-time}"
+    '';
   };
 }
