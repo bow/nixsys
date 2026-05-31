@@ -35,7 +35,8 @@ in
       in
       lib.optionalAttrs (mainUser != null) {
         createUserDataDir = ''
-          mkdir -p ${dir}/${mainUser.name}
+          test -d ${dir} || exit 0
+          mkdir ${dir}/${mainUser.name}
           chown ${mainUser.name}:root ${dir}/${mainUser.name}
           chmod 0700 ${dir}/${mainUser.name}
         '';
