@@ -64,6 +64,7 @@ in
       userDirs = with config.home; {
         enable = true;
         createDirectories = cfg.create-directories;
+        setSessionVariables = true;
         desktop = "${homeDirectory}/${cfg.directories.desktop}";
         download = "${homeDirectory}/${cfg.directories.download}";
         templates = "${homeDirectory}/${cfg.directories.templates}";

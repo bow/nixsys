@@ -55,6 +55,8 @@ in
         inherit (pkgs.yaziPlugins) bypass smart-enter starship;
       };
 
+      shellWrapperName = "y";
+
       settings = {
         mgr = {
           linemode = "mtime";

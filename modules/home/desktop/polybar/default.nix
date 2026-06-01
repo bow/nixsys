@@ -488,7 +488,7 @@ in
         wireless_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/wl|wlan/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ')"
         eth_if="''$(${pkgs.iproute2}/bin/ip -o link show | ${pkgs.gnugrep}/bin/grep ' state UP ' | ${pkgs.gawk}/bin/awk -F: '/^( *[0-9]+: (en|eth))/ {print $2}' | ${pkgs.coreutils}/bin/tr -d ' ' | ${pkgs.coreutils}/bin/head -n1)"
 
-        monitors=''$(${pkgs.xorg.xrandr}/bin/xrandr | ${pkgs.gnugrep}/bin/grep " connected " | ${pkgs.gawk}/bin/awk '{ print $1 }' | ${pkgs.coreutils}/bin/sort -r)
+        monitors=''$(${pkgs.xrandr}/bin/xrandr | ${pkgs.gnugrep}/bin/grep " connected " | ${pkgs.gawk}/bin/awk '{ print $1 }' | ${pkgs.coreutils}/bin/sort -r)
         last_monitor=''$(echo "''${monitors}" | ${pkgs.coreutils}/bin/tail -n 1)
 
         # Launch polybar in all connected monitors and keep the last one in foreground so systemd can see PID.

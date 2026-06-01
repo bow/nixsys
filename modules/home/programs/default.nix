@@ -141,8 +141,8 @@ in
       nomacs
       openconnect
       pavucontrol
+      proton-vpn
       protonmail-bridge
-      protonvpn-gui
       pwvucontrol
       slack
       snapper-gui

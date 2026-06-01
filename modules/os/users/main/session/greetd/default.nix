@@ -54,10 +54,10 @@ in
         settings = {
           terminal.vt = lib.mkForce cfg.vt;
           default_session = lib.mkIf xorgEnabled {
-            command = "${pkgs.xorg.xinit}/bin/startx";
+            command = "${pkgs.xinit}/bin/startx";
           };
           initial_session = lib.mkIf (autologinEnabled && xorgEnabled) {
-            command = "${pkgs.xorg.xinit}/bin/startx";
+            command = "${pkgs.xinit}/bin/startx";
             user = mainUser.name;
           };
         };

@@ -76,8 +76,8 @@ in
         maim = enabled;
         nomacs = enabled;
         openconnect = enabled;
+        proton-vpn = enabled;
         protonmail-bridge = enabled;
-        protonvpn-gui = enabled;
         solaar = enabled;
         spotify = enabled;
         sxiv = enabled;

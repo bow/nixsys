@@ -43,6 +43,8 @@ in
           tree-sitter
           tree-sitter-cli
         ];
+        withPython3 = true;
+        withRuby = true;
       };
 
       xdg.configFile = lib.mkIf cfg.extended {

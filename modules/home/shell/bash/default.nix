@@ -304,7 +304,7 @@ in
       ''
       + lib.optionalString xorgEnabled ''
 
-        ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "compose:menu"
+        ${pkgs.setxkbmap}/bin/setxkbmap -option "compose:menu"
 
         # Resolve path and copy it to clipboard.
         function pcp() {

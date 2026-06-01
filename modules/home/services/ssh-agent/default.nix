@@ -2,14 +2,10 @@
   config,
   lib,
   pkgs,
-  user,
   ...
 }:
 let
   inherit (lib) types;
-  libcfg = lib.nixsys.home;
-
-  shellBash = libcfg.isShellBash user;
 
   cfg = config.nixsys.home.services.ssh-agent;
 in
@@ -26,10 +22,9 @@ in
   config = lib.mkIf cfg.enable {
 
     services.ssh-agent = {
-      enable = true;
+      enable = false;
 
       inherit (cfg) package;
-      enableBashIntegration = shellBash;
       defaultMaximumIdentityLifetime = cfg.default-maximum-identity-lifetime;
     };
   };
