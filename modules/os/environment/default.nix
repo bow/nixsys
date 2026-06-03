@@ -18,25 +18,24 @@
 
       systemPackages = [
         pkgs.coreutils-full
+        pkgs.curl
         pkgs.findutils
         pkgs.file
         pkgs.gawk
         pkgs.gnugrep
         pkgs.gnused
+        pkgs.gnutar
         pkgs.gzip
         pkgs.htop
         pkgs.iputils
         pkgs.iotop
         pkgs.jq
-        pkgs.lzip
         pkgs.neovim
-        pkgs.p7zip
         pkgs.readline
         pkgs.ripgrep
         pkgs.rsync
         pkgs.strace
         pkgs.unzip
-        pkgs.xz
         pkgs.zip
         pkgs.zstd
       ];
