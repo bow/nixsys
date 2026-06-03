@@ -126,9 +126,6 @@ in
       packer
       virt-viewer
 
-      # Writing.
-      texliveFull
-
       # Desktop.
       arandr
       dbeaver-bin

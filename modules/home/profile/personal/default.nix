@@ -62,9 +62,6 @@ in
         pass = enabled;
         pwgen = enabled;
         sequoia-sq = enabled;
-
-        # Writing tools.
-        texliveFull = enabled;
       }
       // lib.optionalAttrs desktopEnabled {
         arandr = enabled;
