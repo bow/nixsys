@@ -224,10 +224,10 @@ in
           greeter = mkColorOption light;
 
           light = mkColorOption "#ffffffff";
-          dark = mkColorOption "#1d2021ee";
-          ring = mkColorOption "#007c5bff";
-          ring-hl = mkColorOption "#e3ac2dff";
-          ring-bs = mkColorOption "#d1472fff";
+          dark = mkColorOption "#1d2021bf";
+          ring = mkColorOption "#fffffff2";
+          ring-hl = mkColorOption "#007c5bff";
+          ring-bs = mkColorOption "#e3ac2dff";
           ring-sep = mkColorOption "#00000000";
         };
       };
