@@ -22,7 +22,7 @@ in
   config = lib.mkIf cfg.enable {
 
     services.ssh-agent = {
-      enable = false;
+      enable = true;
 
       inherit (cfg) package;
       defaultMaximumIdentityLifetime = cfg.default-maximum-identity-lifetime;
