@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   osConfig,
   ...
@@ -23,6 +24,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    # TODO: Simplify back to home.packages
+    home.packages = [
+      # Nix tools.
+      pkgs.nix-tree
+    ];
 
     nixsys.home = {
 
