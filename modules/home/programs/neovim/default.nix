@@ -49,7 +49,7 @@ in
 
       xdg.configFile = lib.mkIf cfg.extended {
         "nvim" = {
-          source = ../../../../dotfiles/nvim;
+          source = ./config;
           recursive = true;
         };
         "nvim/lua/config/local.lua" = {
