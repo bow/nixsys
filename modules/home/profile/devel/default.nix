@@ -319,6 +319,7 @@ in
       ];
       tools = [
         pkgs.unstable.basedpyright
+        pkgs.unstable.black
         pkgs.unstable.mypy
         pkgs.unstable.pyrefly
         pkgs.unstable.ruff
