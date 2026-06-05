@@ -135,12 +135,13 @@ let
 
       NOFORK=''${NOFORK:-1}
 
+      export "''$(/run/current-system/systemd/bin/systemctl --user -M ${user.name}@ show-environment | grep DBUS)"
       playing="''$([[ "''$(${pkgs.playerctl}/bin/playerctl status)" == "Playing" ]] && echo 1 || echo 0)"
 
-      [[ "''${NOFORK}" -eq 1 ]] && [[ "''${playing}" -eq 1 ]] && ${pkgs.playerctl}/bin/playerctl play-pause
+      [[ "''${NOFORK}" -eq 1 ]] && [[ "''${playing}" -eq 1 ]] && ${pkgs.playerctl}/bin/playerctl pause
 
       ${pkgs.i3lock-color}/bin/i3lock \
-          "''$( ([[ "''${NOFORK}" -eq 1 ]] && echo "\--nofork") || echo "" )" \
+          "''$( ([[ "''${NOFORK}" -eq 1 ]] && echo '--nofork') || echo "" )" \
           -i "${theme.lock-screen.bg}" \
           --fill \
           --ignore-empty-password \
@@ -182,7 +183,7 @@ let
           --greeter-color "''${COLOR_FG}" \
           --greeter-size 20 \
           --greeter-font "''${FONT}" \
-          && ( ([[ "''${NOFORK}" -eq 1 ]] && [[ "''${playing}" -eq 1 ]] && ${pkgs.playerctl}/bin/playerctl play-pause) || true )
+          && ( ([[ "''${NOFORK}" -eq 1 ]] && [[ "''${playing}" -eq 1 ]] && ${pkgs.playerctl}/bin/playerctl play) || true )
     '';
 
   rofiEnabled = libcfg.isRofiEnabled config;
