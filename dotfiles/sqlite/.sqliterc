@@ -1,5 +1,0 @@
-.header ON
-.mode column
-.nullvalue "⬥"
-.width 0
-.prompt 'sqlite> ' '...   - '
