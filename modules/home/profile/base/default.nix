@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib.nixsys) enabledWith;
+  inherit (lib.nixsys) enabled enabledWith;
 
   cfg = config.nixsys.home.profile.base;
 in
@@ -27,7 +27,6 @@ in
       pkgs.gnused
       pkgs.jq
       pkgs.readline
-      pkgs.ripgrep
       pkgs.which
 
       # Ops.
@@ -83,7 +82,9 @@ in
 
     nixsys.home = {
       programs = {
+        dnsutils = enabled;
         neovim = enabledWith { extended = lib.mkDefault false; };
+        ripgrep = enabled;
       };
     };
   };

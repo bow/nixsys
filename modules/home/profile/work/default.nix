@@ -84,6 +84,7 @@ in
         nh = enabled;
 
         # Security.
+        gpg = enabled;
         pass = enabled;
         pwgen = enabled;
       };

@@ -5,11 +5,17 @@
   ...
 }:
 let
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
+
   cfg = config.nixsys.home.programs.zathura;
 in
 {
   options.nixsys.home.programs.zathura = {
-    enable = lib.mkEnableOption "nixsys.home.programs.zathura";
+    enable = lib.mkEnableOption "nixsys.home.programs.zathura" // {
+      default = desktopEnabled;
+    };
     package = lib.mkPackageOption pkgs.unstable "zathura" { };
   };
 
