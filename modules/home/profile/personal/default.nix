@@ -12,7 +12,6 @@ let
   btrfsEnabled = osConfig.boot.supportedFilesystems.btrfs or false;
   pulseaudioEnabled = osConfig.nixsys.os.audio.pulseaudio.enable or false;
   pipewireEnabled = osConfig.nixsys.os.audio.pipewire.enable or false;
-  audioEnabled = pulseaudioEnabled || pipewireEnabled;
 
   desktopEnabled = libcfg.isDesktopEnabled config;
 
@@ -25,10 +24,59 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # TODO: Simplify back to home.packages
     home.packages = [
+      # Backup
+      pkgs.restic
+
+      # Chat.
+      pkgs.weechat
+
+      # Media tools.
+      pkgs.pdftk
+      pkgs.chafa
+      pkgs.graphviz
+      pkgs.imagemagick
+      pkgs.timg
+
+      # Network clients.
+      pkgs.elinks
+      pkgs.wget
+
       # Nix tools.
       pkgs.nix-tree
+
+      # Local tools.
+      pkgs.local.nxn
+    ]
+    ++ lib.optionals desktopEnabled [
+      pkgs.arandr
+      pkgs.evince
+      pkgs.firefox
+      pkgs.geany
+      pkgs.google-chrome
+      pkgs.gparted
+      pkgs.maim
+      pkgs.nomacs
+      pkgs.openconnect
+      pkgs.proton-vpn
+      pkgs.protonmail-bridge
+      pkgs.solaar
+      pkgs.spotify
+      pkgs.sxiv
+      pkgs.thunderbird-latest
+      pkgs.todoist-electron
+      pkgs.veracrypt
+      pkgs.vlc
+      pkgs.zathura
+    ]
+    ++ lib.optionals (desktopEnabled && pulseaudioEnabled) [
+      pkgs.pavucontrol
+    ]
+    ++ lib.optionals (desktopEnabled && pipewireEnabled) [
+      pkgs.pwvucontrol
+    ]
+    ++ lib.optionals (desktopEnabled && btrfsEnabled) [
+      pkgs.snapper-gui
     ];
 
     nixsys.home = {
@@ -39,77 +87,19 @@ in
       };
 
       programs = {
-        # Audio.
+        # Media players.
         ncmpcpp = enabled;
-
-        # Backup.
-        restic = enabled;
-
-        # Chat.
-        weechat = enabled;
-
-        # Media tools.
-        pdftk = enabled;
-        chafa = enabled;
-        graphviz = enabled;
-        imagemagick = enabled;
-        timg = enabled;
-
-        # Network clients.
-        aria2 = enabled;
-        elinks = enabled;
-        wget = enabled;
 
         # Nix tools.
         nh = enabled;
-        nxn = enabled;
 
         # Security.
-        gpg = enabled;
         pass = enabled;
         pwgen = enabled;
-        sequoia-sq = enabled;
-      }
-      // lib.optionalAttrs desktopEnabled {
-        arandr = enabled;
-        evince = enabled;
-        firefox = enabled;
-        geany = enabled;
-        google-chrome = enabled;
-        gparted = enabled;
-        maim = enabled;
-        nomacs = enabled;
-        openconnect = enabled;
-        proton-vpn = enabled;
-        protonmail-bridge = enabled;
-        solaar = enabled;
-        spotify = enabled;
-        sxiv = enabled;
-        thunderbird-latest = enabled;
-        todoist-electron = enabled;
-        veracrypt = enabled;
-        vlc = enabled;
-        zathura = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
-        pavucontrol = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && pipewireEnabled) {
-        pwvucontrol = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && btrfsEnabled) {
-        snapper-gui = enabled;
       };
 
       services = {
         gpg-agent = enabled;
-      }
-      // lib.optionalAttrs desktopEnabled {
-        redshift = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && audioEnabled) {
-        mpd = enabled;
-        mpris-proxy = enabled;
       };
     };
   };

@@ -425,21 +425,26 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.unstable.buf
-      pkgs.unstable.cloc
-      pkgs.unstable.curlie
-      pkgs.unstable.dive
-      pkgs.unstable.dos2unix
-      pkgs.unstable.entr
-      pkgs.unstable.fx
-      pkgs.unstable.glow
-      pkgs.unstable.gnumake
-      pkgs.unstable.gnupatch
+      pkgs.binutils
+      pkgs.bubblewrap
+      pkgs.buf
+      pkgs.cloc
+      pkgs.curlie
+      pkgs.distrobox
+      pkgs.dive
+      pkgs.dos2unix
+      pkgs.entr
+      pkgs.fx
+      pkgs.glow
+      pkgs.gnumake
+      pkgs.gnupatch
       pkgs.unstable.grpcurl
       pkgs.unstable.just
-      pkgs.unstable.minify
-      pkgs.unstable.wrk
-      pkgs.unstable.xan
+      pkgs.minify
+      pkgs.nerdctl
+      pkgs.virt-viewer
+      pkgs.wrk
+      pkgs.xan
     ];
 
     nixsys.home.programs = {
@@ -453,13 +458,6 @@ in
       # Navigation.
       yazi = enabled;
       zoxide = enabled;
-
-      # Virtualization.
-      bubblewrap = enabled;
-      distrobox = enabled;
-      nerdctl = enabled;
-      packer = enabled;
-      virt-viewer = enabled;
     };
   };
 }

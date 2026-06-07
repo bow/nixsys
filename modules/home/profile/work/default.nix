@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   osConfig,
   ...
@@ -24,6 +25,49 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    home.packages = [
+      # Backup
+      pkgs.restic
+
+      # Media tools.
+      pkgs.timg
+
+      # Network clients.
+      pkgs.wget
+
+      # Nix tools.
+      pkgs.nix-tree
+
+      # Office tools.
+      pkgs.presenterm
+    ]
+    ++ lib.optionals desktopEnabled [
+      pkgs.arandr
+      pkgs.dbeaver-bin
+      pkgs.evince
+      pkgs.firefox
+      pkgs.geany
+      pkgs.google-chrome
+      pkgs.gparted
+      pkgs.maim
+      pkgs.slack
+      pkgs.solaar
+      pkgs.spotify
+      pkgs.sxiv
+      pkgs.thunderbird-latest
+      pkgs.todoist-electron
+      pkgs.zathura
+    ]
+    ++ lib.optionals (desktopEnabled && pulseaudioEnabled) [
+      pkgs.pavucontrol
+    ]
+    ++ lib.optionals (desktopEnabled && pipewireEnabled) [
+      pkgs.pwvucontrol
+    ]
+    ++ lib.optionals (desktopEnabled && btrfsEnabled) [
+      pkgs.snapper-gui
+    ];
+
     nixsys.home = {
 
       profile = {
@@ -38,63 +82,16 @@ in
       };
 
       programs = {
-        # Backup.
-        restic = enabled;
-
-        # Network clients.
-        aria2 = enabled;
-        wget = enabled;
-
-        # Media tools.
-        timg = enabled;
-
         # Nix tools.
         nh = enabled;
-        nxn = enabled;
-
-        # Presentation.
-        presenterm = enabled;
 
         # Security.
-        gpg = enabled;
         pass = enabled;
         pwgen = enabled;
-      }
-      // lib.optionalAttrs desktopEnabled {
-        arandr = enabled;
-        dbeaver-bin = enabled;
-        evince = enabled;
-        firefox = enabled;
-        geany = enabled;
-        google-chrome = enabled;
-        gparted = enabled;
-        maim = enabled;
-        slack = enabled;
-        solaar = enabled;
-        spotify = enabled;
-        sxiv = enabled;
-        thunderbird-latest = enabled;
-        todoist-electron = enabled;
-        zathura = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && pulseaudioEnabled) {
-        pavucontrol = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && pipewireEnabled) {
-        pwvucontrol = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && btrfsEnabled) {
-        snapper-gui = enabled;
       };
 
       services = {
         gpg-agent = enabled;
-      }
-      // lib.optionalAttrs desktopEnabled {
-        redshift = enabled;
-      }
-      // lib.optionalAttrs (desktopEnabled && audioEnabled) {
-        mpris-proxy = enabled;
       };
     };
   };

@@ -6,11 +6,17 @@
   ...
 }:
 let
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
+
   cfg = config.nixsys.home.services.redshift;
 in
 {
   options.nixsys.home.services.redshift = {
-    enable = lib.mkEnableOption "nixsys.home.services.redshift";
+    enable = lib.mkEnableOption "nixsys.home.services.redshift" // {
+      default = desktopEnabled;
+    };
     package = lib.mkPackageOption pkgs "redshift" { };
   };
 

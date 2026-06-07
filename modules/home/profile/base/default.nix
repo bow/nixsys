@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -15,73 +16,74 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    home.packages = [
+      # Base.
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.file
+      pkgs.fzf
+      pkgs.gawk
+      pkgs.gnugrep
+      pkgs.gnused
+      pkgs.jq
+      pkgs.readline
+      pkgs.ripgrep
+      pkgs.which
+
+      # Ops.
+      pkgs.btop
+      pkgs.dmidecode
+      pkgs.dnsmasq
+      pkgs.dnsutils
+      pkgs.dua
+      pkgs.duf
+      pkgs.ethtool
+      pkgs.eza
+      pkgs.fd
+      pkgs.findutils
+      pkgs.hexyl
+      pkgs.htop
+      pkgs.iftop
+      pkgs.inetutils
+      pkgs.iotop
+      pkgs.ipcalc
+      pkgs.iperf3
+      pkgs.iproute2
+      pkgs.ldns
+      pkgs.lshw
+      pkgs.lsof
+      pkgs.ltrace
+      pkgs.mtr
+      pkgs.nmap
+      pkgs.ntfs3g
+      pkgs.openssl
+      pkgs.pciutils
+      pkgs.pv
+      pkgs.rsync
+      pkgs.socat
+      pkgs.strace
+      pkgs.sysstat
+      pkgs.tree
+      pkgs.usbutils
+      pkgs.whois
+
+      # Compression tools.
+      pkgs.gzip
+      pkgs.lzip
+      pkgs.p7zip
+      pkgs.unrar
+      pkgs.unzip
+      pkgs.xz
+      pkgs.zip
+      pkgs.zstd
+
+      # Security.
+      pkgs.age
+    ];
+
     nixsys.home = {
-
       programs = {
-        # Base.
-        coreutils = enabled;
-        curl = enabled;
-        dircolors = enabled;
-        file = enabled;
-        fzf = enabled;
-        gawk = enabled;
-        gnugrep = enabled;
-        gnused = enabled;
-        jq = enabled;
         neovim = enabledWith { extended = lib.mkDefault false; };
-        readline = enabled;
-        ripgrep = enabled;
-        which = enabled;
-
-        # Ops.
-        btop = enabled;
-        dmidecode = enabled;
-        dnsmasq = enabled;
-        dnsutils = enabled;
-        dua = enabled;
-        duf = enabled;
-        ethtool = enabled;
-        eza = enabled;
-        fd = enabled;
-        findutils = enabled;
-        hexyl = enabled;
-        htop = enabled;
-        iftop = enabled;
-        inetutils = enabled;
-        iotop = enabled;
-        ipcalc = enabled;
-        iperf3 = enabled;
-        iproute2 = enabled;
-        ldns = enabled;
-        lshw = enabled;
-        lsof = enabled;
-        ltrace = enabled;
-        mtr = enabled;
-        nmap = enabled;
-        ntfs3g = enabled;
-        pciutils = enabled;
-        pv = enabled;
-        rsync = enabled;
-        socat = enabled;
-        strace = enabled;
-        sysstat = enabled;
-        tree = enabled;
-        usbutils = enabled;
-        whois = enabled;
-
-        # Compression tools.
-        gzip = enabled;
-        lzip = enabled;
-        p7zip = enabled;
-        unrar = enabled;
-        unzip = enabled;
-        xz = enabled;
-        zip = enabled;
-        zstd = enabled;
-
-        # Security.
-        age = enabled;
-        openssl = enabled;
       };
     };
   };

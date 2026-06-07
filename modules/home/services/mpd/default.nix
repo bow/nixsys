@@ -12,7 +12,9 @@ let
 in
 {
   options.nixsys.home.services.mpd = {
-    enable = lib.mkEnableOption "nixsys.home.services.mpd";
+    enable = lib.mkEnableOption "nixsys.home.services.mpd" // {
+      default = config.nixsys.home.programs.ncmpcpp.enable;
+    };
     package = lib.mkPackageOption pkgs "mpd" { };
 
     db-file = lib.mkOption {
