@@ -55,7 +55,7 @@ in
         inherit (pkgs.yaziPlugins) bypass smart-enter starship;
       };
 
-      shellWrapperName = "y";
+      shellWrapperName = "yy";
 
       settings = {
         mgr = {

@@ -54,7 +54,6 @@ in
       pkgs.sxiv
       pkgs.thunderbird-latest
       pkgs.todoist-electron
-      pkgs.zathura
     ]
     ++ lib.optionals (desktopEnabled && pulseaudioEnabled) [
       pkgs.pavucontrol

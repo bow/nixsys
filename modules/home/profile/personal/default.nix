@@ -66,7 +66,6 @@ in
       pkgs.todoist-electron
       pkgs.veracrypt
       pkgs.vlc
-      pkgs.zathura
     ]
     ++ lib.optionals (desktopEnabled && pulseaudioEnabled) [
       pkgs.pavucontrol
