@@ -44,7 +44,6 @@ in
       pkgs.arandr
       pkgs.dbeaver-bin
       pkgs.evince
-      pkgs.firefox
       pkgs.geany
       pkgs.google-chrome
       pkgs.gparted

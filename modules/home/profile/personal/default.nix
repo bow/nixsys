@@ -51,7 +51,6 @@ in
     ++ lib.optionals desktopEnabled [
       pkgs.arandr
       pkgs.evince
-      pkgs.firefox
       pkgs.geany
       pkgs.google-chrome
       pkgs.gparted

@@ -6,12 +6,17 @@
 }:
 let
   inherit (lib) types;
+  libcfg = lib.nixsys.home;
+
+  desktopEnabled = libcfg.isDesktopEnabled config;
 
   cfg = config.nixsys.home.programs.firefox;
 in
 {
   options.nixsys.home.programs.firefox = {
-    enable = lib.mkEnableOption "nixsys.home.programs.firefox";
+    enable = lib.mkEnableOption "nixsys.home.programs.firefox" // {
+      default = desktopEnabled;
+    };
     package = lib.mkPackageOption pkgs.unstable "firefox" { };
 
     bookmarks = lib.mkOption {
