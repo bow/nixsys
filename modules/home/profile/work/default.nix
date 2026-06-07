@@ -39,6 +39,9 @@ in
 
       # Office tools.
       pkgs.presenterm
+
+      # Local tools.
+      pkgs.local.nxn
     ]
     ++ lib.optionals desktopEnabled [
       pkgs.arandr
