@@ -39,4 +39,3 @@ in
     services.blueman.enable = lib.mkDefault desktopEnabled;
   };
 }
-

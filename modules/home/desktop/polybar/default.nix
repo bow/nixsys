@@ -163,13 +163,13 @@ in
         };
 
         "bar/top" = {
-          monitor = ''''${env:POLYBAR_MONITOR}'';
+          monitor = "\${env:POLYBAR_MONITOR}";
           width = "100%";
           height = 33;
           radius = 0;
           fixed.center = true;
-          background = ''''${colors.background}'';
-          foreground = ''''${colors.foreground}'';
+          background = "\${colors.background}";
+          foreground = "\${colors.foreground}";
 
           line = {
             size = 2;
@@ -239,7 +239,7 @@ in
             mounted = "%{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%";
             unmounted = {
               text = "%mountpoint% not mounted";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
         };
@@ -252,7 +252,7 @@ in
             text = "<label>";
             prefix = {
               text = " ";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
           bar = {
@@ -286,13 +286,13 @@ in
             text = "<label>";
             prefix = {
               text = " ";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
             warn = {
               text = "<label-warn>";
               prefix = {
                 text = " ";
-                foreground = ''''${colors.alert}'';
+                foreground = "\${colors.alert}";
               };
             };
           };
@@ -301,7 +301,7 @@ in
         "module/wlan" = {
           type = "internal/network";
           interface = {
-            text = ''''${env:POLYBAR_WIRELESS_IF}'';
+            text = "\${env:POLYBAR_WIRELESS_IF}";
             type = "wireless";
           };
           interval = 3;
@@ -315,30 +315,30 @@ in
             connected = "%signal%% · %essid%";
             disconnected = {
               text = " ";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
 
           ramp = {
             signal = {
               text = [ " " ];
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
         };
 
         "module/eth" = {
           type = "internal/network";
-          interface = ''''${env:POLYBAR_ETH_IF}'';
+          interface = "\${env:POLYBAR_ETH_IF}";
           interval = 3;
           format = {
             disconnected.prefix = {
               text = "";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
             connected.prefix = {
               text = "";
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
           label = {
@@ -352,7 +352,7 @@ in
           interval = 1;
           format.prefix = {
             text = "  ";
-            foreground = ''''${colors.foreground-alt}'';
+            foreground = "\${colors.foreground-alt}";
           };
           label = "%date%%time%";
           date = {
@@ -371,7 +371,7 @@ in
           format = {
             volume = "<ramp-volume> <label-volume>";
             muted = {
-              foreground = ''''${colors.foreground-alt}'';
+              foreground = "\${colors.foreground-alt}";
             };
           };
 
@@ -381,7 +381,7 @@ in
           };
 
           ramp.volume = {
-            foreground = ''''${colors.foreground-alt}'';
+            foreground = "\${colors.foreground-alt}";
             text = [
               ""
               ""
@@ -404,7 +404,7 @@ in
             text = "%temperature-c%";
             warn = {
               text = "%temperature-c%";
-              foreground = ''''${colors.secondary}'';
+              foreground = "\${colors.secondary}";
             };
           };
 
@@ -416,7 +416,7 @@ in
               ""
               ""
             ];
-            foreground = ''''${colors.foreground-alt}'';
+            foreground = "\${colors.foreground-alt}";
           };
         };
 
@@ -444,34 +444,34 @@ in
           mode = {
             padding = 2;
             foreground = "#000";
-            background = ''''${colors.primary}'';
+            background = "\${colors.primary}";
           };
           # focused: active workspace on focused monitor.
           focused = {
             text = "%name%";
             padding = 6;
-            foreground = ''''${colors.foreground}'';
-            underline = ''''${colors.foreground}'';
+            foreground = "\${colors.foreground}";
+            underline = "\${colors.foreground}";
           };
           # unfocused: inactive workspace on any monitor.
           unfocused = {
-            text = ''''${self.label-focused}'';
-            foreground = ''''${colors.foreground-alt}'';
-            padding = ''''${self.label-focused-padding}'';
+            text = "\${self.label-focused}";
+            foreground = "\${colors.foreground-alt}";
+            padding = "\${self.label-focused-padding}";
           };
           # visible = active workspace on unfocused monitor.
           visible = {
-            text = ''''${self.label-focused}'';
-            padding = ''''${self.label-focused-padding}'';
-            foreground = ''''${colors.foreground-alt}'';
-            underline = ''''${colors.foreground-alt}'';
+            text = "\${self.label-focused}";
+            padding = "\${self.label-focused-padding}";
+            foreground = "\${colors.foreground-alt}";
+            underline = "\${colors.foreground-alt}";
           };
           # urgent = workspace with urgency hint set.
           urgent = {
-            text = ''''${self.label-focused}'';
-            padding = ''''${self.label-focused-padding}'';
-            foreground = ''''${colors.secondary}'';
-            underline = ''''${colors.secondary}'';
+            text = "\${self.label-focused}";
+            padding = "\${self.label-focused-padding}";
+            foreground = "\${colors.secondary}";
+            underline = "\${colors.secondary}";
           };
         };
       };

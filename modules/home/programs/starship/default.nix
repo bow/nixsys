@@ -82,16 +82,16 @@ in
         git_status = {
           format = "([$all_status$ahead_behind]($style) )";
           style = "bright-black";
-          ahead = ''⇡''${count}'';
-          diverged = ''⇕⇡''${ahead_count}⇣''${behind_count}'';
-          behind = ''⇣''${count}'';
-          staged = ''+''${count}'';
+          ahead = "⇡\${count}";
+          diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+          behind = "⇣\${count}";
+          staged = "+\${count}";
           modified = "*";
         };
 
         golang = {
           format = "[·](dimmed white) [[go](cyan)[/](white)($version)](purple) ";
-          version_format = ''''${major}.''${minor}'';
+          version_format = "\${major}.\${minor}";
         };
 
         hostname = {
@@ -103,12 +103,12 @@ in
 
         java = {
           format = "[·](dimmed white) [[java](cyan)[/](white)($version)](purple) ";
-          version_format = ''''${raw}'';
+          version_format = "\${raw}";
         };
 
         kotlin = {
           format = "[·](dimmed white) [[kt](cyan)[/](white)($version)](purple) ";
-          version_format = ''''${raw}'';
+          version_format = "\${raw}";
         };
 
         lua = {

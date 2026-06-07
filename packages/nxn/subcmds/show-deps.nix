@@ -2,7 +2,6 @@
   lib,
   coreutils,
   which,
-  util-linux,
   gnused,
   graphviz,
   timg,

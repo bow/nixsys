@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib.nixsys) enabled enabledWith;
+  inherit (lib.nixsys) enabledWith;
 
   cfg = config.nixsys.home.profile.base;
 in

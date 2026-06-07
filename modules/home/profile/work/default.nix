@@ -12,7 +12,6 @@ let
   btrfsEnabled = osConfig.boot.supportedFilesystems.btrfs or false;
   pulseaudioEnabled = osConfig.nixsys.os.audio.pulseaudio.enable or false;
   pipewireEnabled = osConfig.nixsys.os.audio.pipewire.enable or false;
-  audioEnabled = pulseaudioEnabled || pipewireEnabled;
 
   desktopEnabled = libcfg.isDesktopEnabled config;
 

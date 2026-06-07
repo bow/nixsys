@@ -32,9 +32,11 @@ in
     };
 
     users.users = lib.optionalAttrs mainUserDefined {
-      "${config.nixsys.os.users.main.name}".extraGroups = lib.optionals config.nixsys.os.users.main.trusted [
-        "lpadmin"
-      ];
+      "${config.nixsys.os.users.main.name}".extraGroups =
+        lib.optionals config.nixsys.os.users.main.trusted
+          [
+            "lpadmin"
+          ];
     };
   };
 }

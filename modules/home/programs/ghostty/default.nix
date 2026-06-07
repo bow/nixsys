@@ -82,7 +82,7 @@ in
 
         desktopEntries.${desktopEntryName} = {
           name = "Ghostty (text handler)";
-          comment = ''Open text files in ''$EDITOR in a new Ghostty terminal'';
+          comment = "Open text files in \$EDITOR in a new Ghostty terminal";
           exec = "${ghostty-text-handler}/bin/${handlerScriptName} %f";
           terminal = false;
           icon = "ghostty";

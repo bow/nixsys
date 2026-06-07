@@ -7,7 +7,14 @@
 }:
 rec {
   # Publicly-exported functions.
-  pub = { inherit forEachSystem mkMachine mkHome resolveFlakeRev; };
+  pub = {
+    inherit
+      forEachSystem
+      mkMachine
+      mkHome
+      resolveFlakeRev
+      ;
+  };
 
   /**
     Loop over the given systems to apply the given functions that use nixpkgs for that system.
