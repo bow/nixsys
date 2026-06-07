@@ -421,6 +421,15 @@ in
         '';
       };
     };
+
+    zig = {
+      langservers = [
+        pkgs.unstable.zig
+      ];
+      tools = [
+        pkgs.unstable.zls
+      ];
+    };
   };
 
   config = lib.mkIf cfg.enable {
