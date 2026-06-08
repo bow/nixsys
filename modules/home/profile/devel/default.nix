@@ -451,6 +451,7 @@ in
       pkgs.unstable.just
       pkgs.minify
       pkgs.nerdctl
+      pkgs.onefetch
       pkgs.virt-viewer
       pkgs.wrk
       pkgs.xan
