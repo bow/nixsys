@@ -451,6 +451,7 @@ in
       pkgs.unstable.just
       pkgs.minify
       pkgs.nerdctl
+      pkgs.nix-prefetch-git
       pkgs.onefetch
       pkgs.virt-viewer
       pkgs.wrk
