@@ -412,6 +412,16 @@ return {
     }
 
     opt_lspconfig {
+      name = 'texlab',
+      opts = {
+        on_init = on_init,
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      },
+    }
+
+    opt_lspconfig {
       name = 'zls',
       opts = {
         on_init = on_init,
