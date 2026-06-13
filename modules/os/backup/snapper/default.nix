@@ -46,7 +46,7 @@ in
             TIMELINE_CLEANUP = true;
             TIMELINE_MIN_AGE = 3600;
             TIMELINE_LIMIT_HOURLY = 6;
-            TIMELINE_LIMIT_DAILY = 7;
+            TIMELINE_LIMIT_DAILY = 3;
             TIMELINE_LIMIT_WEEKLY = 0;
             TIMELINE_LIMIT_MONTHLY = 0;
             TIMELINE_LIMIT_QUARTERLY = 0;
