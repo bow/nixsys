@@ -5,7 +5,7 @@ from cyclopts import App, CycloptsError
 from cyclopts.help import PlainFormatter
 from rich.console import Console
 
-from psc.commands import nix
+from psc.commands import git, nix
 
 
 console = Console()
@@ -21,6 +21,7 @@ app = App(
 app["--version"].show = False
 app["--help"].show = False
 
+app.command(git.app)
 app.command(nix.app)
 
 

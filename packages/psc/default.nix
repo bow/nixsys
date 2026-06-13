@@ -1,4 +1,5 @@
 {
+  git,
   graphviz,
   installShellFiles,
   lib,
@@ -26,6 +27,7 @@ python314Packages.buildPythonApplication {
   ];
 
   propagatedBuildInputs = [
+    git
     graphviz
     timg
   ];
