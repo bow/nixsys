@@ -106,10 +106,6 @@
               pkgs.home-manager
               pkgs.sops
               pkgs.ssh-to-age
-
-              pkgs.deadnix
-              pkgs.nixfmt
-              pkgs.statix
             ];
           };
         }
