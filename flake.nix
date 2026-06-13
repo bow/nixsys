@@ -108,6 +108,29 @@
               pkgs.ssh-to-age
             ];
           };
+
+          pkg-psc =
+            let
+              pkg = pkgs.callPackage ./packages/psc { };
+              python = builtins.elemAt (builtins.filter (p: p.pname == "python3") pkg.propagatedBuildInputs) 0;
+
+              # So that the source file has the highest precedence and we can do live edits.
+              psc = pkgs.writeShellScriptBin "psc" ''exec ${python}/bin/python3 -m psc "$@"'';
+            in
+            pkgs.mkShell {
+
+              nativeBuildInputs = pkg.propagatedBuildInputs ++ pkg.propagatedNativeBuildInputs;
+
+              packages = [ psc ];
+
+              shellHook = ''
+                if [[ -d "$PWD/src/psc" ]]; then
+                  export PYTHONPATH="$PWD/src''${PYTHONPATH:+:$PYTHONPATH}"
+                elif [[ -d "$PWD/packages/psc/src" ]]; then
+                  export PYTHONPATH="$PWD/packages/psc/src''${PYTHONPATH:+:$PYTHONPATH}"
+                fi
+              '';
+            };
         }
       );
 
