@@ -69,3 +69,8 @@ vim.cmd [[
   nmap <leader>c i<C-R>=trim(system("cat /dev/urandom \| head -n 512 \| sha256sum \| cut -f1 -d' '"))<CR><Esc>
   imap <leader>c <C-R>=trim(system("cat /dev/urandom \| head -n 512 \| sha256sum \| cut -f1 -d' '"))<CR>
 ]]
+
+-- LSP log.
+vim.api.nvim_create_user_command('LspLog', function()
+  vim.cmd.tabedit(vim.lsp.log.get_filename())
+end, { desc = 'Open the LSP log' })
