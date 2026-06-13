@@ -67,8 +67,12 @@ def resolve_to_path(input: Path | str) -> Path:
 
         raise CycloptsError(f"input {input} is not in the nix store")
 
-    path = shutil.which(input)
+    path = Path(shutil.which(input))
     if path is None:
         raise CycloptsError(f"input {input} not found in $PATH")
 
-    return path
+    path = path.resolve()
+    if path.parts[:3] == ("/", "nix", "store"):
+        return path
+
+    raise CycloptsError(f"input {input} does not resolve to the nix store")
