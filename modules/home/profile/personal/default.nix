@@ -46,7 +46,7 @@ in
       pkgs.nix-tree
 
       # Local tools.
-      pkgs.local.nxn
+      pkgs.local.psc
     ]
     ++ lib.optionals desktopEnabled [
       pkgs.arandr
