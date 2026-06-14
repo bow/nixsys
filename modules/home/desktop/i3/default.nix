@@ -124,6 +124,8 @@ let
     with theme.lock-screen;
     pkgs.writeShellScript "lock.sh" ''
       FONT="${font.name}"
+      COLOR_TIME='${colors.time}'
+      COLOR_GREETER='${colors.greeter}'
       COLOR_BG='${colors.dark}'
       COLOR_FG='${colors.light}'
       COLOR_RING='${colors.ring}'
@@ -169,18 +171,18 @@ let
           --force-clock \
           --time-str "%H:%M" \
           --time-pos "ix:iy-240" \
-          --time-color "''${COLOR_FG}" \
+          --time-color "''${COLOR_TIME}" \
           --time-size 140 \
           --time-font "''${FONT}" \
           --date-str "%A, %d %B %Y" \
           --date-pos "tx:ty+50" \
-          --date-color "''${COLOR_FG}" \
+          --date-color "''${COLOR_TIME}" \
           --date-size 30 \
           --date-font "''${FONT}" \
           --greeter-text "${user.full-name} (${user.name}) · ''$(${pkgs.inetutils}/bin/hostname)" \
           --greeter-pos "15:h-15" \
           --greeter-align 1 \
-          --greeter-color "''${COLOR_FG}" \
+          --greeter-color "''${COLOR_GREETER}" \
           --greeter-size 20 \
           --greeter-font "''${FONT}" \
           && ( ([[ "''${NOFORK}" -eq 1 ]] && [[ "''${playing}" -eq 1 ]] && ${pkgs.playerctl}/bin/playerctl play) || true )
@@ -220,9 +222,9 @@ in
           urgent-bg = mkColorOption "#e3ac2d";
           urgent-fg = mkColorOption "#151515";
         };
-        lock-screen = rec {
-          time = mkColorOption light;
-          greeter = mkColorOption light;
+        lock-screen = {
+          time = mkColorOption "#ffffffff";
+          greeter = mkColorOption "#ffffffff";
 
           light = mkColorOption "#ffffffff";
           dark = mkColorOption "#1d2021bf";
