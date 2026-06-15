@@ -108,6 +108,7 @@
           default = pkgs.mkShellNoCC {
             packages = [
               pkgs.home-manager
+              pkgs.just
             ];
           };
 
