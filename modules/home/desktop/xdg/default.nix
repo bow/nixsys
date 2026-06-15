@@ -37,6 +37,7 @@ in
         desktop = mkDirOption "dsk";
         download = mkDirOption "dl";
         templates = mkDirOption ".xdg-templates";
+        projects = mkDirOption ".xdg-projects";
         public-share = mkDirOption ".xdg-public";
         documents = mkDirOption "docs";
         music = mkDirOption "music";
@@ -68,6 +69,7 @@ in
         desktop = "${homeDirectory}/${cfg.directories.desktop}";
         download = "${homeDirectory}/${cfg.directories.download}";
         templates = "${homeDirectory}/${cfg.directories.templates}";
+        projects = "${homeDirectory}/${cfg.directories.projects}";
         publicShare = "${homeDirectory}/${cfg.directories.public-share}";
         documents = "${homeDirectory}/${cfg.directories.documents}";
         music = "${homeDirectory}/${cfg.directories.music}";
