@@ -92,7 +92,12 @@
         headless = lib.nixsys.mkHome {
           inherit user;
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-          modules = [ { nixsys.home.profile.personal.enable = true; } ];
+          modules = [
+            {
+              nixsys.home.profile.personal.enable = true;
+              home.stateVersion = "25.05";
+            }
+          ];
         };
       };
 
