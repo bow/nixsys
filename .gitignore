@@ -1,3 +1,5 @@
 .direnv/
 result
 machine-key.txt
+*-efi-vars.fd
+*.qcow2
