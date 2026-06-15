@@ -79,10 +79,10 @@
       # usages:
       #   - nix build .#nixosConfigurations.{name}.config.system.build.toplevel
       nixosConfigurations = {
-        workstation-qemu = lib.nixsys.mkMachine {
+        workstation = lib.nixsys.mkMachine {
           inherit user;
-          hostname = "workstation-qemu";
-          modules = [ ./examples/machines/workstation-qemu ];
+          hostname = "workstation";
+          modules = [ ./examples/machines/workstation ];
         };
       };
 
