@@ -44,15 +44,41 @@ in
         '';
       };
 
-    virtualisation.vmVariant = lib.mkDefault {
-      cores = 8;
-      diskSize = 80 * 1024;
-      memorySize = 8192 + 4096;
-      resolution = {
-        x = 1600;
-        y = 1900;
+    virtualisation =
+      let
+        virtualisation =
+          let
+            scale = 1.1;
+          in
+          {
+            cores = 8;
+            diskSize = 80 * 1024;
+            memorySize = 8192 + 4096;
+            resolution = {
+              x = 1280 * scale;
+              y = 960 * scale;
+            };
+            qemu.options = [
+              "-vga virtio"
+              "-display gtk,zoom-to-fit=false"
+            ];
+          };
+      in
+      {
+        vmVariant = {
+          inherit virtualisation;
+          swapDevices = lib.mkForce [ ];
+          nixsys.os.servers.ssh = enabled;
+        };
+        vmVariantWithDisko = {
+          virtualisation = virtualisation // {
+            # See: https://github.com/nix-community/disko/issues/1157
+            fileSystems."/home".neededForBoot = true;
+          };
+          swapDevices = lib.mkForce [ ];
+          nixsys.os.servers.ssh = enabled;
+        };
       };
-    };
 
     nixsys.os = enabledWith {
       inherit hostname;
