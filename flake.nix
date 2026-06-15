@@ -102,10 +102,7 @@
         {
           default = pkgs.mkShellNoCC {
             packages = [
-              pkgs.age
               pkgs.home-manager
-              pkgs.sops
-              pkgs.ssh-to-age
             ];
           };
 
