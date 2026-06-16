@@ -212,6 +212,12 @@ in
       ];
     };
 
+    just = {
+      langservers = [
+        pkgs.unstable.just-lsp
+      ];
+    };
+
     lua = {
       langservers = [
         pkgs.unstable.lua-language-server
