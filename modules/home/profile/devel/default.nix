@@ -390,6 +390,9 @@ in
     };
 
     rust = {
+      langservers = [
+        pkgs.unstable.rust-analyzer
+      ];
       extraConfig = lib.optionalAttrs shellBash {
         programs.bash.bashrcExtra = with config.home; ''
           # Cargo config.
