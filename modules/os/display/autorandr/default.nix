@@ -19,6 +19,7 @@ in
 
     services.autorandr = {
       enable = true;
+      matchEdid = true;
       inherit (cfg) profiles;
     };
 
