@@ -45,25 +45,11 @@ in
       ''
     );
 
-    services.xserver.serverFlagsSection = lib.optionalString cfg.enable-dpms (
-      lib.optionalString (cfg.standby-time > 0) ''
-        Option "StandbyTime" "${toString cfg.standby-time}"
-      ''
-      + (
-        lib.optionalString (cfg.suspend-time > 0) ''
-          Option "SuspendTime" "${toString cfg.suspend-time}"
-        ''
-      )
-      + (
-        lib.optionalString (cfg.blank-time > 0) ''
-          Option "BlankTime"   "${toString cfg.blank-time}"
-        ''
-      )
-      + (
-        lib.optionalString (cfg.off-time > 0) ''
-          Option "OffTime"     "${toString cfg.off-time}"
-        ''
-      )
-    );
+    services.xserver.serverFlagsSection = lib.optionalString cfg.enable-dpms ''
+      Option "StandbyTime" "${toString cfg.standby-time}"
+      Option "SuspendTime" "${toString cfg.suspend-time}"
+      Option "BlankTime"   "${toString cfg.blank-time}"
+      Option "OffTime"     "${toString cfg.off-time}"
+    '';
   };
 }
