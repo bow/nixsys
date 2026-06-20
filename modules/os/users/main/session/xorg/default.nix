@@ -19,7 +19,7 @@ in
     };
     standby-time = lib.mkOption {
       type = types.int;
-      default = 15;
+      default = 60;
     };
     suspend-time = lib.mkOption {
       type = types.int;
@@ -27,7 +27,7 @@ in
     };
     blank-time = lib.mkOption {
       type = types.int;
-      default = 60;
+      default = 15;
     };
     off-time = lib.mkOption {
       type = types.int;
