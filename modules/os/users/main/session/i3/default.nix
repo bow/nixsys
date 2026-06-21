@@ -93,5 +93,36 @@ in
           overrideStrategy = "asDropin";
         };
       };
+
+    # Workaround for mouse left-click that sometimes stop working.
+    environment.etc."systemd/system-sleep/vt-refresh.sh" =
+      let
+        desktopVT = config.services.greetd.settings.terminal.vt;
+        nonDesktopVT = if desktopVT > 2 then desktopVT - 1 else desktopVT + 1;
+      in
+      {
+        mode = "0555";
+        text = ''
+          #!/bin/sh
+          STATE=/run/vt${toString desktopVT}-was-active
+
+          case "$1" in
+            pre)
+              rm -f "$STATE"
+              if [ "$(${pkgs.kbd}/bin/fgconsole)" = "7" ] && ${pkgs.procps}/bin/pgrep -x Xorg >/dev/null 2>&1; then
+                touch "$STATE"
+              fi
+              ;;
+            post)
+              if [ -f "$STATE" ] && [ "$(${pkgs.kbd}/bin/fgconsole)" = "7" ]; then
+                ${pkgs.kbd}/bin/chvt ${toString nonDesktopVT}
+                sleep 0.3
+                ${pkgs.kbd}/bin/chvt ${toString desktopVT}
+              fi
+              rm -f "$STATE"
+              ;;
+          esac
+        '';
+      };
   };
 }
