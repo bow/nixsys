@@ -230,7 +230,7 @@ return {
         lualine_c = {
           {
             'diagnostics',
-            sources = { 'nvim_lsp' },
+            sources = { 'nvim_diagnostic' },
             diagnostics_color = {
               error = 'LuaLineDiagnosticError',
               warn = 'LuaLineDiagnosticWarn',
