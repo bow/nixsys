@@ -15,12 +15,17 @@ let
 
   desktopEnabled = libcfg.isDesktopEnabled config;
 
-  cfg = config.nixsys.home.profile.work;
+  cfg = config.nixsys.home.profile.personal;
 in
 {
-  options.nixsys.home.profile.work = {
-    enable = lib.mkEnableOption "nixsys.home.profile.work";
+  options.nixsys.home.profile.personal = {
+    enable = lib.mkEnableOption "nixsys.home.profile.personal";
   };
+
+  imports = [
+    ./layers/base.nix
+    ./layers/devel.nix
+  ];
 
   config = lib.mkIf cfg.enable {
 
@@ -28,35 +33,44 @@ in
       # Backup
       pkgs.restic
 
+      # Chat.
+      pkgs.weechat
+
       # Media tools.
+      pkgs.pdftk
+      pkgs.chafa
+      pkgs.graphviz
+      pkgs.imagemagick
       pkgs.timg
 
       # Network clients.
+      pkgs.elinks
       pkgs.wget
 
       # Nix tools.
       pkgs.nix-tree
-
-      # Office tools.
-      pkgs.presenterm
 
       # Local tools.
       pkgs.local.psc
     ]
     ++ lib.optionals desktopEnabled [
       pkgs.arandr
-      pkgs.dbeaver-bin
       pkgs.evince
       pkgs.geany
       pkgs.google-chrome
       pkgs.gparted
       pkgs.maim
-      pkgs.slack
+      pkgs.nomacs
+      pkgs.openconnect
+      pkgs.proton-vpn
+      pkgs.protonmail-bridge
       pkgs.solaar
       pkgs.spotify
       pkgs.sxiv
       pkgs.thunderbird-latest
       pkgs.todoist-electron
+      pkgs.veracrypt
+      pkgs.vlc
     ]
     ++ lib.optionals (desktopEnabled && pulseaudioEnabled) [
       pkgs.pavucontrol
@@ -70,18 +84,10 @@ in
 
     nixsys.home = {
 
-      profile = {
-        base = enabled;
-        devel = enabled;
-      };
-
-      desktop.xdg.directories = {
-        music = ".xdg-music";
-        pictures = ".xdg-pictures";
-        videos = ".xdg-videos";
-      };
-
       programs = {
+        # Media players.
+        ncmpcpp = enabled;
+
         # Nix tools.
         nh = enabled;
 

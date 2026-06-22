@@ -1,20 +1,10 @@
 {
-  config,
   pkgs,
   lib,
   ...
 }:
-let
-  inherit (lib.nixsys) enabled enabledWith;
-
-  cfg = config.nixsys.home.profile.base;
-in
 {
-  options.nixsys.home.profile.base = {
-    enable = lib.mkEnableOption "nixsys.home.profile.base";
-  };
-
-  config = lib.mkIf cfg.enable {
+  config = {
 
     home.packages = [
       # Base.
@@ -82,9 +72,12 @@ in
 
     nixsys.home = {
       programs = {
-        dnsutils = enabled;
-        neovim = enabledWith { extended = lib.mkDefault false; };
-        ripgrep = enabled;
+        dnsutils.enable = true;
+        neovim = {
+          enable = true;
+          extended = lib.mkDefault false;
+        };
+        ripgrep.enable = true;
       };
     };
   };

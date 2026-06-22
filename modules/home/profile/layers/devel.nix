@@ -6,55 +6,27 @@
   ...
 }:
 let
-  inherit (lib.nixsys) enabled enabledWith;
   libcfg = lib.nixsys.home;
 
   shellBash = libcfg.isShellBash user;
 
-  mkDevelModuleImports = lib.mapAttrsToList (name: args: mkDevelModule ({ inherit name; } // args));
+  mkDevelModuleImports = lib.mapAttrsToList (name: args: mkDevelConfig ({ inherit name; } // args));
 
-  mkDevelModule =
+  mkDevelConfig =
     {
       name,
       langservers ? [ ],
       tools ? [ ],
-      extraOptions ? { },
       extraConfig ? { },
     }:
-    let
-      inherit (lib) types;
-      dcfg = config.nixsys.home.profile.devel.${name};
-    in
     {
-      options.nixsys.home.profile.devel.${name} = lib.recursiveUpdate {
-        enable = lib.mkEnableOption "nixsys.home.profile.devel.${name}" // {
-          default = config.nixsys.home.profile.devel.enable;
-        };
-        langservers = lib.mkOption {
-          type = types.listOf types.package;
-          default = langservers;
-        };
-        tools = lib.mkOption {
-          type = types.listOf types.package;
-          default = tools;
-        };
-      } extraOptions;
-
-      config = lib.mkIf dcfg.enable (
-        lib.recursiveUpdate {
-          home.packages = dcfg.tools;
-          programs.neovim.extraPackages = dcfg.langservers ++ dcfg.tools;
-        } extraConfig
-      );
+      config = lib.recursiveUpdate {
+        home.packages = tools;
+        programs.neovim.extraPackages = langservers ++ tools;
+      } extraConfig;
     };
-
-  cfg = config.nixsys.home.profile.devel;
 in
 {
-  options.nixsys.home.profile.devel = {
-    enable = lib.mkEnableOption "nixsys.home.profile.devel";
-  };
-
   imports = mkDevelModuleImports {
 
     asciidoc = {
@@ -441,7 +413,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     home.packages = [
       pkgs.binutils
       pkgs.bubblewrap
@@ -468,16 +440,19 @@ in
     ];
 
     nixsys.home.programs = {
-      bat = enabled;
-      direnv = enabled;
-      git = enabled;
-      neovim = enabledWith { extended = true; };
-      starship = enabled;
-      tmux = enabled;
+      bat.enable = true;
+      direnv.enable = true;
+      git.enable = true;
+      neovim = {
+        enable = true;
+        extended = true;
+      };
+      starship.enable = true;
+      tmux.enable = true;
 
       # Navigation.
-      yazi = enabled;
-      zoxide = enabled;
+      yazi.enable = true;
+      zoxide.enable = true;
     };
   };
 }
