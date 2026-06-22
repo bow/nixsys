@@ -29,6 +29,12 @@ in
 {
   imports = mkDevelModuleImports {
 
+    ansible = {
+      langservers = [
+        pkgs.unstable.ansible-language-server
+      ];
+    };
+
     asciidoc = {
       tools = [
         pkgs.unstable.asciidoctor-with-extensions
