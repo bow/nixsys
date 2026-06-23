@@ -341,14 +341,6 @@ in
           key = "p";
           symbol = "";
         }
-        {
-          key = "c";
-          symbol = "";
-        }
-        {
-          key = "b";
-          symbol = "";
-        }
       ];
     };
   };
